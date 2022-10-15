@@ -1,5 +1,5 @@
 # some bullshit env vars (dont remove them)
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway QT_QPA_PLATFORM=qt5ct _JAVA_AWT_WM_NONREPARENTING=1
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway QT_QPA_PLATFORMTHEME=qt5ct _JAVA_AWT_WM_NONREPARENTING=1
 # its important to set some of these variables before launching sway as well (.zprofile for me)
 
 set $mod Mod4
