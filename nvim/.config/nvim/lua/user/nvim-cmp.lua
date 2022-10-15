@@ -1,12 +1,16 @@
+local status, cmp = pcall(require, "cmp")
+if not status then return end
+
+local status, luasnip = pcall(require, "luasnip")
+if not status then return end
+
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
 -- Setup nvim-cmp.
-local cmp = require('cmp')
-
 cmp.setup({
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert({

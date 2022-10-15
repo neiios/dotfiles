@@ -31,7 +31,7 @@ function paruInstall() {
 pacmanInstall stow git wl-clipboard xclip
 [[ ! -d ~/.dotfiles ]] && git clone https://github.com/richard96292/dotfiles ~/.dotfiles 
 cd ~/.dotfiles || exit
-git submodule init && git pull
+git submodule init && git submodule update
 
 # terminal
 pacmanInstall foot foot-terminfo xdg-utils libnotify
@@ -46,11 +46,10 @@ pacmanInstall zsh fzf bat exa
 stow zsh
 
 # neovim
-pacmanInstall neovim python-pynvim stylua cppcheck clang lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-language-server ansbile-lint
-paruInstall prettierd vscode-langservers-extracted
+pacmanInstall neovim python-pynvim stylua cppcheck clang lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-lint
+paruInstall prettierd vscode-langservers-extracted ansible-language-server 
 stow nvim
-# not even sure if it works tbh
-nvim --headless -c ':qa'
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # sway

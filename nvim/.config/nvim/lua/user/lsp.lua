@@ -1,5 +1,14 @@
+local status, cmp = pcall(require, "cmp")
+if not status then return end
+
+local status, null_ls = pcall(require, "null-ls")
+if not status then return end
+
+local status, lspconfig = pcall(require, "lspconfig")
+if not status then return end
+
 -- make lsp work with nvim-cmp
-require'cmp'.setup {
+cmp.setup {
   sources = {
     { name = 'nvim_lsp' }
   }
@@ -50,37 +59,37 @@ local on_attach = function(client, bufnr)
   end
 end
 
-require('null-ls').setup({
+null_ls.setup({
   sources = {
-    require('null-ls').builtins.formatting.prettierd,
-    require('null-ls').builtins.formatting.stylua,
-    require('null-ls').builtins.diagnostics.cppcheck,
+    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.diagnostics.cppcheck,
   },
   -- run formatter on file save
   on_attach = on_attach,
 })
 
-require('lspconfig').eslint.setup({
+lspconfig.eslint.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })
 
-require('lspconfig').clangd.setup({
+lspconfig.clangd.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })
 
-require('lspconfig').html.setup({
+lspconfig.html.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })
 
-require('lspconfig').cssls.setup({
+lspconfig.cssls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })
 
-require('lspconfig').sumneko_lua.setup({
+lspconfig.sumneko_lua.setup({
   settings = {
     Lua = {
       format = { enable = false },
@@ -96,12 +105,12 @@ require('lspconfig').sumneko_lua.setup({
   capabilities = capabilities,
 })
 
-require('lspconfig').tsserver.setup({
+lspconfig.tsserver.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })
 
-require('lspconfig').bashls.setup({
+lspconfig.bashls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })
@@ -122,7 +131,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   end,
 })
 
-require('lspconfig').ansiblels.setup({
+lspconfig.ansiblels.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = {

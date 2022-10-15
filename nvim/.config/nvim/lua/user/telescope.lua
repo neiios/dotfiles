@@ -1,3 +1,6 @@
+local status, _ = pcall(require, "telescope")
+if not status then return end
+
 -- telescope configuration
 require('telescope').setup({
   defaults = {

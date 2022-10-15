@@ -1,3 +1,11 @@
+local status, packer = pcall(require, "packer")
+if not status then
+	print("Packer is not installed")
+	return
+end
+
+vim.cmd([[packadd packer.nvim]])
+
 -- update plugins on file save
 vim.cmd([[
   augroup packer_user_config
@@ -6,20 +14,7 @@ vim.cmd([[
   augroup end
 ]])
 
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
-end
-
-local packer_bootstrap = ensure_packer()
-
-return require("packer").startup(function(use)
+packer.startup(function(use)
 	-- package manager
 	use("wbthomason/packer.nvim")
 
@@ -70,8 +65,4 @@ return require("packer").startup(function(use)
 	-- deps
 	use("nvim-lua/plenary.nvim")
 	use("nvim-lua/popup.nvim")
-
-	if packer_bootstrap then
-		require("packer").sync()
-	end
 end)
