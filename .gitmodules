@@ -10,3 +10,15 @@
 [submodule "zsh/.config/zsh/zsh-history-substring-search"]
 	path = zsh/.config/zsh/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule "tmux/.config/tmux/plugins/tmux-continuum"]
+	path = tmux/.config/tmux/plugins/tmux-continuum
+	url = https://github.com/tmux-plugins/tmux-continuum
+[submodule "tmux/.config/tmux/plugins/tmux-resurrect"]
+	path = tmux/.config/tmux/plugins/tmux-resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect
+[submodule "tmux/.config/tmux/plugins/tmux-yank"]
+	path = tmux/.config/tmux/plugins/tmux-yank
+	url = https://github.com/tmux-plugins/tmux-yank
+[submodule "tmux/.config/tmux/plugins/tmux-mode-indicator"]
+	path = tmux/.config/tmux/plugins/tmux-mode-indicator
+	url = https://github.com/MunifTanjim/tmux-mode-indicator
