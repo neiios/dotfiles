@@ -1,0 +1,47 @@
+# some bullshit env vars (dont remove them)
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway QT_QPA_PLATFORM=qt5ct _JAVA_AWT_WM_NONREPARENTING=1
+# its important to set some of these variables before launching sway as well (.zprofile for me)
+
+set $mod Mod4
+set $bothMods Mod4+Mod1
+set $left h
+set $down j
+set $up k
+set $right l
+set $term foot
+set $menu tofi-drun | xargs swaymsg exec --
+
+# keyboard layouts
+input * {
+    xkb_layout "us,ru,lt"
+    xkb_options "grp:win_space_toggle"
+}
+
+# enable gaps
+gaps inner 5
+
+# fuck mouse acceleration
+input * {
+  accel_profile flat
+}
+
+# no window title
+default_border pixel 2
+
+# desktop outputs
+output 'Unknown 24G1WG4 0x0000B512' bg ~/Pictures/Wallpapers/10-14-Mojave-12.jpg fill mode 1920x1080@144.001hz pos 0 0
+output 'Ancor Communications Inc ASUS VP239 FALMTJ009967' bg ~/Pictures/Wallpapers/10-14-Mojave-13.jpg fill mode 1920x1080@60.000hz pos 1920 0
+
+include keybinds
+include status-bar
+include window-rules
+
+# autostart
+exec {
+  mako
+  easyeffects --gapplication-service
+  udiskie &
+  nextcloud --background
+  keepassxc
+  /home/${USER}/.config/sway/alternating_layouts.py
+}

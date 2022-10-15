@@ -1,0 +1,12 @@
+workspace z output 'Unknown 24G1WG4 0x0000B512'
+workspace x output 'Unknown 24G1WG4 0x0000B512'
+workspace c output 'Unknown 24G1WG4 0x0000B512'
+workspace v output 'Unknown 24G1WG4 0x0000B512'
+
+workspace n output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
+workspace m output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
+workspace < output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
+workspace > output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
+
+for_window [app_id="keepassxc"] move scratchpad
+for_window [app_id="virt-manager"] shortcuts_inhibitor disable
