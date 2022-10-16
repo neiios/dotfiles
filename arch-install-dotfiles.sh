@@ -1,16 +1,5 @@
 #!/bin/bash
 
-while getopts "s" o; do
-    case "${o}" in
-        s)
-          installSway=1
-          ;;
-        *)
-          installSway=0
-          ;;
-    esac
-done
-
 function pacmanInstall() {
   sudo pacman -S "${@}" --noconfirm --needed
 }
@@ -28,9 +17,9 @@ function paruInstall() {
 }
 
 # prerequisites
-pacmanInstall stow git wl-clipboard xclip
-[[ ! -d ~/.dotfiles ]] && git clone https://github.com/richard96292/dotfiles ~/.dotfiles 
-cd ~/.dotfiles || exit
+pacmanInstall stow git wl-clipboard xclip libnewt
+# just in case someone decides to copy it to the wrong directory
+[[ ! -d ~/.dotfiles ]] && git clone https://github.com/richard96292/dotfiles ~/.dotfiles && cd ~/.dotfiles || exit
 git submodule init && git submodule update
 
 # terminal
@@ -49,11 +38,11 @@ stow zsh
 pacmanInstall neovim python-pynvim stylua cppcheck clang lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-lint
 paruInstall prettierd vscode-langservers-extracted ansible-language-server 
 stow nvim
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+[[ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]] && git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # sway
-if [[ installSway -eq 1 ]]; then
+if (whiptail --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
   pacmanInstall sway wlroots swaybg swayidle swaylock wf-recorder grim slurp mako xdg-desktop-portal-wlr polkit xorg-xwayland
   paruInstall tofi
   stow sway tofi mako
