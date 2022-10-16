@@ -19,7 +19,8 @@ function paruInstall() {
 # prerequisites
 pacmanInstall stow git wl-clipboard xclip libnewt
 # just in case someone decides to copy it to the wrong directory
-[[ ! -d ~/.dotfiles ]] && git clone https://github.com/richard96292/dotfiles ~/.dotfiles && cd ~/.dotfiles || exit
+[[ ! -d ~/.dotfiles ]] && git clone https://github.com/richard96292/dotfiles ~/.dotfiles 
+cd ~/.dotfiles || exit
 git submodule init && git submodule update
 
 # terminal
