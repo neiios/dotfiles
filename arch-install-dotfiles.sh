@@ -17,7 +17,7 @@ function paruInstall() {
 }
 
 # prerequisites
-pacmanInstall stow git wl-clipboard xclip libnewt
+pacmanInstall stow git wl-clipboard xclip libnewt glib2
 # just in case someone decides to copy it to the wrong directory
 [[ ! -d ~/.dotfiles ]] && git clone https://github.com/richard96292/dotfiles ~/.dotfiles 
 cd ~/.dotfiles || exit
@@ -52,3 +52,8 @@ fi
 
 # mangohud
 stow mangohud
+
+# gtk
+stow gtk3 gtk4
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
