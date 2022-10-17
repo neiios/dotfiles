@@ -34,6 +34,7 @@ stow tmux
 # zsh and cli stuff
 pacmanInstall zsh fzf bat exa
 stow zsh
+chsh -s /usr/bin/zsh
 
 # neovim
 pacmanInstall neovim python-pynvim stylua cppcheck clang lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-lint
