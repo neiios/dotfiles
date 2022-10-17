@@ -49,3 +49,6 @@ if (whiptail --title "Sway" --yesno "Should the sway window manager be installed
   paruInstall tofi
   stow sway tofi mako
 fi
+
+# mangohud
+stow mangohud
