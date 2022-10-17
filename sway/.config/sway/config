@@ -44,4 +44,5 @@ exec {
   nextcloud --background
   keepassxc
   /home/${USER}/.config/sway/alternating_layouts.py
+  mpris-proxy
 }
