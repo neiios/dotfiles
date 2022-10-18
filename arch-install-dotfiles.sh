@@ -51,7 +51,8 @@ if (whiptail --title "Sway" --yesno "Should the sway window manager be installed
 fi
 
 # mangohud
-stow mangohud
+# flatpak steam doesnt work if mangohud config is a symlink so just copy it manually
+mkdir -pv ~/.config/MangoHud && cp ~/.dotfiles/mangohud/.config/MangoHud/MangoHud.conf ~/.config/MangoHud
 
 # gtk
 stow gtk3 gtk4
