@@ -3,7 +3,7 @@ floating_modifier $mod normal
 
 bindsym --to-code --no-repeat --inhibited {
   # screenshot
-  Print exec grim -g "$(slurp)" - | wl-copy --type image/png
+  Print exec grim -g "$(slurp)" - | wl-copy --type image/png && wl-paste > ~/Pictures/Screenshots/$(date "+%F-%T").png
   Shift+Print exec grim -g "$(slurp)" - | swappy -f  -
 
   # launch apps
