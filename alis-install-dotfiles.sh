@@ -47,7 +47,7 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 if (whiptail --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
   pacmanInstall sway wlroots swaybg swayidle swaylock wf-recorder grim slurp mako xdg-desktop-portal-wlr polkit xorg-xwayland bluez-utils
   paruInstall tofi
-  stow sway tofi mako
+  stow sway tofi mako swappy fonts
 fi
 
 # mangohud

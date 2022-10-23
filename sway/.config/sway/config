@@ -29,8 +29,8 @@ input * {
 default_border pixel 2
 
 # desktop outputs
-output 'Unknown 24G1WG4 0x0000B512' bg ~/Pictures/Wallpapers/10-14-Mojave-12.jpg fill mode 1920x1080@144.001hz pos 0 0
-output 'Ancor Communications Inc ASUS VP239 FALMTJ009967' bg ~/Pictures/Wallpapers/10-14-Mojave-13.jpg fill mode 1920x1080@60.000hz pos 1920 0
+output 'Unknown 24G1WG4 0x0000B512' bg ~/Pictures/Wallpapers/10-14-Mojave-12.jpg fill mode 1920x1080@144.001hz pos 0 0 subpixel rgb
+output 'Ancor Communications Inc ASUS VP239 FALMTJ009967' bg ~/Pictures/Wallpapers/10-14-Mojave-13.jpg fill mode 1920x1080@60.000hz pos 1920 0 subpixel rgb
 
 include keybinds
 include status-bar
