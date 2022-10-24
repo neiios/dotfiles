@@ -94,6 +94,9 @@ bindsym --to-code --no-repeat --inhibited {
   $bothMods+minus scratchpad show
 }
 
+# floating toggle
+bindsym --to-code --no-repeat --inhibited --whole-window $mod+BTN_MIDDLE floating toggle
+
 # resize windows
 mode "resize" {
   bindsym $left resize shrink width 10px
