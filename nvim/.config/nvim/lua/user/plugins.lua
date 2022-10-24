@@ -20,7 +20,6 @@ packer.startup(function(use)
 
 	-- theme
 	use("jacoborus/tender.vim")
-	use({ "mcchrish/zenbones.nvim", requires = "rktjmp/lush.nvim" })
 	use("wuelnerdotexe/vim-enfocado")
 
 	-- native lsp
