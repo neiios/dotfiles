@@ -1,18 +1,24 @@
-local status, cmp = pcall(require, "cmp")
-if not status then return end
+local status, cmp = pcall(require, 'cmp')
+if not status then
+  return
+end
 
-local status, null_ls = pcall(require, "null-ls")
-if not status then return end
+local status, null_ls = pcall(require, 'null-ls')
+if not status then
+  return
+end
 
-local status, lspconfig = pcall(require, "lspconfig")
-if not status then return end
+local status, lspconfig = pcall(require, 'lspconfig')
+if not status then
+  return
+end
 
 -- make lsp work with nvim-cmp
-cmp.setup {
+cmp.setup({
   sources = {
-    { name = 'nvim_lsp' }
-  }
-}
+    { name = 'nvim_lsp' },
+  },
+})
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- only use null-ls for formatting

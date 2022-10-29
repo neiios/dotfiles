@@ -1,5 +1,7 @@
-local status, comment = pcall(require, "Comment")
-if not status then return end
+local status, comment = pcall(require, 'Comment')
+if not status then
+  return
+end
 
 comment.setup({
   ---Add a space b/w comment and the line

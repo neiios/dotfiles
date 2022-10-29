@@ -11,12 +11,7 @@ vim.g.maplocalleader = ' '
 -- telescope bindings
 keymap('n', '<leader>ff', ':Telescope find_files hidden=true<cr>', opts)
 keymap('n', '<leader>fb', ':Telescope file_browser hidden=true<cr>', opts)
-keymap(
-  'n',
-  '<leader>fs',
-  ':Telescope current_buffer_fuzzy_find hidden=true<cr>',
-  opts
-)
+keymap('n', '<leader>fs', ':Telescope current_buffer_fuzzy_find hidden=true<cr>', opts)
 -- nvim tree
 keymap('n', '<leader>e', ':NvimTreeToggle<cr>', opts)
 

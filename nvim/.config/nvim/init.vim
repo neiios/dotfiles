@@ -80,7 +80,7 @@ set relativenumber
 set mouse=a
 " always use system clipboard for copy and paste
 " buggy on gnome wayland
-" set clipboard+=unnamedplus
+set clipboard+=unnamedplus
 vnoremap Y "+y
 nnoremap Y "+y
 " use persistent undo
