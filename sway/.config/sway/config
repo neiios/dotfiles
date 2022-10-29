@@ -14,7 +14,7 @@ set $menu tofi-drun | xargs swaymsg exec --
 # keyboard layouts
 input * {
     xkb_layout "us,ru,lt"
-    xkb_options "grp:win_space_toggle"
+    xkb_options "grp:win_space_toggle,caps:escape"
 }
 
 # enable gaps
@@ -42,7 +42,8 @@ exec {
   easyeffects --gapplication-service
   udiskie &
   nextcloud --background
-  keepassxc
+  keepassxc &
   /home/${USER}/.config/sway/alternating_layouts.py
   mpris-proxy
+  polkit-dumb-agent
 }

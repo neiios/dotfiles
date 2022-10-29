@@ -34,6 +34,9 @@ stow tmux
 # hotkey
 stow hotkey
 
+# environment variables
+stow env
+
 # zsh and cli stuff
 pacmanInstall zsh fzf bat exa
 stow zsh

@@ -8,6 +8,9 @@ hash nvim && alias vi="nvim"
 hash bat && alias cat="bat"
 hash exa && alias ls="exa -a --long --group --git"
 
+# respect xdg
+alias wget=wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"
+
 # color
 alias diff='diff --color=auto'
 alias grep='grep --color=auto'
