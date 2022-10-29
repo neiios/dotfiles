@@ -16,40 +16,46 @@ function paruInstall() {
   paru -S "${@}" --noconfirm --needed
 }
 
+function dotfileInstall() {
+  stow -v 2 "${@}"
+}
+
 # prerequisites
 pacmanInstall stow git wl-clipboard xclip libnewt glib2
+
 # just in case someone decides to copy it to the wrong directory
-[[ ! -d ~/.dotfiles ]] && git clone https://github.com/richard96292/dotfiles ~/.dotfiles 
-cd ~/.dotfiles || exit
-git submodule init && git submodule update
+[[ ! -d ~/.dotfiles ]] && git clone https://github.com/richard96292/dotfiles ~/.dotfiles && cd ~/.dotfiles && git pull && git submodule init && git submodule update && bash alis-install-dotfiles.sh && exit # long boi
+
+# initialize the repo
+git pull && git submodule init && git submodule update
 
 # environment variables
-stow env
+dotfileInstall env
 
 # git
 pacmanInstall github-cli
-stow git
+dotfileInstall git
 
 # terminal
 pacmanInstall foot foot-terminfo xdg-utils libnotify
-stow foot
+dotfileInstall foot
 
 # tmux
 pacmanInstall tmux
-stow tmux
+dotfileInstall tmux
 
 # hotkey
-stow hotkey
+dotfileInstall hotkey
 
 # zsh and cli stuff
 pacmanInstall zsh fzf bat exa
-stow zsh
+dotfileInstall zsh
 chsh -s /usr/bin/zsh
 
 # neovim
 pacmanInstall neovim python-pynvim stylua cppcheck clang lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-lint
 paruInstall prettierd vscode-langservers-extracted ansible-language-server 
-stow nvim
+dotfileInstall nvim
 [[ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]] && git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
@@ -57,7 +63,7 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 if (whiptail --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
   pacmanInstall sway wlroots swaybg swayidle swaylock wf-recorder grim slurp mako xdg-desktop-portal-wlr polkit xorg-xwayland bluez-utils
   paruInstall tofi polkit-dumb-agent
-  stow sway tofi mako swappy fonts
+  dotfileInstall sway tofi mako swappy fonts
 fi
 
 # mangohud
@@ -65,6 +71,6 @@ fi
 mkdir -pv ~/.config/MangoHud && cp ~/.dotfiles/mangohud/.config/MangoHud/MangoHud.conf ~/.config/MangoHud
 
 # gtk
-stow gtk
+dotfileInstall gtk
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
