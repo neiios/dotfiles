@@ -1,0 +1,16 @@
+[user]
+	email = 68248740+richard96292@users.noreply.github.com
+	name = Igor
+	signingkey = 68248740+richard96292@users.noreply.github.com
+[core]
+	editor = nvim
+[tag]
+	gpgSign = true
+[commit]
+	gpgsign = true
+[credential "https://github.com"]
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = !/usr/bin/gh auth git-credential
+[init]
+	defaultBranch = master

@@ -23,6 +23,13 @@ pacmanInstall stow git wl-clipboard xclip libnewt glib2
 cd ~/.dotfiles || exit
 git submodule init && git submodule update
 
+# environment variables
+stow env
+
+# git
+pacmanInstall github-cli
+stow git
+
 # terminal
 pacmanInstall foot foot-terminfo xdg-utils libnotify
 stow foot
@@ -33,9 +40,6 @@ stow tmux
 
 # hotkey
 stow hotkey
-
-# environment variables
-stow env
 
 # zsh and cli stuff
 pacmanInstall zsh fzf bat exa
@@ -51,8 +55,8 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # sway
 if (whiptail --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
-  pacmanInstall sway wlroots swaybg swayidle swaylock wf-recorder grim slurp mako xdg-desktop-portal-wlr polkit xorg-xwayland bluez-utils polkit-dumb-agent
-  paruInstall tofi
+  pacmanInstall sway wlroots swaybg swayidle swaylock wf-recorder grim slurp mako xdg-desktop-portal-wlr polkit xorg-xwayland bluez-utils
+  paruInstall tofi polkit-dumb-agent
   stow sway tofi mako swappy fonts
 fi
 
