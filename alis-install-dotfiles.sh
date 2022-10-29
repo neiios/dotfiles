@@ -48,7 +48,7 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # sway
 if (whiptail --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
-  pacmanInstall sway wlroots swaybg swayidle swaylock wf-recorder grim slurp mako xdg-desktop-portal-wlr polkit xorg-xwayland bluez-utils
+  pacmanInstall sway wlroots swaybg swayidle swaylock wf-recorder grim slurp mako xdg-desktop-portal-wlr polkit xorg-xwayland bluez-utils polkit-dumb-agent
   paruInstall tofi
   stow sway tofi mako swappy fonts
 fi
@@ -58,6 +58,6 @@ fi
 mkdir -pv ~/.config/MangoHud && cp ~/.dotfiles/mangohud/.config/MangoHud/MangoHud.conf ~/.config/MangoHud
 
 # gtk
-stow gtk3 gtk4
+stow gtk
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
