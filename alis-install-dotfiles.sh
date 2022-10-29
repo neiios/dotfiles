@@ -31,6 +31,9 @@ stow foot
 pacmanInstall tmux
 stow tmux
 
+# hotkey
+stow hotkey
+
 # zsh and cli stuff
 pacmanInstall zsh fzf bat exa
 stow zsh
