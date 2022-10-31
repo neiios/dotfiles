@@ -53,7 +53,7 @@ dotfileInstall zsh
 chsh -s /usr/bin/zsh
 
 # neovim
-pacmanInstall neovim python-pynvim stylua cppcheck clang lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-lint
+pacmanInstall neovim python-pynvim stylua cppcheck clang lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-lint fd fzf
 paruInstall prettierd vscode-langservers-extracted ansible-language-server 
 dotfileInstall nvim
 [[ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]] && git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
