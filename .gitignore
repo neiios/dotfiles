@@ -1,3 +1,6 @@
 zsh/.config/zsh/.zcompdump
 tmux/.config/tmux/ressurect
 nvim/.config/nvim/plugin
+
+gtk/.config/gtk-3.0/bookmarks
+gtk/.config/gtk-4.0/bookmarks
