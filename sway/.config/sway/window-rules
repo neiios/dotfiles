@@ -1,15 +1,19 @@
-workspace z output 'Unknown 24G1WG4 0x0000B512'
-workspace x output 'Unknown 24G1WG4 0x0000B512'
-workspace c output 'Unknown 24G1WG4 0x0000B512'
-workspace v output 'Unknown 24G1WG4 0x0000B512'
+workspace 1:z output 'Unknown 24G1WG4 0x0000B512'
+workspace 2:x output 'Unknown 24G1WG4 0x0000B512'
+workspace 3:c output 'Unknown 24G1WG4 0x0000B512'
+workspace 4:v output 'Unknown 24G1WG4 0x0000B512'
 
-workspace n output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
-workspace m output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
-workspace < output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
-workspace > output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
+workspace 5:n output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
+workspace 6:m output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
+workspace 7:< output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
+workspace 8:> output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
 
 for_window [app_id="keepassxc"] move scratchpad
 for_window [app_id="virt-manager"] shortcuts_inhibitor disable
 # this makes the popup window for mic access small and stickied instead of an
 # extra window, this will work until it's fixed in firefox
 for_window [title="\ -\ Sharing\ Indicator$"] floating enable, sticky enable
+
+# origin rules
+for_window [title="Origin"] move workspace 10
+for_window [title="Wine System Tray"] move workspace 10

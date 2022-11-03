@@ -1,4 +1,4 @@
-rm ~/.python_history
+[[ -e ~/.python_history ]] && rm ~/.python_history
 # imports systemd environment to the regular shell
 # thats some black magic. thanks bb010g!
 # it even works with MANPAGER="nvim +Man!"

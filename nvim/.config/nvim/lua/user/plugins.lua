@@ -37,6 +37,9 @@ packer.startup(function(use)
   -- editorconfig support
   use('gpanders/editorconfig.nvim')
 
+  -- documentation generation
+  use({ 'kkoomen/vim-doge', run = ':call doge#install()' })
+
   -- nvim-tree
   use('kyazdani42/nvim-tree.lua')
 
@@ -50,6 +53,7 @@ packer.startup(function(use)
       require('nvim-treesitter.install').update({ with_sync = true })
     end,
   })
+  -- use('nvim-treesitter/nvim-tree-docs')
 
   -- telescope things
   use('nvim-telescope/telescope.nvim')

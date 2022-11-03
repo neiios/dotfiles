@@ -51,11 +51,20 @@ alias gst="git stash"
 alias gstp="git stash pop"
 alias gw="git show"
 
+# ansible
+alias ap="ansible-playbook"
+alias av="ansible-vault"
+alias ave="ansible-vault encrypt"
+alias avd="ansible-vault decrypt"
+
 # make
 alias make="make -j$(nproc)"
 
 # ssh
 # alias ssh='TERM=xterm-256color ssh'
+
+# htop
+alias htop="btop"
 
 # wget
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"

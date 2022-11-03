@@ -12,6 +12,7 @@ treesitter_configs.setup({
   incremental_selection = { enable = true },
   indent = { enable = true },
   matchup = { enable = true },
+  -- tree_docs = { enable = true },
 })
 
 local status, treesitter_parsers = pcall(require, 'nvim-treesitter.parsers')

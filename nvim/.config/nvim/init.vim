@@ -112,3 +112,6 @@ if has("nvim")
   lua require('nvim')
 endif
 
+" yaml and folds
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+set foldlevel=99

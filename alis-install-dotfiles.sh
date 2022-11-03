@@ -21,7 +21,7 @@ function dotfileInstall() {
 }
 
 # prerequisites
-pacmanInstall stow git wl-clipboard xclip libnewt glib2
+pacmanInstall stow git wl-clipboard xclip libnewt glib2 btop
 
 # just in case someone decides to copy it to the wrong directory
 [[ ! -d ~/.dotfiles ]] && git clone https://github.com/richard96292/dotfiles ~/.dotfiles && cd ~/.dotfiles && git pull && git submodule init && git submodule update && bash alis-install-dotfiles.sh && exit # long boi
@@ -50,7 +50,7 @@ dotfileInstall hotkey
 # zsh and cli stuff
 pacmanInstall zsh fzf bat exa
 dotfileInstall zsh
-chsh -s /usr/bin/zsh
+[[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && chsh -s /usr/bin/zsh || echo "zsh is already used"
 
 # neovim
 pacmanInstall neovim python-pynvim stylua cppcheck clang lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-lint fd fzf
