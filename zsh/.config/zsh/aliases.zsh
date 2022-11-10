@@ -8,6 +8,9 @@ hash nvim && alias vi="nvim"
 hash bat && alias cat="bat"
 hash exa && alias ls="exa -a --long --group --git"
 
+# bitcoin-cli
+alias bcli="bitcoin-cli"
+
 # respect xdg
 alias wget=wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"
 

@@ -68,6 +68,7 @@ dotfileInstall tmux
 dotfileInstall hotkey
 dotfileInstall zsh
 [[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && chsh -s /usr/bin/zsh || echo "zsh is already used"
+touch "$XDG_CACHE_HOME/wget-hsts"
 
 # neovim
 pacmanInstall neovim python-pynvim stylua cppcheck clang yamllint lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-lint fd fzf
