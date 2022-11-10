@@ -87,6 +87,14 @@ if (whiptail --title "Sway" --yesno "Should the sway window manager be installed
     mako
   paruInstall tofi polkit-dumb-agent-git
   dotfileInstall sway tofi mako swappy fonts
+  # autologin to tty
+  # .zpofile will autostart sway
+  execLine="-/sbin/agetty -o '-p -f -- \u' --noclear --autologin $USER %I "'$TERM'
+  sudo tee "/etc/systemd/system/getty@tty1.service.d/autologin.conf" > /dev/null <<EOF
+[Service]
+ExecStart=
+ExecStart=$execLine
+EOF
 fi
 
 # gtk
