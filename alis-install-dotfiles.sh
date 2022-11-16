@@ -67,12 +67,12 @@ dotfileInstall foot
 dotfileInstall tmux
 dotfileInstall hotkey
 dotfileInstall zsh
-[[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && chsh -s /usr/bin/zsh || echo "zsh is already used"
+[[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && sudo chsh -s $(which zsh) $(whoami) || echo "zsh is already used"
 touch "$XDG_CACHE_HOME/wget-hsts"
 
 # neovim
 pacmanInstall neovim python-pynvim stylua cppcheck clang yamllint lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-lint fd fzf
-paruInstall prettierd vscode-langservers-extracted ansible-language-server 
+paruInstall prettierd vscode-langservers-extracted ansible-language-server
 dotfileInstall nvim
 [[ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]] && git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
@@ -90,7 +90,7 @@ if (whiptail --title "Sway" --yesno "Should the sway window manager be installed
   # autologin to tty
   # .zpofile will autostart sway
   execLine="-/sbin/agetty -o '-p -f -- \u' --noclear --autologin $USER %I "'$TERM'
-  sudo tee "/etc/systemd/system/getty@tty1.service.d/autologin.conf" > /dev/null <<EOF
+  sudo tee "/etc/systemd/system/getty@tty1.service.d/autologin.conf" >/dev/null <<EOF
 [Service]
 ExecStart=
 ExecStart=$execLine
