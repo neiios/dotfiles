@@ -13,8 +13,8 @@ set $menu tofi-drun | xargs swaymsg exec --
 
 # keyboard layouts
 input * {
-    xkb_layout "us,ru,lt"
-    xkb_options "grp:win_space_toggle,caps:escape"
+    xkb_layout "us,ru"
+    xkb_options "grp:win_space_toggle,ctrl:nocaps,compose:ralt"
 }
 
 # enable gaps

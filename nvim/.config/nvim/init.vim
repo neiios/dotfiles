@@ -37,9 +37,7 @@ set display+=lastline " dot replace a very long line with @
 set encoding=utf-8 " use utf-8 for the output show in the terminal
 set fileencoding=utf-8 " use utf-8 for file writing
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+ " specify how characters are displayed with :list command
-if v:version > 703 || v:version == 703 && has("patch541")
-  set formatoptions+=j " Delete comment character when joining commented lines
-endif
+set formatoptions+=j " Delete comment character when joining commented lines
 
 if has('path_extra')
   setglobal tags-=./tags tags-=./tags; tags^=./tags;
@@ -111,7 +109,3 @@ if has("nvim")
   " load the main configuration file
   lua require('nvim')
 endif
-
-" yaml and folds
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
-set foldlevel=99
