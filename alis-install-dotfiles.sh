@@ -35,7 +35,7 @@ git pull && git submodule init && git submodule update
 
 # generic packages
 pacmanInstall firefox firefox-ublock-origin thunderbird \
-  zsh btop fzf bat exa github-cli neofetch ripgrep tldr yt-dlp \
+  zsh btop duf fzf bat exa github-cli neofetch ripgrep tldr yt-dlp \
   foot foot-terminfo tmux \
   element-desktop \
   easyeffects \
@@ -68,6 +68,7 @@ dotfileInstall tmux
 dotfileInstall hotkey
 dotfileInstall zsh
 [[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && sudo chsh -s $(which zsh) $(whoami) || echo "zsh is already used"
+rm -f .bash_logout .bash_profile .bashrc
 touch "$XDG_CACHE_HOME/wget-hsts"
 
 # neovim
