@@ -54,7 +54,7 @@ pacmanInstall firefox firefox-ublock-origin thunderbird \
 paruInstall code-features code-icons code-marketplace \
   nsxiv
 
-flatpakInstall flathub com.github.tchx84.Flatseal \
+flatpakInstall com.github.tchx84.Flatseal \
   com.discordapp.Discord \
   com.github.Eloston.UngoogledChromium \
   com.github.taiko2k.tauonmb org.musicbrainz.Picard \
@@ -67,7 +67,7 @@ dotfileInstall foot
 dotfileInstall tmux
 dotfileInstall hotkey
 dotfileInstall zsh
-[[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && sudo chsh -s $(which zsh) $(whoami) || echo "zsh is already used"
+[[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && sudo chsh -s "$(which zsh)" "$(whoami)" || echo "zsh is already used"
 rm -f .bash_logout .bash_profile .bashrc
 touch "$XDG_CACHE_HOME/wget-hsts"
 
@@ -80,6 +80,7 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # sway
 if (whiptail --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
+  clear
   pacmanInstall sway wlroots xorg-xwayland swaybg swayidle swaylock \
     xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
     wf-recorder grim slurp swappy \
@@ -104,9 +105,10 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 if (whiptail --title "Gaming" --yesno "Do you really?" 0 0); then
+  clear
   # mangohud
   # flatpak steam doesnt work if mangohud config is a symlink so just copy it manually
   mkdir -pv ~/.config/MangoHud && cp ~/.dotfiles/mangohud/.config/MangoHud/MangoHud.conf ~/.config/MangoHud
   # programs
-  flatpakInstall flathub com.valvesoftware.Steam com.valvesoftware.Steam.CompatibilityTool.Proton-GE com.valvesoftware.Steam.Utility.gamescope org.freedesktop.Platform.VulkanLayer.MangoHud//22.08
+  flatpakInstall com.valvesoftware.Steam com.valvesoftware.Steam.CompatibilityTool.Proton-GE com.valvesoftware.Steam.Utility.gamescope org.freedesktop.Platform.VulkanLayer.MangoHud//22.08
 fi
