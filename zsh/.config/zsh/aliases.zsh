@@ -40,6 +40,7 @@ alias gl='git log --graph --pretty="format:%C(yellow)%h%C(auto)%d%Creset %s %C(w
 alias gla='gl --all'
 alias gm="git merge --no-ff"
 alias gmf="git merge --ff-only"
+alias gpf="git push --force"
 alias gp="git push"
 alias gpt="git push --tags"
 alias gr="git reset"
