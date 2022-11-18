@@ -32,6 +32,7 @@ pacmanInstall stow git libnewt
 
 # initialize the repo
 git pull && git submodule init && git submodule update
+mkdir ~/.config
 
 # generic packages
 pacmanInstall firefox firefox-ublock-origin thunderbird \
@@ -54,7 +55,7 @@ pacmanInstall firefox firefox-ublock-origin thunderbird \
 paruInstall code-features code-icons code-marketplace \
   nsxiv
 
-flatpakInstall com.github.tchx84.Flatseal \
+flatpakInstall flathub com.github.tchx84.Flatseal \
   com.discordapp.Discord \
   com.github.Eloston.UngoogledChromium \
   com.github.taiko2k.tauonmb org.musicbrainz.Picard \
@@ -68,7 +69,7 @@ dotfileInstall tmux
 dotfileInstall hotkey
 dotfileInstall zsh
 [[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && sudo chsh -s "$(which zsh)" "$(whoami)" || echo "zsh is already used"
-rm -f .bash_logout .bash_profile .bashrc
+rm -f ~/.bash_logout ~/.bash_profile ~/.bashrc
 touch "$XDG_CACHE_HOME/wget-hsts"
 
 # neovim
@@ -110,5 +111,5 @@ if (whiptail --title "Gaming" --yesno "Do you really?" 0 0); then
   # flatpak steam doesnt work if mangohud config is a symlink so just copy it manually
   mkdir -pv ~/.config/MangoHud && cp ~/.dotfiles/mangohud/.config/MangoHud/MangoHud.conf ~/.config/MangoHud
   # programs
-  flatpakInstall com.valvesoftware.Steam com.valvesoftware.Steam.CompatibilityTool.Proton-GE com.valvesoftware.Steam.Utility.gamescope org.freedesktop.Platform.VulkanLayer.MangoHud//22.08
+  flatpakInstall flathub com.valvesoftware.Steam com.valvesoftware.Steam.CompatibilityTool.Proton-GE com.valvesoftware.Steam.Utility.gamescope org.freedesktop.Platform.VulkanLayer.MangoHud//22.08
 fi
