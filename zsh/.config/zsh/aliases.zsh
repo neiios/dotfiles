@@ -11,6 +11,9 @@ hash exa && alias ls="exa -a --long --group --git"
 # bitcoin-cli
 alias bcli="bitcoin-cli"
 
+# sudo with aliases
+alias sudo='sudo '
+
 # respect xdg
 alias wget=wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"
 
