@@ -97,6 +97,7 @@ if (whiptail --title "Sway" --yesno "Should the sway window manager be installed
   # autologin to tty
   # .zpofile will autostart sway
   execLine="-/sbin/agetty -o '-p -f -- \u' --noclear --autologin $USER %I "'$TERM'
+  sudo mkdir -pv "/etc/systemd/system/getty@tty1.service.d"
   sudo tee "/etc/systemd/system/getty@tty1.service.d/autologin.conf" >/dev/null <<EOF
 [Service]
 ExecStart=
