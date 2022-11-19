@@ -19,7 +19,7 @@ function paruInstall() {
 }
 
 function flatpakInstall() {
-  flatpak install -y --noninteractive "${@}"
+  flatpak install -y --noninteractive --system "${@}"
 }
 
 function dotfileInstall() {
@@ -27,7 +27,7 @@ function dotfileInstall() {
 }
 
 # deps
-pacmanInstall stow git libnewt
+pacmanInstall stow git dialog
 
 # just in case someone decides to copy it to the wrong directory
 [[ ! -d ~/.dotfiles ]] && git clone https://github.com/richard96292/dotfiles ~/.dotfiles && cd ~/.dotfiles && git pull && git submodule init && git submodule update && bash alis-install-dotfiles.sh && exit # long boi
@@ -85,11 +85,10 @@ dotfileInstall nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # sway
-if (whiptail --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
+if (dialog --erase-on-exit --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
   # copy default wallpaper
   mkdir -pv ~/Pictures/Wallpapers
   cp ~/.dotfiles/wallpapers/default.jpg ~/Pictures/Wallpapers/default.jpg
-  clear
   pacmanInstall sway wlroots xorg-xwayland swaybg swayidle swaylock \
     xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
     wf-recorder grim slurp swappy \
@@ -114,8 +113,7 @@ dotfileInstall gtk
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
-if (whiptail --title "Gaming" --yesno "Do you really?" 0 0); then
-  clear
+if (dialog --erase-on-exit --title "Gaming" --yesno "Do you really?" 0 0); then
   # mangohud
   # flatpak steam doesnt work if mangohud config is a symlink so just copy it manually
   mkdir -pv ~/.config/MangoHud && cp ~/.dotfiles/mangohud/.config/MangoHud/MangoHud.conf ~/.config/MangoHud
