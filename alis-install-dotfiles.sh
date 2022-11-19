@@ -86,6 +86,7 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # sway
 if (whiptail --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
+  clear
   pacmanInstall sway wlroots xorg-xwayland swaybg swayidle swaylock \
     xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
     wf-recorder grim slurp swappy \
@@ -111,6 +112,7 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 if (whiptail --title "Gaming" --yesno "Do you really?" 0 0); then
+  clear
   # mangohud
   # flatpak steam doesnt work if mangohud config is a symlink so just copy it manually
   mkdir -pv ~/.config/MangoHud && cp ~/.dotfiles/mangohud/.config/MangoHud/MangoHud.conf ~/.config/MangoHud
