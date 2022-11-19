@@ -22,6 +22,12 @@ alias diff='diff --color=auto'
 alias grep='grep --color=auto'
 alias ip='ip -color=auto'
 
+# arch mirrorlist
+alias rate-mirrors-arch='export TMPFILE="$(mktemp)"; \
+  rate-mirrors --save=$TMPFILE --protocol=https arch --max-delay=21600 \
+    && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup \
+    && sudo mv $TMPFILE /etc/pacman.d/mirrorlist'
+
 # git
 alias gs="git status -sb"
 alias ga="git add"
