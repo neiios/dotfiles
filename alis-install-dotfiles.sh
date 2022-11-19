@@ -57,7 +57,7 @@ pacmanInstall firefox firefox-ublock-origin thunderbird \
   v4l2loopback-utils
 
 paruInstall code-features code-icons code-marketplace \
-  rate-mirrors \
+  rate-mirrors-bin \
   nsxiv
 
 flatpakInstall flathub com.github.tchx84.Flatseal \
