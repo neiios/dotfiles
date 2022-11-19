@@ -53,7 +53,8 @@ pacmanInstall firefox firefox-ublock-origin thunderbird \
   code \
   nextcloud-client \
   ansible ansible-lint sshpass python-argcomplete python-boto3 \
-  dolphin gwenview ark
+  dolphin gwenview ark \
+  v4l2loopback-utils
 
 paruInstall code-features code-icons code-marketplace \
   rate-mirrors \
