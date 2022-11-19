@@ -19,7 +19,7 @@ function paruInstall() {
 }
 
 function flatpakInstall() {
-  flatpak install --user -y --noninteractive "${@}"
+  flatpak install -y --noninteractive "${@}"
 }
 
 function dotfileInstall() {
@@ -75,7 +75,7 @@ dotfileInstall hotkey
 dotfileInstall zsh
 [[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && sudo chsh -s "$(which zsh)" "$(whoami)" || echo "zsh is already used"
 rm -f ~/.bash_logout ~/.bash_profile ~/.bashrc
-touch "$XDG_CACHE_HOME/wget-hsts"
+touch "$HOME/.config/wget-hsts"
 
 # neovim
 pacmanInstall neovim python-pynvim stylua cppcheck clang yamllint lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-lint fd fzf
