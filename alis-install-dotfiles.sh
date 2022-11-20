@@ -54,14 +54,15 @@ pacmanInstall firefox firefox-ublock-origin thunderbird \
   nextcloud-client \
   ansible ansible-lint sshpass python-argcomplete python-boto3 \
   dolphin gwenview ark \
-  v4l2loopback-utils
+  v4l2loopback-utils v4l2loopback-dkms \
+  texlive-most texlive-lang texlive-langextra biber ghostscript python perl ruby dialog python-pygments
 
 paruInstall code-features code-icons code-marketplace \
   rate-mirrors-bin \
-  nsxiv
+  nsxiv \
+  texlive-latexindent-meta
 
 flatpakInstall flathub com.github.tchx84.Flatseal \
-  com.discordapp.Discord \
   com.github.Eloston.UngoogledChromium \
   com.github.taiko2k.tauonmb org.musicbrainz.Picard \
   com.obsproject.Studio org.kde.kdenlive \
@@ -118,7 +119,9 @@ if (dialog --erase-on-exit --title "Gaming" --yesno "Do you really?" 0 0); then
   # flatpak steam doesnt work if mangohud config is a symlink so just copy it manually
   mkdir -pv ~/.config/MangoHud && cp ~/.dotfiles/mangohud/.config/MangoHud/MangoHud.conf ~/.config/MangoHud
   # programs
-  flatpakInstall flathub com.valvesoftware.Steam com.valvesoftware.Steam.CompatibilityTool.Proton-GE com.valvesoftware.Steam.Utility.gamescope org.freedesktop.Platform.VulkanLayer.MangoHud//22.08
+  flatpakInstall flathub com.valvesoftware.Steam com.valvesoftware.Steam.CompatibilityTool.Proton-GE \
+    com.valvesoftware.Steam.Utility.gamescope org.freedesktop.Platform.VulkanLayer.MangoHud//22.08 \
+    com.discordapp.Discord
 fi
 
 echo "Installed successfully!"
