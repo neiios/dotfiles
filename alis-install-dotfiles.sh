@@ -121,7 +121,7 @@ dotfileInstall gtk
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
-if (dialog --erase-on-exit --title "Gaming" --yesno "Do you really?" 0 0); then
+if (dialog --erase-on-exit --title "Gaming" --defaultno --yesno "Do you really?" 0 0); then
   # mangohud
   # flatpak steam doesnt work if mangohud config is a symlink so just copy it manually
   mkdir -pv ~/.config/MangoHud && cp ~/.dotfiles/mangohud/.config/MangoHud/MangoHud.conf ~/.config/MangoHud
