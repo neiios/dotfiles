@@ -1,5 +1,5 @@
 # some bullshit env vars (dont remove them)
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway _JAVA_AWT_WM_NONREPARENTING=1
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway _JAVA_AWT_WM_NONREPARENTING=1 QT_QPA_PLATFORMTHEME=qt5ct
 # its important to set some of these variables before launching sway as well (.zprofile for me)
 
 set $mod Mod4
@@ -31,9 +31,13 @@ input * {
 # no window title
 default_border pixel 2
 
-# desktop outputs
-output 'Unknown 24G1WG4 0x0000B512' bg ~/Pictures/Wallpapers/default.jpg fill mode 1920x1080@144.001hz pos 0 0 subpixel rgb
-output 'Ancor Communications Inc ASUS VP239 FALMTJ009967' bg ~/Pictures/Wallpapers/default.jpg fill mode 1920x1080@60.000hz pos 1920 0 subpixel rgb
+# wallpaper
+output * bg ~/Pictures/Wallpapers/default.jpg fill
+# desktop
+output 'Unknown 24G1WG4 0x0000B512' mode 1920x1080@144.001hz pos 0 0 subpixel rgb
+output 'Ancor Communications Inc ASUS VP239 FALMTJ009967' mode 1920x1080@60.000hz pos 1920 0 subpixel rgb
+# laptop
+output 'Unknown 0x02D8 0x00000000' mode 1366x768@60.019hz pos 0 0 subpixel rgb
 
 include keybinds
 include status-bar
@@ -50,3 +54,4 @@ exec {
   mpris-proxy
   polkit-dumb-agent
 }
+# vim: ft=swayconfig

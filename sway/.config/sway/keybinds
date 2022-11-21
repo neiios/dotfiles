@@ -103,3 +103,4 @@ mode "resize" {
 }
 
 bindsym $bothMods+r mode "resize"
+# vim: ft=swayconfig

@@ -30,7 +30,7 @@ function dotfileInstall() {
 pacmanInstall stow git dialog
 
 # just in case someone decides to copy it to the wrong directory
-[[ ! -d ~/.dotfiles ]] && git clone https://github.com/richard96292/dotfiles ~/.dotfiles && cd ~/.dotfiles && git pull && git submodule init && git submodule update && bash alis-install-dotfiles.sh && exit # long boi
+[[ ! -d ~/.dotfiles ]] && echo "Dotfile repo should be cloned to ~/.dotfiles directory." && exit 1
 
 # initialize the repo
 cd ~/.dotfiles || exit
@@ -40,6 +40,7 @@ mkdir -pv ~/.config
 # generic packages
 pacmanInstall firefox firefox-ublock-origin thunderbird \
   zsh btop duf fzf bat exa github-cli neofetch ripgrep tldr yt-dlp \
+  ranger atool ffmpegthumbnailer mediainfo odt2txt perl-image-exiftool transmission-cli \
   foot foot-terminfo tmux \
   element-desktop \
   easyeffects \
@@ -53,7 +54,6 @@ pacmanInstall firefox firefox-ublock-origin thunderbird \
   code \
   nextcloud-client \
   ansible ansible-lint sshpass python-argcomplete python-boto3 \
-  dolphin gwenview ark \
   v4l2loopback-utils v4l2loopback-dkms \
   texlive-most texlive-lang texlive-langextra biber ghostscript python perl ruby dialog python-pygments
 
@@ -90,14 +90,20 @@ if (dialog --erase-on-exit --title "Sway" --yesno "Should the sway window manage
   # copy default wallpaper
   mkdir -pv ~/Pictures/Wallpapers
   cp ~/.dotfiles/wallpapers/default.jpg ~/Pictures/Wallpapers/default.jpg
+
   pacmanInstall sway wlroots xorg-xwayland swaybg swayidle swaylock \
     xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
     wf-recorder grim slurp swappy \
     pavucontrol bluez-tools \
     udiskie \
-    mako
+    mako \
+    breeze qt5ct \
+    dolphin kdegraphics-thumbnailers kde-cli-tools ffmpegthumbs taglib kimageformats qt5-imageformats \
+    ark lrzip lzop p7zip unarchiver unrar \
+    gwenview kimageformats qt5-imageformats
+
   paruInstall tofi polkit-dumb-agent-git
-  dotfileInstall sway tofi mako swappy fonts
+  dotfileInstall sway tofi mako swappy fonts qt
   # autologin to tty
   # .zpofile will autostart sway
   execLine="-/sbin/agetty -o '-p -f -- \u' --noclear --autologin $USER %I "'$TERM'

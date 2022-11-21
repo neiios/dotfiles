@@ -7,3 +7,4 @@ bar {
         inactive_workspace #000000 #000000 #5c5c5c
     }
 }
+# vim: ft=swayconfig
