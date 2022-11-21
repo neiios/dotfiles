@@ -69,6 +69,7 @@ flatpakInstall flathub com.github.tchx84.Flatseal \
   org.telegram.desktop
 
 dotfileInstall env
+dotfileInstall easyeffects
 dotfileInstall git
 dotfileInstall foot
 dotfileInstall tmux
