@@ -74,6 +74,8 @@ dotfileInstall git
 dotfileInstall foot
 dotfileInstall tmux
 dotfileInstall hotkey
+# keepassxc
+mkdir -pv ~/.config/keepassxc && cp ~/.dotfiles/keepassxc/.config/keepassxc/keepassxc.ini ~/.config/keepassxc
 dotfileInstall zsh
 [[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && sudo chsh -s "$(which zsh)" "$(whoami)" || echo "zsh is already used"
 rm -f ~/.bash_logout ~/.bash_profile ~/.bashrc
@@ -95,7 +97,7 @@ if (dialog --erase-on-exit --title "Sway" --yesno "Should the sway window manage
   pacmanInstall sway wlroots xorg-xwayland swaybg swayidle swaylock \
     xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
     wf-recorder grim slurp swappy \
-    pavucontrol bluez-tools \
+    pavucontrol blueman bluez-tools \
     udiskie \
     mako \
     breeze qt5ct \
