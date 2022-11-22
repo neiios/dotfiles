@@ -149,7 +149,7 @@ function main() {
 
   dotfileInstall tmux
 
-  mkdir -pv ~/.config/keepassxc && cp ~/.dotfiles/keepassxc/.config/keepassxc/keepassxc.ini ~/.config/keepassxc
+  dotfileInstall keepassxc
 
   dotfileInstall zsh
   [[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && sudo chsh -s "$(which zsh)" "$(whoami)" || echo "zsh is already used"
