@@ -31,8 +31,6 @@ input * {
 # no window title
 default_border pixel 2
 
-# wallpaper
-output * bg ~/Pictures/Wallpapers/default.jpg fill
 # desktop
 output 'Unknown 24G1WG4 0x0000B512' mode 1920x1080@144.001hz pos 0 0 subpixel rgb
 output 'Ancor Communications Inc ASUS VP239 FALMTJ009967' mode 1920x1080@60.000hz pos 1920 0 subpixel rgb
@@ -45,6 +43,7 @@ include window-rules
 
 # autostart
 exec {
+  /home/${USER}/.config/sway/change-wallpaper.sh
   mako
   easyeffects --gapplication-service
   udiskie &

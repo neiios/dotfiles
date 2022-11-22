@@ -1,0 +1,12 @@
+[Unit]
+Description=A job to change sway wallpaper
+
+[Service]
+; kill mode is very impronant
+; otherwise systemd will kill spawned swaybg process
+KillMode=process
+Type=oneshot
+ExecStart=%h/.config/sway/change-wallpaper.sh
+
+[Install]
+WantedBy=default.target

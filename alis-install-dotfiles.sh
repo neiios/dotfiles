@@ -73,10 +73,6 @@ function installNeovim() {
 
 function installSway() {
   if (dialog --erase-on-exit --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
-    # copy default wallpaper
-    mkdir -pv ~/Pictures/Wallpapers
-    cp ~/.dotfiles/wallpapers/default.jpg ~/Pictures/Wallpapers/default.jpg
-
     pacmanInstall sway wlroots xorg-xwayland swaybg swayidle swaylock \
       xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
       wf-recorder grim slurp swappy \
@@ -99,6 +95,10 @@ function installSway() {
 ExecStart=
 ExecStart=$execLine
 EOF
+
+    # wallpapers
+    dotfileInstall wallpapers
+    systemctl --user enable sway-change-wallpaper.timer
   fi
 }
 
