@@ -79,13 +79,20 @@ function installSway() {
       pavucontrol blueman bluez-tools \
       udiskie \
       mako \
-      breeze qt5ct \
+      breeze gnome-themes-extra qt5ct \
       dolphin kdegraphics-thumbnailers kde-cli-tools ffmpegthumbs taglib kimageformats qt5-imageformats \
       ark lrzip lzop p7zip unarchiver unrar \
       gwenview kimageformats qt5-imageformats
 
     paruInstall tofi polkit-dumb-agent-git
-    dotfileInstall sway tofi mako swappy fonts qt
+
+    # install sway config
+    dotfileInstall sway
+
+    # gtk settings
+    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
     # autologin to tty
     # .zpofile will autostart sway
     execLine="-/sbin/agetty -o '-p -f -- \u' --noclear --autologin $USER %I "'$TERM'
@@ -97,7 +104,7 @@ ExecStart=$execLine
 EOF
 
     # wallpapers
-    dotfileInstall wallpapers
+    systemctl --user daemon-reload
     systemctl --user enable sway-change-wallpaper.timer
   fi
 }
@@ -126,13 +133,6 @@ function main() {
 
   installPackages || error "Error installing packages."
 
-  dotfileInstall defaults
-  # change default terminal for kde apps
-  grep -q "\[General\]" ~/.config/kdeglobals \
-    || echo "[General]" >>~/.config/kdeglobals
-  sed -i '/^TerminalApplication=/d' ~/.config/kdeglobals
-  sed -i '/^\[General\]/a TerminalApplication=footclient' ~/.config/kdeglobals
-
   dotfileInstall env
   touch "$HOME/.config/wget-hsts"
 
@@ -141,6 +141,11 @@ function main() {
   dotfileInstall git
 
   dotfileInstall foot
+  # change default terminal for kde apps
+  grep -q "\[General\]" ~/.config/kdeglobals \
+    || echo "[General]" >>~/.config/kdeglobals
+  sed -i '/^TerminalApplication=/d' ~/.config/kdeglobals
+  sed -i '/^\[General\]/a TerminalApplication=footclient' ~/.config/kdeglobals
 
   dotfileInstall tmux
 
@@ -149,10 +154,6 @@ function main() {
   dotfileInstall zsh
   [[ ! "$(readlink /proc/$$/exe)" == "/usr/bin/zsh" ]] && sudo chsh -s "$(which zsh)" "$(whoami)" || echo "zsh is already used"
   rm -f ~/.bash_logout ~/.bash_profile ~/.bashrc
-
-  dotfileInstall gtk
-  gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
-  gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
   installNeovim || error "Error installing neovim."
 
