@@ -14,6 +14,9 @@ set $menu tofi-drun | xargs swaymsg exec --
 # fixes cursor size
 seat * xcursor_theme Adwaita 24
 
+# lazy load xwayland
+xwayland enable
+
 # keyboard layouts
 input * {
     xkb_layout "us,ru"
