@@ -15,13 +15,13 @@ wallpaperDir="${HOME}/.local/share/wallpapers"
 cd "${wallpaperDir}" || error "Wallpaper directory doesn't exist."
 
 # based on time
-filename=$(find . -type f | sed 's/^\.\///g' | sort | grep -E -- "-${currentHour}.avif|-${currentHour}-|\b${currentHour}-")
+filename=$(find . -type f | sed 's/^\.\///g' | grep -E -- "^${currentHour}-|-${currentHour}-|\b-${currentHour}.avif")
 
 # random
 # filename=$(find . -type f | sed 's/^\.\///g' | shuf --head-count=1)
 
 # get pid of old swaybg process
-if pidof swaybg; then pid=$(pidof swaybg); fi
+if pidof swaybg; then pid=($(pidof swaybg)); fi
 
 # launch new swaybg
 swaybg -i "${wallpaperDir}/${filename}" -m fill -o '*' &
@@ -31,4 +31,4 @@ disown
 sleep 5
 
 # remove old background
-if [[ -n $pid ]]; then kill "${pid}"; fi
+if [[ ! ${#pid[@]} -eq 0 ]]; then kill "${pid[@]}"; fi
