@@ -15,7 +15,7 @@ wallpaperDir="${HOME}/.local/share/wallpapers"
 cd "${wallpaperDir}" || error "Wallpaper directory doesn't exist."
 
 # based on time
-filename=$(find . -type f | sed 's/^\.\///g' | grep -E -- "^${currentHour}-|-${currentHour}-|\b-${currentHour}.avif")
+filename=$(find . -type f | sed 's/^\.\///g' | grep -E -- "\b${currentHour}\b")
 
 # random
 # filename=$(find . -type f | sed 's/^\.\///g' | shuf --head-count=1)
