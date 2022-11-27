@@ -7,14 +7,6 @@ function error() {
   exit 1
 }
 
-# check if paru is installed
-if ! hash paru 2>/dev/null; then
-  git clone https://aur.archlinux.org/paru-bin.git "/home/${USER}/paru"
-  cd "/home/${USER}/paru" || exit
-  makepkg -si --noconfirm --needed
-  rm -rf "/home/${USER}/paru"
-fi
-
 function pacmanInstall() {
   sudo pacman -S "${@}" --noconfirm --needed
 }
@@ -122,13 +114,21 @@ function installGaming() {
 }
 
 function main() {
+  # check if paru is installed
+  if ! hash paru 2>/dev/null; then
+    git clone https://aur.archlinux.org/paru-bin.git "/home/${USER}/paru"
+    cd "/home/${USER}/paru" || exit
+    makepkg -si --noconfirm --needed
+    rm -rf "/home/${USER}/paru"
+  fi
+
   pacmanInstall stow git dialog
 
   # just in case someone decides to copy it to the wrong directory
-  [[ ! -d ~/.dotfiles ]] && echo "Dotfile repo should be cloned to ~/.dotfiles directory." && exit 1
+  [[ ! -d ~/.dotfiles/.git ]] && echo "Dotfile repo should be cloned to ~/.dotfiles directory." && exit 1
 
   cd ~/.dotfiles || exit
-  git pull && git submodule init && git submodule update
+  git submodule init && git submodule update
   mkdir -pv ~/.config
 
   installPackages || error "Error installing packages."
