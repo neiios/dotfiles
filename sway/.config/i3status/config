@@ -1,0 +1,27 @@
+general {
+  interval = 5
+  colors = true
+}
+
+order += "battery all"
+order += "tztime local"
+order += "path_exists VPN"
+
+battery all {
+  format = "%status %percentage %remaining"
+  last_full_capacity = true
+  low_threshold = 30
+  format_down = ""
+  separator = false
+}
+
+tztime local {
+  format = "%F %H:%M"
+  separator = false
+}
+
+path_exists VPN {
+  path = "/proc/sys/net/ipv4/conf/tun0"
+  format_down = ""
+  separator = false
+}

@@ -31,6 +31,17 @@ input * {
   accel_profile flat
 }
 
+# bar
+bar {
+    position top
+    status_command i3status
+    colors {
+        statusline #ffffff
+        background #000000
+        inactive_workspace #000000 #000000 #5c5c5c
+    }
+}
+
 # no window title
 default_border pixel 2
 

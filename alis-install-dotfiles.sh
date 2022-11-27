@@ -73,7 +73,7 @@ function installNeovim() {
 
 function installSway() {
   if (dialog --erase-on-exit --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
-    pacmanInstall sway wlroots xorg-xwayland swaybg swayidle swaylock \
+    pacmanInstall sway wlroots xorg-xwayland swaybg swayidle swaylock i3status \
       xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
       wf-recorder grim slurp swappy \
       pavucontrol blueman bluez-tools \
