@@ -65,7 +65,7 @@ function installPackages() {
 
 function installNeovim() {
   pacmanInstall neovim python-pynvim stylua cppcheck clang yamllint lua-language-server bash-language-server shellcheck shfmt typescript-language-server ansible-lint fd fzf
-  paruInstall prettierd vscode-langservers-extracted ansible-language-server
+  paruInstall prettierd vscode-langservers-extracted ansible-language-server nodejs-emmet-ls
   dotfileInstall nvim
   [[ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]] && git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
@@ -135,6 +135,7 @@ function main() {
 
   dotfileInstall env
   touch "$HOME/.config/wget-hsts"
+  mkdir -pv "$HOME/.local/share/npm"
 
   dotfileInstall easyeffects
 
