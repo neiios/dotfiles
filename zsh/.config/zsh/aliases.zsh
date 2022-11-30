@@ -6,7 +6,7 @@ hash nvim && alias vi="nvim"
 
 # cat and ls
 hash bat && alias cat="bat"
-hash exa && alias ls="exa -a --long --group --git"
+hash exa && alias ls="exa -a --long --group"
 
 # bitcoin-cli
 alias bcli="bitcoin-cli"
