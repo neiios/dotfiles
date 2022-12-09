@@ -26,6 +26,10 @@ input * {
 # enable gaps
 gaps inner 5
 
+# disable gaps and border if workspace has only one window open
+smart_gaps on
+smart_borders on
+
 # fuck mouse acceleration
 input * {
   accel_profile flat
