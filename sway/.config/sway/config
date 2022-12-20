@@ -20,7 +20,7 @@ xwayland enable
 # keyboard layouts
 input * {
     xkb_layout "us,ru"
-    xkb_options "grp:win_space_toggle,ctrl:nocaps,compose:ralt"
+    xkb_options "grp:win_space_toggle,caps:escape,compose:ralt"
 }
 
 # enable gaps
@@ -48,6 +48,7 @@ bar {
 
 # no window title
 default_border pixel 2
+# default_border normal
 
 # desktop
 output 'Unknown 24G1WG4 0x0000B512' mode 1920x1080@144.001hz pos 0 0 subpixel rgb
