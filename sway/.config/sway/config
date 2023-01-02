@@ -1,7 +1,7 @@
-# some bullshit env vars (dont remove them)
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway _JAVA_AWT_WM_NONREPARENTING=1 QT_QPA_PLATFORMTHEME=qt5ct
-# its important to set some of these variables before launching sway as well (.zprofile for me)
+# The variables should be set when launching Sway as well
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
+# TODO: clean up the variables
 set $mod Mod4
 set $bothMods Mod4+Mod1
 set $left h
@@ -11,66 +11,60 @@ set $right l
 set $term footclient
 set $menu tofi-drun | xargs swaymsg exec --
 
-# fixes cursor size
+# Set cursor theme
 seat * xcursor_theme Adwaita 24
 
-# lazy load xwayland
-xwayland enable
-
-# keyboard layouts
+# Keyboard settings
 input * {
     xkb_layout "us,ru"
     xkb_options "grp:win_space_toggle,caps:escape,compose:ralt"
+    # Fuck mouse acceleration
+    accel_profile flat
 }
 
-# enable gaps
+# Gaps
 gaps inner 5
+gaps outer 10
 
-# disable gaps and border if workspace has only one window open
+# No gaps if only one window is open
 smart_gaps on
 smart_borders on
 
-# fuck mouse acceleration
-input * {
-  accel_profile flat
-}
-
-# bar
-bar {
-    position top
-    status_command i3status
-    colors {
-        statusline #ffffff
-        background #000000
-        inactive_workspace #000000 #000000 #5c5c5c
-    }
-}
-
-# no window title
+# Tiled windows have no border
 default_border pixel 2
-# default_border normal
+default_floating_border normal
 
-# desktop
+# Bar
+bar {
+    swaybar_command waybar
+    # position top
+    # status_command i3status
+    # colors {
+    #     statusline #ffffff
+    #     background #000000
+    #     inactive_workspace #000000 #000000 #5c5c5c
+    # }
+}
+
+# Monitors
 output 'Unknown 24G1WG4 0x0000B512' mode 1920x1080@144.001hz pos 0 0 subpixel rgb
 output 'Ancor Communications Inc ASUS VP239 FALMTJ009967' mode 1920x1080@60.000hz pos 1920 0 subpixel rgb
-# laptop
 output 'Unknown 0x02D8 0x00000000' mode 1366x768@60.019hz pos 0 0 subpixel rgb
 
-include keybinds
-include status-bar
-include window-rules
-
-# autostart
+# Autostart
 exec {
   /home/${USER}/.config/sway/change-wallpaper.sh
-  mako
-  easyeffects --gapplication-service
-  udiskie &
-  nextcloud --background
-  keepassxc &
   /home/${USER}/.config/sway/alternating_layouts.py
+  mako
   mpris-proxy
   polkit-dumb-agent
+  udiskie &
+  easyeffects --gapplication-service
   foot --server
+  keepassxc &
+  emacs --daemon
 }
-# vim: ft=swayconfig
+
+# Includes
+include keybinds
+include window-rules

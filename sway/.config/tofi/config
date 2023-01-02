@@ -1,6 +1,6 @@
 anchor = top
 width = 100%
-height = 25
+height = 26
 horizontal = true
 font-size = 11
 prompt-text = ""

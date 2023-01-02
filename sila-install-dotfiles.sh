@@ -65,7 +65,7 @@ function installNeovim() {
 
 function installSway() {
   if (dialog --erase-on-exit --title "Sway" --yesno "Should the sway window manager be installed and configured?" 0 0); then
-    pacmanInstall sway wlroots xorg-xwayland swaybg swayidle swaylock i3status \
+    pacmanInstall sway waybar wlroots xorg-xwayland swaybg swayidle swaylock i3status \
       xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
       wf-recorder grim slurp swappy \
       pavucontrol blueman bluez-tools \
@@ -143,8 +143,8 @@ function main() {
 
   dotfileInstall foot
   # change default terminal for kde apps
-  grep -q "\[General\]" ~/.config/kdeglobals \
-    || echo "[General]" >>~/.config/kdeglobals
+  grep -q "\[General\]" ~/.config/kdeglobals ||
+    echo "[General]" >>~/.config/kdeglobals
   sed -i '/^TerminalApplication=/d' ~/.config/kdeglobals
   sed -i '/^\[General\]/a TerminalApplication=footclient' ~/.config/kdeglobals
 
