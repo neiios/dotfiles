@@ -31,11 +31,15 @@ window#waybar {
   color: white;
 }
 
-#battery,
 #pulseaudio,
 #clock,
+#backlight,
 #tray {
   margin-right: 1rem;
+}
+
+#battery {
+  margin-right: 1.5rem;
 }
 
 #tray menu {

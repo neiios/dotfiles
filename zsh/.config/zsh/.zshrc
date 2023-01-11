@@ -55,8 +55,8 @@ bindkey '^x^e' edit-command-line
 # bindkey -M vicmd v edit-command-line
 
 # add to path
-path=('~/.config/emacs/bin' $path)
-export PATH
+# path=('~/.config/emacs/bin' $path)
+# export PATH
 
 # fzf things
 source "/usr/share/fzf/key-bindings.zsh"

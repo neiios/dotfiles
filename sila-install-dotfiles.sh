@@ -47,6 +47,7 @@ function installPackages() {
     rate-mirrors-bin \
     nsxiv \
     keyd-git \
+    nerd-fonts-jetbrains-mono \
     texlive-latexindent-meta
 
   flatpakInstall flathub com.github.tchx84.Flatseal \
@@ -148,8 +149,8 @@ function main() {
 
   dotfileInstall foot
   # change default terminal for kde apps
-  grep -q "\[General\]" ~/.config/kdeglobals ||
-    echo "[General]" >>~/.config/kdeglobals
+  grep -q "\[General\]" ~/.config/kdeglobals \
+    || echo "[General]" >>~/.config/kdeglobals
   sed -i '/^TerminalApplication=/d' ~/.config/kdeglobals
   sed -i '/^\[General\]/a TerminalApplication=footclient' ~/.config/kdeglobals
 
