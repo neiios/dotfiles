@@ -43,6 +43,8 @@ function installPackages() {
     v4l2loopback-utils v4l2loopback-dkms \
     texlive-most texlive-lang texlive-langextra biber ghostscript python perl ruby dialog python-pygments
 
+  systemctl --user enable --now syncthing
+
   paruInstall code-features code-icons code-marketplace \
     rate-mirrors-bin \
     nsxiv \
@@ -149,8 +151,8 @@ function main() {
 
   dotfileInstall foot
   # change default terminal for kde apps
-  grep -q "\[General\]" ~/.config/kdeglobals \
-    || echo "[General]" >>~/.config/kdeglobals
+  grep -q "\[General\]" ~/.config/kdeglobals ||
+    echo "[General]" >>~/.config/kdeglobals
   sed -i '/^TerminalApplication=/d' ~/.config/kdeglobals
   sed -i '/^\[General\]/a TerminalApplication=footclient' ~/.config/kdeglobals
 
