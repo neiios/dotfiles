@@ -1,18 +1,18 @@
 # Desktop workspaces
-workspace 1:z output 'Unknown 24G1WG4 0x0000B512'
-workspace 2:x output 'Unknown 24G1WG4 0x0000B512'
-workspace 3:c output 'Unknown 24G1WG4 0x0000B512'
-workspace 4:v output 'Unknown 24G1WG4 0x0000B512'
-workspace 5:n output 'Unknown 24G1WG4 0x0000B512'
-workspace 6:m output 'Unknown 24G1WG4 0x0000B512'
+workspace 1:z output 'AOC 24G1WG4 0x0000B512'
+workspace 2:x output 'AOC 24G1WG4 0x0000B512'
+workspace 3:c output 'AOC 24G1WG4 0x0000B512'
+workspace 4:v output 'AOC 24G1WG4 0x0000B512'
+workspace 5:n output 'AOC 24G1WG4 0x0000B512'
+workspace 6:m output 'AOC 24G1WG4 0x0000B512'
 workspace 7:< output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
 workspace 8:> output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
 
 # Laptop workspaces
-workspace 1:z output 'Unknown 24G1WG4 0x0000B512'
-workspace 2:x output 'Unknown 24G1WG4 0x0000B512'
-workspace 3:c output 'Unknown 24G1WG4 0x0000B512'
-workspace 4:v output 'Unknown 24G1WG4 0x0000B512'
+workspace 1:z output 'Unknown 0x02D8 0x00000000'
+workspace 2:x output 'Unknown 0x02D8 0x00000000'
+workspace 3:c output 'Unknown 0x02D8 0x00000000'
+workspace 4:v output 'Unknown 0x02D8 0x00000000'
 
 for_window [app_id="virt-manager"] shortcuts_inhibitor disable
 # this makes the popup window for mic access small and stickied instead of an

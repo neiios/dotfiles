@@ -17,7 +17,7 @@ seat * xcursor_theme Adwaita 24
 # Keyboard settings
 input * {
     xkb_layout "us,ru"
-    xkb_options "grp:win_space_toggle,caps:escape,compose:ralt"
+    xkb_options "grp:win_space_toggle,compose:ralt"
     # Fuck mouse acceleration
     accel_profile flat
 }
@@ -47,7 +47,7 @@ bar {
 }
 
 # Monitors
-output 'Unknown 24G1WG4 0x0000B512' mode 1920x1080@144.001hz pos 0 0 subpixel rgb
+output 'AOC 24G1WG4 0x0000B512' mode 1920x1080@144.001hz pos 0 0 subpixel rgb
 output 'Ancor Communications Inc ASUS VP239 FALMTJ009967' mode 1920x1080@60.000hz pos 1920 0 subpixel rgb
 output 'Unknown 0x02D8 0x00000000' mode 1366x768@60.019hz pos 0 0 subpixel rgb
 
