@@ -38,7 +38,7 @@ function installPackages() {
     qpwgraph \
     mpv zathura zathura-cb zathura-djvu zathura-pdf-mupdf zathura-ps \
     code \
-    nextcloud-client \
+    syncthing \
     ansible ansible-lint sshpass python-argcomplete python-boto3 \
     v4l2loopback-utils v4l2loopback-dkms \
     texlive-most texlive-lang texlive-langextra biber ghostscript python perl ruby dialog python-pygments
@@ -46,6 +46,7 @@ function installPackages() {
   paruInstall code-features code-icons code-marketplace \
     rate-mirrors-bin \
     nsxiv \
+    keyd-git \
     texlive-latexindent-meta
 
   flatpakInstall flathub com.github.tchx84.Flatseal \
@@ -53,6 +54,10 @@ function installPackages() {
     com.github.taiko2k.tauonmb org.musicbrainz.Picard \
     com.obsproject.Studio org.kde.kdenlive \
     org.telegram.desktop
+
+  # cant use stow for /etc
+  sudo mkdir -pv /etc/keyd && sudo cp ~/.dotfiles/keyd/default.conf /etc/keyd/default.conf
+  sudo systemctl enable --now keyd
 }
 
 function installNeovim() {
@@ -106,8 +111,8 @@ function installGaming() {
     # flatpak steam doesnt work if mangohud config is a symlink so just copy it manually
     mkdir -pv ~/.config/MangoHud && cp ~/.dotfiles/mangohud/.config/MangoHud/MangoHud.conf ~/.config/MangoHud
 
-    flatpakInstall flathub com.valvesoftware.Steam com.valvesoftware.Steam.CompatibilityTool.Proton-GE \
-      com.valvesoftware.Steam.Utility.gamescope org.freedesktop.Platform.VulkanLayer.MangoHud//22.08 \
+    flatpakInstall flathub com.valvesoftware.Steam com.valvesoftware.Steam.Utility.gamescope \
+      org.freedesktop.Platform.VulkanLayer.MangoHud//22.08 \
       com.discordapp.Discord
     dotfileInstall hotkey
   fi
