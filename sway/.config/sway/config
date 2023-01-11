@@ -49,7 +49,7 @@ bar {
 # Monitors
 output 'AOC 24G1WG4 0x0000B512' mode 1920x1080@144.001hz pos 0 0 subpixel rgb
 output 'Ancor Communications Inc ASUS VP239 FALMTJ009967' mode 1920x1080@60.000hz pos 1920 0 subpixel rgb
-output 'Unknown 0x02D8 0x00000000' mode 1366x768@60.019hz pos 0 0 subpixel rgb
+output 'LG Display 0x02D8 Unknown' mode 1366x768@60.019hz pos 0 0 subpixel rgb
 
 # Autostart
 exec {

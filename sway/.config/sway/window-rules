@@ -9,10 +9,10 @@ workspace 7:< output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
 workspace 8:> output 'Ancor Communications Inc ASUS VP239 FALMTJ009967'
 
 # Laptop workspaces
-workspace 1:z output 'Unknown 0x02D8 0x00000000'
-workspace 2:x output 'Unknown 0x02D8 0x00000000'
-workspace 3:c output 'Unknown 0x02D8 0x00000000'
-workspace 4:v output 'Unknown 0x02D8 0x00000000'
+workspace 1:z output 'LG Display 0x02D8 Unknown'
+workspace 2:x output 'LG Display 0x02D8 Unknown'
+workspace 3:c output 'LG Display 0x02D8 Unknown'
+workspace 4:v output 'LG Display 0x02D8 Unknown'
 
 for_window [app_id="virt-manager"] shortcuts_inhibitor disable
 # this makes the popup window for mic access small and stickied instead of an
