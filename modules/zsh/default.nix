@@ -50,6 +50,8 @@ in {
         source ${pkgs.fzf}/share/fzf/key-bindings.zsh
         source ${pkgs.fzf}/share/fzf/completion.zsh
         source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
+
+        source "/home/${username}/.sdkman/bin/sdkman-init.sh"
       '';
 
       localVariables = {
