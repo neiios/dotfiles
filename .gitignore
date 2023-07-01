@@ -1,12 +1,2 @@
-zsh/.config/zsh/.zcompdump
-tmux/.config/tmux/ressurect
-nvim/.config/nvim/plugin
-git/.config/git/gitk
-gtk/.config/gtk-3.0/bookmarks
-gtk/.config/gtk-4.0/bookmarks
-easyeffects/.config/easyeffects/autoload
-sway/.config/systemd/user/timers.target.wants
-sway/.config/systemd/user/default.target.wants
-keepassxc/.config/keepassxc/keepassxc.ini
-
-*known_hosts*
+result
+NOTES.md
