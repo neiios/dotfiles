@@ -32,9 +32,5 @@
         inherit args username;
       };
     };
-
-    packages.x86_64-linux = {
-      foliate = import ./packages/foliate.nix {inherit pkgs;};
-    };
   };
 }
