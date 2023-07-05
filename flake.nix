@@ -29,7 +29,7 @@
       ];
 
       extraSpecialArgs = {
-        inherit args username;
+        inherit args username nixpkgs;
       };
     };
   };

@@ -1,6 +1,7 @@
 {
   pkgs,
   username,
+  nixpkgs,
   ...
 }: {
   home.username = "${username}";
@@ -9,6 +10,7 @@
   home.stateVersion = "23.05";
   targets.genericLinux.enable = true;
   systemd.user.startServices = "sd-switch";
+  nix.registry.nixpkgs.flake = nixpkgs;
 
   modules = {
     emacs.enable = true;
