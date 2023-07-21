@@ -1,18 +1,6 @@
-{
-  pkgs,
-  username,
-  nixpkgs,
-  ...
-}: {
-  home.username = "${username}";
-  home.homeDirectory = "/home/${username}";
-  programs.home-manager.enable = true;
-  home.stateVersion = "23.05";
-  targets.genericLinux.enable = true;
-  systemd.user.startServices = "sd-switch";
-  nix.registry.nixpkgs.flake = nixpkgs;
-
+{pkgs, ...}: {
   modules = {
+    boilerplate.enable = true;
     emacs.enable = true;
     zsh.enable = true;
     git.enable = true;
