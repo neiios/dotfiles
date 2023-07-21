@@ -241,3 +241,20 @@
 (use-package org-superstar
   :hook (org-mode . (lambda () (org-superstar-mode)))
   :config (setq org-startup-indented t))
+
+(use-package nix-mode
+  :mode ("\\.nix\\'" "\\.nix.in\\'"))
+(use-package nix-drv-mode
+  :elpaca nil
+  :ensure nix-mode
+  :mode "\\.drv\\'")
+(use-package nix-shell
+  :elpaca nil
+  :ensure nix-mode
+  :commands (nix-shell-unpack nix-shell-configure nix-shell-build))
+(use-package nix-repl
+  :elpaca nil
+  :ensure nix-mode
+  :commands (nix-repl))
+
+(use-package magit)
