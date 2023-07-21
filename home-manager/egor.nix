@@ -23,17 +23,14 @@
     nodePackages.bash-language-server
   ];
 
-  home.sessionVariables = {
-    MOZ_ENABLE_WAYLAND = "1";
+  programs.thunderbird = {
+    enable = true;
+    profiles.nix = {
+      isDefault = true;
+    };
   };
 
-  nix = {
-    package = pkgs.nix;
-    settings = {
-      auto-optimise-store = true;
-      experimental-features = ["nix-command" "flakes"];
-      warn-dirty = false;
-      use-xdg-base-directories = true;
-    };
+  home.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
   };
 }

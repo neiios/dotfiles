@@ -39,5 +39,9 @@ in {
         };
       };
     };
+
+    home.packages = [
+      pkgs.gh
+    ];
   };
 }

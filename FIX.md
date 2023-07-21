@@ -1,4 +1,4 @@
-# A collection of fixes for small issues
+# Fixes and TODOs
 
 ## Update nix
 
@@ -18,3 +18,5 @@ xdg-mime default org.gnome.Nautilus.desktop inode/directory
 ```bash
 ratbagctl cheering-viscacha button 5 action set macro key_numlock
 ```
+
+## Create MangoHud hardlink
