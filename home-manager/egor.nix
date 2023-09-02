@@ -1,36 +1,37 @@
-{pkgs, ...}: {
-  modules = {
-    boilerplate.enable = true;
-    emacs.enable = true;
-    zsh.enable = true;
-    git.enable = true;
-    tmux.enable = true;
-    foot.enable = true;
-  };
-
-  home.packages = with pkgs; [
-    nix
-    nil
-    alejandra
-    deploy-rs
-
-    ssh-to-age
-    sops
-    nixos-rebuild
-
-    shfmt
-    shellcheck
-    nodePackages.bash-language-server
+{
+  config,
+  lib,
+  pkgs,
+  ...
+} @ args: {
+  imports = [
+    ./easyeffects
+    ./shell
+    ./fonts.nix
+    ./git.nix
+    ./gnome.nix
   ];
 
-  programs.thunderbird = {
-    enable = true;
-    profiles.nix = {
-      isDefault = true;
-    };
-  };
+  home.packages = with pkgs; [
+    nil
+    alejandra
+    nixos-rebuild
+  ];
 
-  home.sessionVariables = {
-    MOZ_ENABLE_WAYLAND = "1";
-  };
+  home.username = "egor";
+  home.homeDirectory = "/home/egor";
+  home.stateVersion = "23.05";
+  programs.home-manager.enable = true;
+  systemd.user.startServices = "sd-switch";
+  nix.registry.nixpkgs.flake = args.nixpkgs;
+  nix.registry.home-manager.flake = args.home-manager;
+  nix.package = pkgs.nix;
+  nix.settings.use-xdg-base-directories = true;
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = _: true;
+  home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
+
+  systemd.user.tmpfiles.rules = [
+    "L+ /home/egor/.config/home-manager - - - - /home/egor/Dev/dotfiles"
+  ];
 }

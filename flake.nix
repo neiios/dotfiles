@@ -1,36 +1,35 @@
 {
-  description = "Ze Dotfiles";
-
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
+  description = "Ze Nix Dotfiles III";
 
   outputs = {
+    self,
     nixpkgs,
     home-manager,
     ...
   } @ args: let
-    system = "x86_64-linux";
-    username = "egor";
-    pkgs = nixpkgs.legacyPackages.${system};
-    createHmConfig = home-manager.lib.homeManagerConfiguration;
+    dotfilesPath = "/home/egor/Dev/dotfiles";
   in {
-    homeConfigurations."egor" = createHmConfig {
-      inherit pkgs;
-
-      modules = [
-        {imports = import ./modules/module-list.nix;}
-        ./home-manager/egor.nix
-      ];
-
-      extraSpecialArgs = {
-        inherit args username nixpkgs;
+    homeConfigurations = {
+      egor = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = args // {inherit dotfilesPath;};
+        modules = [
+          ./home-manager/egor.nix
+        ];
       };
+    };
+  };
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "";
     };
   };
 }
