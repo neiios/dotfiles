@@ -18,19 +18,6 @@
     keyMode = "vi";
     mouse = true;
     plugins = with pkgs; [
-      {
-        plugin = tmuxPlugins.resurrect;
-        extraConfig = ''
-          set -g @resurrect-dir '$HOME/.config/tmux/ressurect'
-        '';
-      }
-      {
-        plugin = tmuxPlugins.continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '5'
-        '';
-      }
       tmuxPlugins.mode-indicator
       tmuxPlugins.yank
     ];
@@ -71,5 +58,19 @@
       bind-key -n C-S-Left swap-window -t -1\; select-window -t -1
       bind-key -n C-S-Right swap-window -t +1\; select-window -t +1
     '';
+  };
+
+  systemd.user.services.tmux-autostart = {
+    Unit = {
+      Description = "Autostart Tmux.";
+    };
+    Service = {
+      Type = "forking";
+      ExecStart = "${pkgs.tmux}/bin/tmux new-session -s default -d";
+      ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+    };
   };
 }

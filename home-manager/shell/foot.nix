@@ -68,7 +68,7 @@
   dconf.settings = {
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Super>Return";
-      command = "footclient";
+      command = "footclient -m tmux a";
       name = "Launch Terminal";
     };
     "com/github/stunkymonkey/nautilus-open-any-terminal" = {
