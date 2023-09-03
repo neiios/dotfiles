@@ -7,6 +7,7 @@
   imports = [
     ./easyeffects
     ./shell
+    ./vscode
     ./fonts.nix
     ./generic-linux.nix
     ./git.nix
@@ -32,6 +33,6 @@
   nixpkgs.config.allowUnfreePredicate = _: true;
   home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
   systemd.user.tmpfiles.rules = [
-    "L+ /home/egor/.config/home-manager - - - - /home/egor/Dev/dotfiles"
+    "L+ ${config.xdg.configHome}/home-manager - - - - /home/egor/Dev/dotfiles"
   ];
 }
