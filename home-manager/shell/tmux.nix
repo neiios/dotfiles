@@ -28,14 +28,25 @@
       set-option -g focus-events on
 
       # customize status bar
-      set -g status-bg black
-      set -g status-fg green
-      set -g status-justify centre
-      set -g status-left-length 20
-      set-window-option -g status-left "#[fg=black,bg=cyan] #S "
-      set -g status-right-length 20
-      set -g status-right "#{tmux_mode_indicator}"
-      set-window-option -g window-status-current-format "#[fg=black,bg=green] #I:#W "
+      # set -g status-bg black
+      # set -g status-fg green
+      # set -g status-justify centre
+      # set -g status-left-length 20
+      # set-window-option -g status-left "#[fg=black,bg=cyan] #S "
+      # set -g status-right-length 20
+      # set -g status-right "#{tmux_mode_indicator}"
+      # set-window-option -g window-status-current-format "#[fg=black,bg=green] #I:#W "
+
+      # for nvim plugin
+      set -g focus-events on
+      set -g status-style bg=default
+      set -g status-left-length 90
+      set -g status-right-length 90
+      set -g status-justify absolute-centre
+      set-window-option -g window-status-current-format "#[fg=black,bg=blue] #I:#W "
+      set -g pane-active-border-style fg=blue
+      set-window-option -g status-left ""
+      set-window-option -g status-right ""
 
       # reload config file
       bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"

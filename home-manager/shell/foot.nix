@@ -9,7 +9,7 @@
     server.enable = true;
     settings = {
       main = {
-        font = "JetBrainsMono Nerd Font:size=10.5";
+        font = "JetBrainsMono Nerd Font:size=11";
         pad = "8x8 center";
         initial-window-size-pixels = "1200x700";
         title = "⠀"; # What an ugly hack. But oh well.
@@ -39,22 +39,22 @@
       colors = {
         alpha = "1";
         background = "000000";
-        foreground = "b9b9b9";
-        regular0 = "252525";
-        regular1 = "c01c28";
-        regular2 = "58af00";
-        regular3 = "e59a04";
-        regular4 = "12488b";
-        regular5 = "a347ba";
-        regular6 = "38b49e";
-        regular7 = "d0cfcc";
-        bright0 = "5e5c64";
-        bright1 = "f66151";
-        bright2 = "8ec251";
-        bright3 = "e9ad0c";
-        bright4 = "66aadd";
-        bright5 = "c061cb";
-        bright6 = "26d1b3";
+        foreground = "ffffff";
+        regular0 = "000000";
+        regular1 = "ff5f59";
+        regular2 = "44bc44";
+        regular3 = "d0bc00";
+        regular4 = "2fafff";
+        regular5 = "feacd0";
+        regular6 = "00d3d0";
+        regular7 = "bfbfbf";
+        bright0 = "595959";
+        bright1 = "ff6b55";
+        bright2 = "70b900";
+        bright3 = "fec43f";
+        bright4 = "79a8ff";
+        bright5 = "b6a0ff";
+        bright6 = "6ae4b9";
         bright7 = "ffffff";
       };
     };
@@ -62,7 +62,7 @@
 
   programs.tmux.extraConfig = ''
     # True color support
-    set -ag terminal-overrides ",foot:RGB"
+    set-option -sa terminal-features ',foot:RGB'
   '';
 
   dconf.settings = {
