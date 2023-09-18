@@ -20,15 +20,10 @@
   "nix.serverSettings": {
     "nil": {
       "diagnostics": {
-        "ignored": [
-          "unused_binding",
-          "unused_with"
-        ]
+        "ignored": ["unused_binding", "unused_with"]
       },
       "formatting": {
-        "command": [
-          "alejandra"
-        ]
+        "command": ["alejandra"]
       }
     }
   },
@@ -41,6 +36,11 @@
   "terminal.integrated.minimumContrastRatio": 1,
   "editor.smoothScrolling": true,
   "editor.stickyScroll.enabled": true,
-  "editor.scrollbar.vertical": "hidden",
-  "editor.scrollbar.verticalScrollbarSize": 0,
+  "editor.linkedEditing": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "python.analysis.autoImportCompletions": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  }
 }
