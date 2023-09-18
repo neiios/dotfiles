@@ -1,0 +1,6 @@
+{
+    "device": "alsa_input.usb-E-MU_Systems__Inc._E-MU_0204___USB_E-MU-A9-3F19-07DB030E-07D4E-8740AT2A-00.analog-stereo",
+    "device-description": "E-MU 0204 | USB Analog Stereo",
+    "device-profile": "analog-input",
+    "preset-name": "Actually Decent Mic Preset"
+}
