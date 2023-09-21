@@ -42,5 +42,6 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true
-  }
+  },
+  "direnv.restart.automatic": true,
 }
