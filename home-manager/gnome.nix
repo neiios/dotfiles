@@ -66,15 +66,24 @@ in {
 
     "org/gnome/desktop/wm/keybindings" = {
       close = ["<Super>q"];
+
       cycle-windows = ["<Super>s"];
       cycle-windows-backward = ["<Shift><Super>s"];
+
+      switch-to-workspace-left = ["<Super>a"];
       move-to-workspace-left = ["<Shift><Super>a"];
+      switch-to-workspace-right = ["<Super>d"];
       move-to-workspace-right = ["<Shift><Super>d"];
+
       switch-group = ["<Alt>Escape"];
       switch-group-backward = ["<Shift><Alt>Escape"];
-      switch-to-workspace-left = ["<Super>a"];
-      switch-to-workspace-right = ["<Super>d"];
+
       toggle-maximized = ["<Super>w"];
+    };
+
+    "org/gnome/shell/keybindings" = {
+      toggle-application-view = [];
+      toggle-quick-settings = [];
     };
 
     "org/gnome/shell/app-switcher" = {
