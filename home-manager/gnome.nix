@@ -30,15 +30,11 @@ in {
 
     "org/gnome/desktop/input-sources" = {
       sources = [(mkTuple ["xkb" "us"]) (mkTuple ["xkb" "ru"]) (mkTuple ["xkb" "lt"])];
-      xkb-options = ["terminate:ctrl_alt_bksp"];
+      xkb-options = ["caps:escape"];
     };
 
     "org/gnome/shell/extensions/dock-from-dash" = {
       show-overview = true;
-    };
-
-    "org/gnome/desktop/wm/keybindings" = {
-      close = ["<Super>q"];
     };
 
     "org/gnome/settings-daemon/plugins/power" = {
@@ -61,6 +57,28 @@ in {
 
     "org/gnome/desktop/session" = {
       idle-delay = mkUint32 0;
+    };
+
+    "org/gnome/desktop/sound" = {
+      event-sounds = false;
+      theme-name = "__custom";
+    };
+
+    "org/gnome/desktop/wm/keybindings" = {
+      close = ["<Super>q"];
+      cycle-windows = ["<Super>s"];
+      cycle-windows-backward = ["<Shift><Super>s"];
+      move-to-workspace-left = ["<Shift><Super>a"];
+      move-to-workspace-right = ["<Shift><Super>d"];
+      switch-group = ["<Alt>Escape"];
+      switch-group-backward = ["<Shift><Alt>Escape"];
+      switch-to-workspace-left = ["<Super>a"];
+      switch-to-workspace-right = ["<Super>d"];
+      toggle-maximized = ["<Super>w"];
+    };
+
+    "org/gnome/shell/app-switcher" = {
+      current-workspace-only = true;
     };
   };
 }
