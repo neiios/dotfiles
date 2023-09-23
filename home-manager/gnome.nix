@@ -3,29 +3,12 @@
   lib,
   pkgs,
   ...
-} @ args: let
-  mute-mic = pkgs.writeShellApplication {
-    name = "mute-mic";
-    runtimeInputs = [pkgs.xdotool];
-    text = ''
-      xdotool keydown Num_Lock
-      xdotool keyup Num_Lock
-    '';
-  };
-in {
+} @ args: {
   home.packages = with pkgs; [mute-mic];
 
   dconf.settings = with lib.hm.gvariant; {
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
-      ];
-    };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-      binding = "Num_Lock";
-      command = "${mute-mic}/bin/mute-mic";
-      name = "Mute Mic";
+      mic-mute = ["Num_Lock"];
     };
 
     "org/gnome/desktop/input-sources" = {
