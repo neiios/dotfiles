@@ -44,4 +44,8 @@
     "editor.formatOnSave": true
   },
   "direnv.restart.automatic": true,
+  "C_Cpp.clang_format_fallbackStyle": "WebKit",
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  }
 }

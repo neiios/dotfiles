@@ -4,8 +4,6 @@
   pkgs,
   ...
 } @ args: {
-  home.packages = with pkgs; [mute-mic];
-
   dconf.settings = with lib.hm.gvariant; {
     "org/gnome/settings-daemon/plugins/media-keys" = {
       mic-mute = ["Num_Lock"];
