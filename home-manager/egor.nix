@@ -6,6 +6,7 @@
 } @ args: {
   imports = [
     ./easyeffects
+    ./neovim
     ./shell
     ./vscode
     ./fonts.nix

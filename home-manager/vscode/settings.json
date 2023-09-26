@@ -47,5 +47,6 @@
   "C_Cpp.clang_format_fallbackStyle": "WebKit",
   "[markdown]": {
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
-  }
+  },
+  "workbench.colorTheme": "Default Light Modern"
 }
