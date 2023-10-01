@@ -74,14 +74,13 @@
   systemd.user.services.tmux-autostart = {
     Unit = {
       Description = "Autostart Tmux.";
+      Requires = ["graphical-session.target"];
+      After = ["graphical-session.target"];
     };
     Service = {
       Type = "forking";
       ExecStart = "${pkgs.tmux}/bin/tmux new-session -s default -d";
       ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
-    };
-    Install = {
-      WantedBy = ["graphical-session.target"];
     };
   };
 }
