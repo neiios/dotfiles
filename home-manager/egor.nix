@@ -10,7 +10,6 @@
     ./shell
     ./vscode
     ./fonts.nix
-    ./generic-linux.nix
     ./git.nix
     ./gnome.nix
   ];
@@ -24,6 +23,7 @@
   home.username = "egor";
   home.homeDirectory = "/home/egor";
   home.stateVersion = "23.05";
+  targets.genericLinux.enable = true;
   programs.home-manager.enable = true;
   systemd.user.startServices = "sd-switch";
   nix.registry.nixpkgs.flake = args.nixpkgs;
