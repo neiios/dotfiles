@@ -41,6 +41,10 @@ in {
     initExtra = ''
       zle_highlight=('paste:none')
 
+      autoload -z edit-command-line
+      zle -N edit-command-line
+      bindkey "^X^E" edit-command-line
+
       source ${pkgs.fzf}/share/fzf/key-bindings.zsh
       source ${pkgs.fzf}/share/fzf/completion.zsh
       source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
@@ -49,7 +53,6 @@ in {
 
       export NVM_DIR="$([ -z "''${XDG_CONFIG_HOME-}" ] && printf %s "''${HOME}/.nvm" || printf %s "''${XDG_CONFIG_HOME}/nvm")"
       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
     '';
 
     envExtra = ''
