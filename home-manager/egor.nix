@@ -8,7 +8,7 @@
     ./easyeffects
     ./neovim
     ./shell
-    ./vscode
+    ./vscode.nix
     ./fonts.nix
     ./git.nix
     ./gnome.nix
