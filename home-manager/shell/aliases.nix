@@ -19,6 +19,10 @@
       ffmpeg -i $1 -c:v libvpx-vp9 -vf scale=512:-1 -pix_fmt yuva420p -metadata:s:v:0 alpha_mode="1" -t 00:00:03 ~/Videos/$2.webm
     }
 
+    function unnest() {
+      mv ./$1/{.,}* . && rmdir $1
+    }
+
     alias g="git"
     alias gs="git status --short --branch"
     alias gc="git commit --verbose"
