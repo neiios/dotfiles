@@ -9,6 +9,7 @@
     dcu = "docker compose -d";
     dcd = "docker compose down";
     dclean = "docker system prune -a --volumes";
+    install-package = "nvim ~/Dev/dotfiles/home-manager/quick.nix && hms";
   };
 
   programs.zsh.initExtra = ''

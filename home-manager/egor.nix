@@ -8,10 +8,11 @@
     ./easyeffects
     ./neovim
     ./shell
-    ./vscode.nix
     ./fonts.nix
     ./git.nix
     ./gnome.nix
+    ./quick.nix
+    ./vscode.nix
   ];
 
   home.packages = with pkgs; [
