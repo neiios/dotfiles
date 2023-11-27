@@ -56,7 +56,9 @@ in {
     '';
 
     envExtra = ''
-      export PATH=$HOME/.local/bin:$PATH
+      export PATH="$HOME/.local/bin:$PATH"
+      # BUG: fix flatpak paths (nix zsh overrides system XDG_DATA_DIRS)
+      export XDG_DATA_DIRS="${config.xdg.dataHome}/flatpak/exports/share:/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
     '';
 
     history = {
