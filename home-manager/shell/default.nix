@@ -4,7 +4,7 @@
   pkgs,
   ...
 } @ args: let
-  username = "egor";
+  username = "igor";
 in {
   imports = [
     ./foot.nix

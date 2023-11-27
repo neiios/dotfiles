@@ -7,17 +7,19 @@
     home-manager,
     ...
   } @ args: let
-    dotfilesPath = "/home/egor/Dev/dotfiles";
+    dotfilesPath = "/home/igor/Dev/dotfiles";
   in {
     homeConfigurations = {
-      egor = home-manager.lib.homeManagerConfiguration {
+      igor = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         extraSpecialArgs = args // {inherit dotfilesPath;};
         modules = [
-          ./home-manager/egor.nix
+          ./home-manager/home.nix
         ];
       };
     };
+
+    defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
   };
 
   inputs = {

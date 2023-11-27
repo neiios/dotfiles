@@ -15,6 +15,6 @@
     EDITOR = "${pkgs.neovim}/bin/nvim";
   };
   systemd.user.tmpfiles.rules = [
-    "L+ ${config.xdg.configHome}/nvim - - - - /home/egor/Dev/dotfiles/home-manager/neovim/config"
+    "L+ ${config.xdg.configHome}/nvim - - - - /home/igor/Dev/dotfiles/home-manager/neovim/config"
   ];
 }

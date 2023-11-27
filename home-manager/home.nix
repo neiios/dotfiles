@@ -21,8 +21,8 @@
     nixos-rebuild
   ];
 
-  home.username = "egor";
-  home.homeDirectory = "/home/egor";
+  home.username = "igor";
+  home.homeDirectory = "/home/igor";
   home.stateVersion = "23.05";
   targets.genericLinux.enable = true;
   programs.home-manager.enable = true;
@@ -35,6 +35,6 @@
   nixpkgs.config.allowUnfreePredicate = _: true;
   home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
   systemd.user.tmpfiles.rules = [
-    "L+ ${config.xdg.configHome}/home-manager - - - - /home/egor/Dev/dotfiles"
+    "L+ ${config.xdg.configHome}/home-manager - - - - /home/igor/Dev/dotfiles"
   ];
 }
