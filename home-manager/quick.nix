@@ -17,11 +17,20 @@
   ];
 
   xdg.enable = true;
+  nix.settings.use-xdg-base-directories = true;
+
   home.sessionVariables = {
-    GOPATH = "$XDG_DATA_HOME/go";
-    GOMODCACHE = "$XDG_CACHE_HOME/go/mod";
-    R_HOME_USER = "$XDG_DATA_HOME/R";
-    R_PROFILE_USER = "$XDG_DATA_HOME/R/profile";
-    R_HISTFILE = "$XDG_CACHE_HOME/R/history";
+    GOPATH = "${config.xdg.dataHome}/go";
+    GOMODCACHE = "${config.xdg.cacheHome}/go/mod";
+    R_HOME_USER = "${config.xdg.dataHome}/R";
+    R_PROFILE_USER = "${config.xdg.dataHome}/R/profile";
+    R_HISTFILE = "${config.xdg.cacheHome}/R/history";
+    _JAVA_OPTIONS = "-Djava.util.prefs.userRoot=${config.xdg.configHome}/java";
+    GTK2_RC_FILES = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+    ANDROID_HOME = "${config.xdg.dataHome}/android";
+  };
+
+  programs.zsh.shellAliases = {
+    adb = "HOME=${config.xdg.dataHome}/android adb";
   };
 }
