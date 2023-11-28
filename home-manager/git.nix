@@ -18,6 +18,12 @@
         autocrlf = "false";
         eol = "lf";
       };
+      url = {
+        "https://invent.kde.org/" = {
+          insteadOf = "kde:";
+          pushInsteadOf = "kde:";
+        };
+      };
     };
   };
 

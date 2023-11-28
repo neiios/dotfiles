@@ -5,6 +5,8 @@
     '';
     enableCompletion = true; # Will run autoload -U compinit && compinit
     initExtra = ''
+      autoload -U +X bashcompinit && bashcompinit
+
       _comp_options+=(globdots) # Complete hidden files
       unsetopt complete_aliases
       zstyle ':completion:*' completer _extensions _complete _approximate
