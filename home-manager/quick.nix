@@ -20,13 +20,14 @@
   nix.settings.use-xdg-base-directories = true;
 
   home.sessionVariables = {
+    DOTNET_CLI_TELEMETRY_OPTOUT = "1"; # <3 Microsoft
     GOPATH = "$XDG_DATA_HOME/go";
     GOMODCACHE = "$XDG_CACHE_HOME/go/mod";
     R_HOME_USER = "$XDG_DATA_HOME/R";
     R_PROFILE_USER = "$XDG_DATA_HOME/R/profile";
     R_HISTFILE = "$XDG_CACHE_HOME/R/history";
-    _JAVA_OPTIONS = "-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java";
-    GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
+    # _JAVA_OPTIONS = "-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"; # intellij really doesnt like this
+    # GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc"; # Plasma hardcodes the value
     ANDROID_HOME = "$XDG_DATA_HOME/android";
     TEXMFHOME = "$XDG_DATA_HOME/texmf";
     TEXMFVAR = "$XDG_CACHE_HOME/texlive/texmf-var";
@@ -69,5 +70,21 @@
     ## Register autocomplete function
     complete -o nospace -F _comp_kdesrc_run kdesrc-run
     ################################################################################
+
+    # zsh parameter completion for the dotnet CLI
+    _dotnet_zsh_complete()
+    {
+      local completions=("$(dotnet complete "$words")")
+
+      # If the completion list is empty, just continue with filename selection
+      if [ -z "$completions" ]
+      then
+        _arguments '*::arguments: _normal'
+        return
+      fi
+
+      # This is not a variable assignment, don't remove spaces!
+      _values = "''${(ps:\n:)completions}"
+    }
   '';
 }
