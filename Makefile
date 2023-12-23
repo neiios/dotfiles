@@ -15,4 +15,7 @@ set_default_shell:
 	grep -qxF "$(NIX_ZSH_PATH)" /etc/shells || echo "$(NIX_ZSH_PATH)" | sudo tee -a /etc/shells
 	chsh -s "$(NIX_ZSH_PATH)"
 
-.PHONY: install nix_install home_manager_switch set_default_shell
+clean:
+	rm -rf ./build
+
+.PHONY: install nix_install home_manager_switch set_default_shell clean
