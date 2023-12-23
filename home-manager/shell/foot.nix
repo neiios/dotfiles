@@ -10,9 +10,9 @@
     settings = {
       main = {
         font = "JetBrainsMono Nerd Font:size=10.5";
-        pad = "8x8 center";
+        pad = "16x16 center";
         initial-window-size-pixels = "1200x700";
-        title = "⠀"; # What an ugly hack. But oh well.
+        title = " "; # What an ugly hack. But oh well.
         locked-title = "yes";
         dpi-aware = "no";
       };
