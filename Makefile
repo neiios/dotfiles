@@ -15,6 +15,9 @@ set_default_shell:
 	grep -qxF "$(NIX_ZSH_PATH)" /etc/shells || echo "$(NIX_ZSH_PATH)" | sudo tee -a /etc/shells
 	chsh -s "$(NIX_ZSH_PATH)"
 
+run_install_script:
+	./install.sh
+
 clean:
 	rm -rf ./build
 
