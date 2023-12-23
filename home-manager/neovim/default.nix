@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  dotfilesPath,
   ...
 } @ args: {
   home.packages = with pkgs; [
@@ -14,7 +15,7 @@
   home.sessionVariables = {
     EDITOR = "${pkgs.neovim}/bin/nvim";
   };
-  systemd.user.tmpfiles.rules = [
-    "L+ ${config.xdg.configHome}/nvim - - - - /home/igor/Dev/dotfiles/home-manager/neovim/config"
-  ];
+  # systemd.user.tmpfiles.rules = [
+  #   "L+ ${config.xdg.configHome}/nvim - - - - ${dotfilesPath}/home-manager/neovim/config"
+  # ];
 }
