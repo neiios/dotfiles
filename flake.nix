@@ -18,8 +18,6 @@
         ];
       };
     };
-
-    defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
   };
 
   inputs = {
