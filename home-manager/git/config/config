@@ -1,0 +1,13 @@
+[core]
+  autocrlf = "false"
+  eol = "lf"
+[init]
+  defaultBranch = "master"
+[user]
+  email = "egor@sgf.lt"
+  name = "Igor"
+
+[url "https://invent.kde.org/"]
+  insteadOf = "kde:"
+[url "ssh://git@invent.kde.org/"]
+	pushInsteadOf = "kde:"
