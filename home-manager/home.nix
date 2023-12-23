@@ -6,13 +6,10 @@
 } @ args: {
   imports = [
     ./easyeffects
+    ./git
     ./neovim
     ./shell
     ./fonts.nix
-    ./git.nix
-    ./gnome.nix
-    ./quick.nix
-    ./vscode.nix
   ];
 
   home.packages = with pkgs; [

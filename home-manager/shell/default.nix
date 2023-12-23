@@ -7,11 +7,12 @@
   username = "igor";
 in {
   imports = [
-    ./foot.nix
-    ./tmux.nix
     ./completions.nix
     ./aliases.nix
+    ./foot.nix
     ./prompt.nix
+    ./tmux.nix
+    ./xdg-vars.nix
   ];
 
   home.packages = with pkgs; [
@@ -26,8 +27,8 @@ in {
     tealdeer
   ];
 
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
+  # programs.direnv.enable = true;
+  # programs.direnv.nix-direnv.enable = true;
 
   programs.zsh = {
     enable = true;
