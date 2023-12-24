@@ -9,7 +9,7 @@
     server.enable = true;
     settings = {
       main = {
-        font = "JetBrainsMono Nerd Font:size=10.5";
+        font = "BerkeleyMono Nerd Font:size=10.5, JetBrainsMono Nerd Font:size=10.5, monospace:size=10";
         pad = "16x16 center";
         initial-window-size-pixels = "1200x700";
         title = " "; # What an ugly hack. But oh well.
