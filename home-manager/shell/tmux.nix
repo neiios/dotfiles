@@ -7,7 +7,7 @@
   programs.tmux = {
     enable = true;
     terminal = "tmux-256color";
-    prefix = "C-a";
+    prefix = "M-a";
     aggressiveResize = true;
     baseIndex = 1;
     clock24 = true;
