@@ -1,8 +1,19 @@
-# Issues
+# issues
 
-- LibGL <https://github.com/NixOS/nixpkgs/issues/9415>
-- Flatpak apps can't access files in `/nix` or symlinked files in `dotfiles` folder.
+# nix
 
-- Good luck saving your existing settings
+- libgl <https://github.com/NixOS/nixpkgs/issues/9415>
+- flatpak apps can't access files in `/nix` or symlinked files in `Configuration` folder this is an inconvenient but intended behavior
 
-- Incorrect mouse cursor with flatpak apps <https://github.com/flatpak/flatpak/issues/709#issuecomment-1416710789>
+# nixos
+
+- flatpaks dont see system fonts or icons on nixos
+- on nixos gnome gui apps dont have icons after install until reboot
+
+# flatpak
+
+- incorrect mouse cursor with flatpak apps <https://github.com/flatpak/flatpak/issues/709#issuecomment-1416710789>
+
+# gnome
+
+- gnome keyring is not unlocked automatically with autologin (works on fedora?)

@@ -3,16 +3,15 @@
   lib,
   pkgs,
   ...
-} @ args: {
+}:
+{
   programs.foot = {
     enable = true;
-    server.enable = true;
     settings = {
       main = {
-        font = "BerkeleyMono Nerd Font:size=10.5, JetBrainsMono Nerd Font:size=10.5, monospace:size=10";
+        font = "JetBrainsMono Nerd Font-10.5:medium, monospace:size=10";
         pad = "16x16 center";
         initial-window-size-pixels = "1200x700";
-        title = " "; # What an ugly hack. But oh well.
         locked-title = "yes";
         dpi-aware = "no";
       };
@@ -39,7 +38,7 @@
       colors = {
         alpha = "1";
         background = "000000";
-        foreground = "ffffff";
+        foreground = "dddddd";
         regular0 = "000000";
         regular1 = "ff5f59";
         regular2 = "44bc44";
@@ -55,15 +54,10 @@
         bright4 = "79a8ff";
         bright5 = "b6a0ff";
         bright6 = "6ae4b9";
-        bright7 = "ffffff";
+        bright7 = "dddddd";
       };
     };
   };
-
-  programs.tmux.extraConfig = ''
-    # True color support
-    set-option -sa terminal-features ',foot:RGB'
-  '';
 
   dconf.settings = {
     "org/gnome/settings-daemon/plugins/media-keys" = {
@@ -74,8 +68,13 @@
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Super>Return";
-      command = "${pkgs.foot}/bin/footclient ${pkgs.tmux}/bin/tmux new-session -s default -A";
+      command = "${pkgs.foot}/bin/foot ${pkgs.tmux}/bin/tmux new-session -s default -A";
       name = "Launch Terminal";
     };
   };
+
+  programs.tmux.extraConfig = ''
+    # True color support
+    set-option -sa terminal-features ',foot:RGB'
+  '';
 }

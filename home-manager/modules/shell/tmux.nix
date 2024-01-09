@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-} @ args: {
+}:
+{
   programs.tmux = {
     enable = true;
     terminal = "tmux-256color";
@@ -27,18 +28,7 @@
       # helps with autoread inside vim
       set-option -g focus-events on
 
-      # customize status bar
-      # set -g status-bg black
-      # set -g status-fg green
-      # set -g status-justify centre
-      # set -g status-left-length 20
-      # set-window-option -g status-left "#[fg=black,bg=cyan] #S "
-      # set -g status-right-length 20
-      # set -g status-right "#{tmux_mode_indicator}"
-      # set-window-option -g window-status-current-format "#[fg=black,bg=green] #I:#W "
-
-      # for nvim plugin
-      set -g focus-events on
+      # status bar
       set -g status-style bg=default
       set -g status-left-length 90
       set -g status-right-length 90
@@ -48,8 +38,6 @@
       set-window-option -g status-left ""
       set-window-option -g status-right ""
 
-      # reload config file
-      bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
       # create splits
       bind-key v split-window -h -c "#{pane_current_path}"
       bind-key s split-window -v -c "#{pane_current_path}"
@@ -73,9 +61,9 @@
 
   systemd.user.services.tmux-autostart = {
     Unit = {
-      Description = "Autostart Tmux.";
-      Requires = ["graphical-session.target"];
-      After = ["graphical-session.target"];
+      Description = "Autostart Tmux";
+      Requires = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
     };
     Service = {
       Type = "forking";

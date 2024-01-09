@@ -2,20 +2,17 @@
   config,
   lib,
   pkgs,
-  dotfilesPath,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
-    (pkgs.gitAndTools.git.override
-      {
-        sendEmailSupport = true;
-      })
+    (pkgs.gitAndTools.git.override { sendEmailSupport = true; })
     gh
     glab
   ];
 
   systemd.user.tmpfiles.rules = [
-    "L+ ${config.xdg.configHome}/git - - - - ${dotfilesPath}/home-manager/git/config"
+    "L+ ${config.xdg.configHome}/git - - - - ${config.home.homeDirectory}/Configuration/home-manager/modules/git/config"
   ];
 
   programs.ssh = {
