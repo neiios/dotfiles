@@ -23,7 +23,15 @@
   targets.genericLinux.enable = false;
 
   fonts.fontconfig.enable = true;
-  home.packages = with pkgs; [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
+  home.packages = with pkgs; [
+    inter
+    noto-fonts
+    noto-fonts-color-emoji
+    noto-fonts-monochrome-emoji
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+  ];
 
   nix.package = pkgs.nix;
   nix.settings.use-xdg-base-directories = true; # Be careful with this, modules can hardcode old paths

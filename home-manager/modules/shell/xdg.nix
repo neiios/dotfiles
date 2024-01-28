@@ -14,7 +14,7 @@
     R_HOME_USER = "${config.xdg.dataHome}/R";
     R_PROFILE_USER = "${config.xdg.dataHome}/R/profile";
     R_HISTFILE = "${config.xdg.cacheHome}/R/history";
-    # GTK2_RC_FILES = "${config.xdg.configHome}/gtk-2.0/gtkrc"; # Plasma hardcodes the value
+    GTK2_RC_FILES = "${config.xdg.configHome}/gtk-2.0/gtkrc"; # NOTE: Plasma hardcodes this value
     ANDROID_HOME = "${config.xdg.dataHome}/android";
     TEXMFHOME = "${config.xdg.dataHome}/texmf";
     TEXMFVAR = "${config.xdg.cacheHome}/texlive/texmf-var";
