@@ -6,8 +6,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixfmt-rfc.url = "github:piegamesde/nixfmt/rfc101-style";
   };
 
   outputs = inputs: {

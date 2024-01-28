@@ -45,7 +45,7 @@
     # stylua
     # vscode-langservers-extracted
     nil
-    nixfmt-rfc.packages.x86_64-linux.default
+    nixfmt-rfc-style
     # (python3.withPackages (
     #   ps: with ps; [
     #     setuptools
