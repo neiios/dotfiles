@@ -6,6 +6,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixGL = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: {
@@ -26,7 +31,5 @@
       gnome = import ./home-manager/modules/gnome.nix;
       packages = import ./home-manager/modules/packages.nix;
     };
-
-    formatter.x86_64-linux = inputs.nixfmt-rfc.packages.x86_64-linux.default;
   };
 }
