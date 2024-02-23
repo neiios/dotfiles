@@ -46,19 +46,7 @@
     # vscode-langservers-extracted
     nil
     nixfmt-rfc-style
-    # (python3.withPackages (
-    #   ps: with ps; [
-    #     setuptools
-    #     pip
-    #     numpy
-    #     scipy
-    #     pandas
-    #     seaborn
-    #     matplotlib
-    #     scikit-learn
-    #   ]
-    # ))
-    # pipenv
-    # poetry
   ];
+
+  programs.pyenv.enable = true;
 }
