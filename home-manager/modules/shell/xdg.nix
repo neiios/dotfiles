@@ -20,7 +20,6 @@
     TEXMFVAR = "${config.xdg.cacheHome}/texlive/texmf-var";
     TEXMFCONFIG = "${config.xdg.configHome}/texlive/texmf-config";
     KERAS_HOME = "${config.xdg.stateHome}/keras";
-    PYENV_ROOT = "${config.xdg.dataHome}/pyenv";
     NUGET_PACKAGES = "${config.xdg.cacheHome}/NuGetPackages";
     JUPYTER_CONFIG_DIR = "${config.xdg.configHome}/jupyter";
     DOCKER_CONFIG = "${config.xdg.configHome}/docker";
