@@ -9,7 +9,7 @@
     enable = true;
     settings = {
       main = {
-        font = "JetBrainsMono Nerd Font-10.5:medium, monospace:size=10";
+        font = "JetBrainsMono Nerd Font:size=11, monospace:size=10";
         pad = "16x16 center";
         initial-window-size-pixels = "1200x700";
         locked-title = "yes";
