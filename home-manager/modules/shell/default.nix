@@ -17,7 +17,7 @@
     interactiveShellInit = ''
       set fish_greeting
 
-      fish_add_path ~/.local/nvim/bin
+      fish_add_path ~/.local/nvim/bin 
 
       # starship transience character
       function starship_transient_prompt_func
@@ -27,16 +27,20 @@
 
     shellAliases = {
       nrs = "sudo nixos-rebuild switch";
-      hms = "home-manager switch";
+      # Impure because of nixGL
+      hms = "home-manager switch --impure";
       nrshms = "nrs && hms";
       hmsnrs = "hms && nrs";
       nfc = "nix flake check";
 
       ls = "ls --color=auto -lah";
 
-      dps = "podman ps -a --format='table {{.ID}}	{{.Names}}	{{.Image}}	{{.Status}}	{{.RunningFor}}'";
-      dcu = "podman compose -d";
-      dcd = "podman compose down";
+      pops = "podman ps -a --format='table {{.ID}}	{{.Names}}	{{.Image}}	{{.Status}}	{{.RunningFor}}'";
+      pocu = "podman compose -d";
+      pocd = "podman compose down";
+      dps = "pops";
+      dcu = "pocu";
+      dcd = "pocd";
     };
   };
 
