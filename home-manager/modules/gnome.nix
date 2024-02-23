@@ -8,7 +8,8 @@
   home.packages = with pkgs.gnomeExtensions; [
     legacy-gtk3-theme-scheme-auto-switcher
     appindicator
-    blur-my-shell
+    app-hider
+    alphabetical-app-grid
   ];
 
   dconf.settings = with lib.hm.gvariant; {
