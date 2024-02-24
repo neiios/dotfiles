@@ -46,6 +46,7 @@
     # vscode-langservers-extracted
     nil
     nixfmt-rfc-style
+    deploy-rs
   ];
 
   programs.pyenv.enable = true;
