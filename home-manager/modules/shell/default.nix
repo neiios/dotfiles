@@ -12,23 +12,30 @@
     ./xdg.nix
   ];
 
-  programs.fish = {
+  targets.genericLinux.enable = true;
+
+  programs.zsh = {
     enable = true;
-    interactiveShellInit = ''
-      set fish_greeting
+    dotDir = ".config/zsh";
+    defaultKeymap = "emacs";
 
-      fish_add_path ~/.local/nvim/bin 
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    enableVteIntegration = true;
 
-      # starship transience character
-      function starship_transient_prompt_func
-        ${config.home.profileDirectory}/bin/starship module character
-      end
-    '';
+    history.ignoreSpace = true;
+    history.path = "${config.xdg.cacheHome}/zsh_history";
+    historySubstringSearch.enable = true;
+
+    syntaxHighlighting.enable = true;
+    syntaxHighlighting.highlighters = [
+      "main"
+      "brackets"
+    ];
 
     shellAliases = {
       nrs = "sudo nixos-rebuild switch";
-      # Impure because of nixGL
-      hms = "home-manager switch --impure";
+      hms = "home-manager switch --impure"; # Needs impure because of nixGL
       nrshms = "nrs && hms";
       hmsnrs = "hms && nrs";
       nfc = "nix flake check";
@@ -42,27 +49,31 @@
       dcu = "pocu";
       dcd = "pocd";
     };
+
+    envExtra = ''
+      export XDG_DATA_DIRS=$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/igor/.local/share/flatpak/exports/share
+    '';
+
+    initExtra = ''
+      source ${./completions.zsh}
+      source ${./prompt.zsh}
+
+      # Disable paste highlight
+      zle_highlight=('paste:none')
+    '';
   };
 
   programs.tmux.extraConfig = ''
-    set -g default-shell ${pkgs.fish}/bin/fish
+    set -g default-shell ${pkgs.zsh}/bin/zsh
   '';
-
-  programs.starship = {
-    enable = true;
-    enableTransience = true;
-    settings = {
-      add_newline = false;
-      character = {
-        success_symbol = "\\$";
-        error_symbol = "[\\$](bold red)";
-      };
-    };
-  };
 
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+
+  services.ssh-agent.enable = true;
+
+  programs.fzf.enable = true;
 
   programs.direnv = {
     enable = true;

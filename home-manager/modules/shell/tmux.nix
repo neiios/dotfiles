@@ -33,7 +33,7 @@
       set -g status-left-length 90
       set -g status-right-length 90
       set -g status-justify absolute-centre
-      set-window-option -g window-status-current-format "#[fg=black,bg=blue] #I:#W "
+      set-window-option -g window-status-current-format "#[fg=black,bg=brightblue] #I:#W "
       set -g pane-active-border-style fg=blue
       set-window-option -g status-left ""
       set-window-option -g status-right ""

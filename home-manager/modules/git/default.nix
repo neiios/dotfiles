@@ -26,7 +26,7 @@
     };
   };
 
-  programs.fish.shellAliases = {
+  programs.zsh.shellAliases = {
     gs = "git status --short --branch";
     gc = "git commit --verbose";
     gca = "git add --all && git commit --verbose";
