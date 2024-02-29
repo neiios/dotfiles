@@ -34,13 +34,13 @@
     "org/gnome/desktop/interface" = {
       clock-format = "24h";
       toolkit-accessibility = false;
-      document-font-name = "Inter Variable 11";
-      font-name = "Inter Variable 11";
+      document-font-name = "Inter 11";
+      font-name = "Inter 11";
       monospace-font-name = "JetBrainsMonoNL Nerd Font 10";
     };
 
     "org/gnome/desktop/wm/preferences" = {
-      titlebar-font = "Inter Variable Bold 11";
+      titlebar-font = "Inter Bold 11";
     };
 
     "org/gnome/desktop/peripherals/mouse" = {
@@ -62,13 +62,15 @@
 
     "org/gnome/desktop/wm/keybindings" = {
       close = [ "<Super>q" ];
+      toggle-maximized = [ "<Super>w" ];
+      toggle-fullscreen=["<Shift><Super>f"]; # borderless for every window. nice.
+
       move-to-workspace-last = [ "<Shift><Super>e" ];
       move-to-workspace-left = [ "<Shift><Super>a" ];
       move-to-workspace-right = [ "<Shift><Super>d" ];
       switch-to-workspace-last = [ "<Super>e" ];
       switch-to-workspace-left = [ "<Super>a" ];
       switch-to-workspace-right = [ "<Super>d" ];
-      toggle-maximized = [ "<Super>w" ];
     };
 
     "org/gnome/mutter" = {
