@@ -27,6 +27,7 @@ in
   programs.home-manager.enable = true;
 
   fonts.fontconfig.enable = true;
+  # Flatpaks won't be able to use these
   home.packages = with pkgs; [
     inter
     noto-fonts
@@ -37,8 +38,6 @@ in
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
   
-  programs.bash.enable = true;
-
   # aaaa fucking assertion
   programs.mpv = let 
     mpvScripts = with pkgs.mpvScripts; [ uosc thumbfast mpris ];
@@ -48,16 +47,20 @@ in
     package = (nixGL mpvPackage);
   };
 
-  services.ssh-agent.enable = true;
-
-  nix.package = pkgs.nixVersions.nix_2_19;
-  nix.settings.use-xdg-base-directories = true; # Be careful with this, modules can hardcode old paths
-  nix.settings.warn-dirty = false;
+  nix.package = pkgs.nix; 
   nix.registry.nixpkgs.flake = args.nixpkgs;
   nix.registry.home-manager.flake = args.home-manager;
 
+  # Be careful with this, modules can hardcode old paths
+  nix.settings.use-xdg-base-directories = true;
+  # Annoying and kinda useless
+  nix.settings.warn-dirty = false;
+
+  # TODO: doesn't work with the new cli
   nixpkgs.config.allowUnfree = true;
   home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
+
+  # Allows using home-manager on cli without specifying the path to dotfiles each time
   systemd.user.tmpfiles.rules = [
     "L+ ${config.xdg.configHome}/home-manager - - - - ${config.home.homeDirectory}/Configuration"
   ];
