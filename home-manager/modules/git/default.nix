@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     (pkgs.gitAndTools.git.override { sendEmailSupport = true; })

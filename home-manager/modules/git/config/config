@@ -1,13 +1,20 @@
 [core]
-  autocrlf = "false"
-  eol = "lf"
+	autocrlf = "false"
+	eol = "lf"
 [init]
-  defaultBranch = "master"
+	defaultBranch = "master"
 [user]
-  email = "egor@sgf.lt"
-  name = "Igor"
+	email = "egor@sgf.lt"
+	name = "Igor"
 
 [url "https://invent.kde.org/"]
-  insteadOf = "kde:"
+	insteadOf = "kde:"
 [url "ssh://git@invent.kde.org/"]
-  pushInsteadOf = "kde:"
+	pushInsteadOf = "kde:"
+
+[credential "https://github.com"]
+	helper =
+	helper = !/home/igor/.local/state/nix/profile/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/home/igor/.local/state/nix/profile/bin/gh auth git-credential
