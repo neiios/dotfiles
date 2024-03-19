@@ -1,14 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  nixfmt-rfc,
-  ...
-}:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # vscode # TODO: will break on non nixos
-
     # (pkgs.buildFHSUserEnv {
     #   name = "fhs";
     #   runScript = "zsh";
@@ -34,19 +26,19 @@
     tesseract
     ffmpeg-full
     trash-cli
+    wl-clipboard
 
     # dev tools
     # neovim # NOTE: for now just compile from source manually
     # gcc
     # nodejs
     # tree-sitter
-    # wl-clipboard
-    # lua-language-server
-    # stylua
     # vscode-langservers-extracted
+
     nil
     nixfmt-rfc-style
-    deploy-rs
+    lua-language-server
+    stylua
   ];
 
   programs.pyenv.enable = true;

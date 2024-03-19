@@ -1,9 +1,7 @@
 {
   config,
-  lib,
   pkgs,
   self,
-  username,
   ...
 }@args:
 let
