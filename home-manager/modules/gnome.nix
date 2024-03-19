@@ -1,17 +1,5 @@
+{ lib, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  home.packages = with pkgs.gnomeExtensions; [
-    legacy-gtk3-theme-scheme-auto-switcher
-    appindicator
-    app-hider
-    alphabetical-app-grid
-  ];
-
   dconf.settings = with lib.hm.gvariant; {
     "org/gnome/desktop/input-sources" = {
       sources = [
@@ -49,7 +37,7 @@
 
     "org/gnome/desktop/peripherals/touchpad" = {
       tap-to-click = true;
-      speed = 0.4;
+      speed = 0.25;
     };
 
     "org/gnome/desktop/search-providers" = {
@@ -63,7 +51,7 @@
     "org/gnome/desktop/wm/keybindings" = {
       close = [ "<Super>q" ];
       toggle-maximized = [ "<Super>w" ];
-      toggle-fullscreen=["<Shift><Super>f"]; # borderless for every window. nice.
+      toggle-fullscreen = [ "<Shift><Super>w" ]; # borderless for every window. nice.
 
       move-to-workspace-last = [ "<Shift><Super>e" ];
       move-to-workspace-left = [ "<Shift><Super>a" ];
