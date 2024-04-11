@@ -12,11 +12,10 @@ let
 in
 {
   imports = [
-    self.homeModules.easyeffects
-    self.homeModules.git
-    self.homeModules.shell
-    self.homeModules.gnome
-    self.homeModules.packages
+    ./modules/git
+    ./modules/shell
+    ./modules/gnome.nix
+    ./modules/packages.nix
   ];
 
   home.username = "igor";
@@ -50,6 +49,11 @@ in
       enable = true;
       package = (nixGL mpvPackage);
     };
+
+  services.easyeffects = {
+    enable = true;
+    package = (nixGL pkgs.easyeffects);
+  };
 
   services.syncthing.enable = true;
 

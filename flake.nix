@@ -23,13 +23,5 @@
         modules = [ ./home-manager ];
       };
     };
-
-    homeModules = {
-      easyeffects = import ./home-manager/modules/easyeffects;
-      git = import ./home-manager/modules/git;
-      shell = import ./home-manager/modules/shell;
-      gnome = import ./home-manager/modules/gnome.nix;
-      packages = import ./home-manager/modules/packages.nix;
-    };
   };
 }
