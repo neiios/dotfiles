@@ -33,7 +33,13 @@
     # gcc
     # nodejs
     # tree-sitter
-    # vscode-langservers-extracted
+
+    vscode-langservers-extracted
+    biome
+    eslint_d
+    nodePackages.eslint
+    prettierd
+    nodePackages.prettier
 
     nil
     nixfmt-rfc-style

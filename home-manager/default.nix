@@ -35,17 +35,25 @@ in
     noto-fonts-cjk-serif
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
-  
-  # aaaa fucking assertion
-  programs.mpv = let 
-    mpvScripts = with pkgs.mpvScripts; [ uosc thumbfast mpris ];
-    mpvPackage = (pkgs.wrapMpv pkgs.mpv-unwrapped { scripts = mpvScripts; });
-  in {
-    enable = true;
-    package = (nixGL mpvPackage);
-  };
 
-  nix.package = pkgs.nix; 
+  # aaaa fucking assertion
+  programs.mpv =
+    let
+      mpvScripts = with pkgs.mpvScripts; [
+        uosc
+        thumbfast
+        mpris
+      ];
+      mpvPackage = (pkgs.wrapMpv pkgs.mpv-unwrapped { scripts = mpvScripts; });
+    in
+    {
+      enable = true;
+      package = (nixGL mpvPackage);
+    };
+
+  services.syncthing.enable = true;
+
+  nix.package = pkgs.nix;
   nix.registry.nixpkgs.flake = args.nixpkgs;
   nix.registry.home-manager.flake = args.home-manager;
 

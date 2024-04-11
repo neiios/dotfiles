@@ -1,15 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   programs.foot = {
     enable = true;
     settings = {
       main = {
-        font = "JetBrainsMono Nerd Font:size=11, monospace:size=10";
+        font = "JetBrainsMono Nerd Font:size=10, monospace:size=10";
         pad = "16x16 center";
         initial-window-size-pixels = "1200x700";
         locked-title = "yes";

@@ -16,7 +16,6 @@
           "lt"
         ])
       ];
-      xkb-options = [ "caps:escape" ];
     };
 
     "org/gnome/desktop/interface" = {
@@ -35,15 +34,6 @@
       accel-profile = "flat";
     };
 
-    "org/gnome/desktop/peripherals/touchpad" = {
-      tap-to-click = true;
-      speed = 0.25;
-    };
-
-    "org/gnome/desktop/search-providers" = {
-      disabled = [ "org.gnome.Software.desktop" ];
-    };
-
     "org/gnome/desktop/session" = {
       idle-delay = mkUint32 0;
     };
@@ -59,6 +49,10 @@
       switch-to-workspace-last = [ "<Super>e" ];
       switch-to-workspace-left = [ "<Super>a" ];
       switch-to-workspace-right = [ "<Super>d" ];
+    };
+
+    "org/gnome/shell/keybindings" = {
+      toggle-application-view = [ ];
     };
 
     "org/gnome/mutter" = {
@@ -79,16 +73,8 @@
       sleep-inactive-battery-type = "nothing";
     };
 
-    "org/gnome/shell/keybindings" = {
-      toggle-application-view = [ ];
-    };
-
     "org/gtk/settings/file-chooser" = {
       clock-format = "24h";
-    };
-
-    "system/locale" = {
-      region = "en_IE.UTF-8";
     };
   };
 }

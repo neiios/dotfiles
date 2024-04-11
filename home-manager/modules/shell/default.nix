@@ -13,7 +13,7 @@
     dotDir = ".config/zsh";
     defaultKeymap = "emacs";
 
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     enableCompletion = true;
     enableVteIntegration = true;
 
@@ -33,6 +33,8 @@
       nrshms = "nrs && hms";
       hmsnrs = "hms && nrs";
       nfc = "nix flake check";
+
+      magit = "emacs --eval \"(progn (magit-status) (delete-other-windows))\"";
 
       ls = "ls --color=auto -lah";
       cd = "z";
