@@ -4,7 +4,7 @@
 [init]
 	defaultBranch = "master"
 [user]
-	email = "egor@sgf.lt"
+	email = "igor@sgf.lt"
 	name = "Igor"
 
 [url "https://invent.kde.org/"]
