@@ -39,12 +39,10 @@
       ls = "ls --color=auto -lah";
       cd = "z";
 
-      pops = "podman ps -a --format='table {{.ID}}	{{.Names}}	{{.Image}}	{{.Status}}	{{.RunningFor}}'";
-      pocu = "podman compose -d";
-      pocd = "podman compose down";
-      dps = "pops";
-      dcu = "pocu";
-      dcd = "pocd";
+      dps = "docker ps -a --format='table {{.ID}}	{{.Names}}	{{.Image}}	{{.Status}}	{{.RunningFor}}'";
+      dcu = "docker compose up -d";
+      dcl = "docker compose logs -f";
+      dcd = "docker compose down";
     };
 
     envExtra = ''
