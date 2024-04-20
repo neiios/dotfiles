@@ -72,7 +72,7 @@ in
 
   # Allows using home-manager on cli without specifying the path to dotfiles each time
   systemd.user.tmpfiles.rules = [
-    "L+ ${config.xdg.configHome}/home-manager - - - - ${config.home.homeDirectory}/Configuration"
+    "L+ ${config.xdg.configHome}/home-manager - - - - ${config.home.homeDirectory}/.dotfiles"
   ];
 
   # This should really be the default

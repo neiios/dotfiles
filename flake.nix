@@ -17,9 +17,7 @@
     homeConfigurations = {
       igor = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = inputs // {
-          username = "igor";
-        };
+        extraSpecialArgs = inputs;
         modules = [ ./home-manager ];
       };
     };
