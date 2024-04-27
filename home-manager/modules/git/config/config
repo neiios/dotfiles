@@ -6,6 +6,14 @@
 [user]
 	email = "igor@sgf.lt"
 	name = "Igor"
+	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF3WGEdwyTD4paPwPLFu7vPtDOaqR0qpsZWZSl4sSmbH all things git key
+
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
 
 [url "https://invent.kde.org/"]
 	insteadOf = "kde:"
@@ -14,7 +22,7 @@
 
 [credential "https://github.com"]
 	helper =
-	helper = !/home/igor/.local/state/nix/profile/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
 	helper =
-	helper = !/home/igor/.local/state/nix/profile/bin/gh auth git-credential
+	helper = !gh auth git-credential
