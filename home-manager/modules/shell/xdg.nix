@@ -24,6 +24,7 @@
     TEXMFCONFIG = "${config.xdg.configHome}/texlive/texmf-config";
 
     DOCKER_CONFIG = "${config.xdg.configHome}/docker";
+    DOCKER_HOST= "unix:///run/user/1000/docker.sock";
 
     DOTNET_CLI_TELEMETRY_OPTOUT = "1"; # <3 Microsoft
     NUGET_PACKAGES = "${config.xdg.cacheHome}/NuGetPackages";
