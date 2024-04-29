@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  self,
-  ...
-}@args:
+{ config, pkgs, ... }@args:
 let
   nixGL = import ./nixGL.nix {
     inherit pkgs config;
@@ -13,9 +8,12 @@ in
 {
   imports = [
     ./modules/git
-    ./modules/shell
+    ./modules/foot.nix
     ./modules/gnome.nix
     ./modules/packages.nix
+    ./modules/shell.nix
+    ./modules/tmux.nix
+    ./modules/xdg.nix
   ];
 
   home.username = "igor";
@@ -56,6 +54,8 @@ in
   };
 
   services.syncthing.enable = true;
+
+  targets.genericLinux.enable = true;
 
   nix.package = pkgs.nix;
   nix.registry.nixpkgs.flake = args.nixpkgs;
