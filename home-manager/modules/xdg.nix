@@ -6,6 +6,7 @@
     GOPATH = "${config.xdg.dataHome}/go";
     GOMODCACHE = "${config.xdg.cacheHome}/go/mod";
 
+    R_LIBS_USER = "${config.xdg.dataHome}/R/%p-library/%v";
     R_HOME_USER = "${config.xdg.dataHome}/R";
     R_PROFILE_USER = "${config.xdg.dataHome}/R/profile";
     R_HISTFILE = "${config.xdg.cacheHome}/R/history";
