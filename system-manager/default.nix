@@ -1,5 +1,6 @@
 { pkgs, system-manager, ... }:
 {
+  imports = [ ./keyd.nix ];
   config = {
     system-manager.allowAnyDistro = true;
     nixpkgs.hostPlatform = "x86_64-linux";
