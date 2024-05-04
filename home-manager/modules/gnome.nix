@@ -20,14 +20,7 @@
 
     "org/gnome/desktop/interface" = {
       clock-format = "24h";
-      enable-animations = false;
-      document-font-name = "Inter 11";
-      font-name = "Inter 11";
       monospace-font-name = "JetBrainsMonoNL Nerd Font 10";
-    };
-
-    "org/gnome/desktop/wm/preferences" = {
-      titlebar-font = "Inter Bold 11";
     };
 
     "org/gnome/desktop/peripherals/mouse" = {
@@ -79,7 +72,8 @@
       switch-to-application-7 = [ ];
       switch-to-application-8 = [ ];
       switch-to-application-9 = [ ];
-      toggle-application-view = [ "<Super>s" ];
+
+      toggle-application-view = [ ];
       toggle-quick-settings = [ ];
     };
 
@@ -93,7 +87,7 @@
       switch-to-workspace-left = [ "<Super>a" ];
       switch-to-workspace-right = [ "<Super>d" ];
 
-      maximize = [ "<Super>w" ];
+      toggle-maximized = [ "<Super>w" ];
       toggle-fullscreen = [ "<Shift><Super>w" ];
 
       move-to-workspace-1 = [ "<Super><Shift>1" ];
