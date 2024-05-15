@@ -3,7 +3,7 @@
     nixpkgs.url = "github:/NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:Smona/home-manager/nixgl-compat";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -24,20 +24,28 @@
     };
   };
 
-  outputs = inputs: {
-    homeConfigurations = {
-      igor = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = inputs;
-        modules = [ ./home-manager ];
+  outputs =
+    inputs:
+    let
+      forEachSystem = inputs.nixpkgs.lib.genAttrs [ "x86_64-linux" ];
+      forEachPkgs = f: forEachSystem (sys: f inputs.nixpkgs.legacyPackages.${sys});
+    in
+    {
+      homeConfigurations = {
+        igor = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs = inputs;
+          modules = [ ./home-manager ];
+        };
       };
-    };
 
-    systemConfigs = {
-      rainier = inputs.system-manager.lib.makeSystemConfig {
-        extraSpecialArgs = inputs;
-        modules = [ ./system-manager ];
+      systemConfigs = {
+        rainier = inputs.system-manager.lib.makeSystemConfig {
+          extraSpecialArgs = inputs;
+          modules = [ ./system-manager ];
+        };
       };
+
+      packages = forEachPkgs (pkgs: import ./packages { inherit pkgs; });
     };
-  };
 }
