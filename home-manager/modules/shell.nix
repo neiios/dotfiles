@@ -1,5 +1,12 @@
-{ config, lib, pkgs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  programs.bash.enable = true;
+
   programs = {
     fish = {
       enable = true;
@@ -8,7 +15,6 @@
         set -g fish_greeting
 
         fish_add_path --append '${config.xdg.dataHome}/JetBrains/Toolbox/scripts'
-        fish_add_path --prepend '${config.home.homeDirectory}/.local/nvim/bin'
       '';
 
       shellAliases = {
@@ -17,7 +23,7 @@
         neofetch = "${lib.getBin pkgs.fastfetch}/bin/fastfetch";
 
         nrs = "sudo nixos-rebuild switch";
-        hms = "home-manager switch --impure --flake ~/.dotfiles"; # Needs impure because of nixGL
+        hms = "home-manager switch";
         ssm = "sudo system-manager switch --flake ~/.dotfiles";
         nfc = "nix flake check";
 

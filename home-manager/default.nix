@@ -1,14 +1,11 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}@args:
+{ config, pkgs, ... }@args:
 {
   imports = [
     ./modules/git
+    ./modules/gnome.nix
     ./modules/packages.nix
     ./modules/shell.nix
+    ./modules/terminal.nix
     ./modules/tmux.nix
     ./modules/xdg.nix
   ];
@@ -24,6 +21,7 @@
   # Flatpaks won't be able to use these
   home.packages = with pkgs; [
     inter
+    liberation_ttf
     noto-fonts
     noto-fonts-color-emoji
     noto-fonts-monochrome-emoji
@@ -52,25 +50,18 @@
     package = (config.lib.nixGL.wrap pkgs.easyeffects);
   };
 
-  programs.kitty.enable = true;
-  programs.kitty.package = (config.lib.nixGL.wrap pkgs.kitty);
-  programs.kitty.extraConfig = ''
-    window_padding_width 10
-    background_opacity 0.9
-    shell ${lib.getBin pkgs.fish}/bin/fish
-
-    font_family      JetBrainsMonoNL Nerd Font
-    bold_font        auto
-    italic_font      auto
-    bold_italic_font auto
-  '';
-
   services.syncthing.enable = true;
 
   targets.genericLinux.enable = true;
 
+  nix.package = pkgs.nixVersions.latest;
   nix.registry.nixpkgs.flake = args.nixpkgs;
   nix.registry.home-manager.flake = args.home-manager;
+
+  # Be careful with this, modules can hardcode old paths
+  nix.settings.use-xdg-base-directories = true;
+  # Annoying and kinda useless
+  nix.settings.warn-dirty = false;
 
   # TODO: doesn't work with the new cli
   nixpkgs.config.allowUnfree = true;

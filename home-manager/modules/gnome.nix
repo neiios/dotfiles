@@ -45,11 +45,6 @@
       idle-delay = mkUint32 0;
     };
 
-    "org/gnome/desktop/sound" = {
-      event-sounds = false;
-      theme-name = "__custom";
-    };
-
     "org/gnome/settings-daemon/plugins/power" = {
       idle-dim = false;
       power-button-action = "interactive";
