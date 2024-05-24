@@ -10,17 +10,6 @@
     "L+ ${config.xdg.configHome}/git - - - - ${config.home.homeDirectory}/.dotfiles/home-manager/modules/git/config"
   ];
 
-  programs.ssh = {
-    enable = true;
-    matchBlocks = {
-      gh = {
-        user = "git";
-        hostname = "github.com";
-        identityFile = "~/.ssh/github_key";
-      };
-    };
-  };
-
   programs.fish.shellAliases = {
     gs = "git status --short --branch";
     gc = "git commit --verbose";

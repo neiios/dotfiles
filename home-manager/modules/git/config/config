@@ -6,7 +6,7 @@
 [user]
 	email = "igor@sgf.lt"
 	name = "Igor"
-	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF3WGEdwyTD4paPwPLFu7vPtDOaqR0qpsZWZSl4sSmbH all things git key
+	signingkey = ~/.ssh/id_ed25519
 
 [gpg]
 	format = ssh
