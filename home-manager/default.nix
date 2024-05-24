@@ -28,7 +28,15 @@
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+
+    # I use podman but the ui of docker-compose is nicer
+    docker-compose
+
+    neovim
   ];
+
+  programs.vscode.enable = true;
+  programs.vscode.package = (config.lib.nixGL.wrap pkgs.vscode);
 
   # aaaa fucking assertion
   programs.mpv =
@@ -45,9 +53,9 @@
       package = (config.lib.nixGL.wrap mpvPackage);
     };
 
-  services.easyeffects = {
-    enable = true;
-    package = (config.lib.nixGL.wrap pkgs.easyeffects);
+  home.sessionVariables = {
+    # Use rootless podman by default
+    DOCKER_HOST = "unix:///run/user/1000/podman/podman.sock";
   };
 
   services.syncthing.enable = true;
