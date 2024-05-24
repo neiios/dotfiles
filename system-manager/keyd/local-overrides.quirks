@@ -1,0 +1,9 @@
+[Serial Keyboards]
+MatchUdevType=keyboard
+MatchName=keyd virtual keyboard
+AttrKeyboardIntegration=internal
+
+[Trackpoint Override]
+MatchUdevType=pointingstick
+MatchName=*TPPS/2 IBM TrackPoint*
+AttrTrackpointMultiplier=1.8

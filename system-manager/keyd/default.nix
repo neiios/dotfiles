@@ -2,8 +2,8 @@
 {
   systemd.tmpfiles.rules = [
     "d /etc/keyd 0755 root root - -"
-    "L+ /etc/keyd/keyd.conf - - - - /home/igor/.dotfiles/system-manager/keyd.conf"
-    "L+ /etc/libinput/local-overrides.quirks - - - - /home/igor/.dotfiles/system-manager/local-overrides.quirks"
+    "L+ /etc/keyd/keyd.conf - - - - /home/igor/.dotfiles/system-manager/keyd/keyd.conf"
+    "L+ /etc/libinput/local-overrides.quirks - - - - /home/igor/.dotfiles/system-manager/keyd/local-overrides.quirks"
   ];
 
   environment.systemPackages = with pkgs; [ keyd ];
