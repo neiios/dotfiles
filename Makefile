@@ -1,5 +1,8 @@
 PWD=$$(pwd)
 
+all:
+	echo "What do you even want to do?"
+
 sysm:
 	sudo -i system-manager switch --flake $(PWD)
 	rm -f $(PWD)/result
@@ -13,3 +16,7 @@ bootstrap-sysm:
 
 bootstrap-hm:
 	nix run home-manager/master -- switch --flake $(PWD)
+
+bootstrap-nix:
+	curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+	. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
