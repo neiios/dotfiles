@@ -1,9 +1,10 @@
-{ lib, ... }:
 {
-  home.sessionVariables = {
-    QT_WAYLAND_DECORATION = "adwaita";
-  };
-
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   dconf.settings = with lib.hm.gvariant; {
     "org/gnome/desktop/input-sources" = {
       sources = [
@@ -24,7 +25,7 @@
 
     "org/gnome/desktop/interface" = {
       clock-format = "24h";
-      monospace-font-name = "JetBrainsMono Nerd Font 10";
+      monospace-font-name = "JetBrainsMonoNL Nerd Font 10";
     };
 
     "org/gnome/desktop/peripherals/mouse" = {
@@ -37,6 +38,10 @@
 
     "org/gnome/system/location" = {
       enabled = false;
+    };
+
+    "org/gnome/desktop/sound" = {
+      event-sounds = false;
     };
 
     "org/gnome/mutter" = {

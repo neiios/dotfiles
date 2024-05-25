@@ -7,7 +7,7 @@
   ];
 
   systemd.user.tmpfiles.rules = [
-    "L+ ${config.xdg.configHome}/git - - - - ${config.home.homeDirectory}/.dotfiles/home-manager/modules/git/config"
+    "L+ ${config.xdg.configHome}/git - - - - ${config.home.homeDirectory}/.dotfiles/home-manager/git/config"
   ];
 
   programs.fish.shellAliases = {
