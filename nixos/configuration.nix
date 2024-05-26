@@ -30,8 +30,12 @@
   users.users.igor = {
     isNormalUser = true;
     description = "Igor";
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      "wheel"
+      "adbusers"
+    ];
   };
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -39,6 +43,8 @@
   };
 
   services.flatpak.enable = true;
+
+  programs.adb.enable = true;
 
   environment.systemPackages = with pkgs; [
     git
