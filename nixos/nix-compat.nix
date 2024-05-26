@@ -157,6 +157,7 @@
       expat
       fontconfig
       freetype
+      fuse # for appimages
       fuse3
       gdk-pixbuf
       glib
