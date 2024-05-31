@@ -117,6 +117,6 @@
     [Trackpoint Override]
     MatchUdevType=pointingstick
     MatchName=*TPPS/2 IBM TrackPoint*
-    AttrTrackpointMultiplier=1.8
+    AttrTrackpointMultiplier=1
   '';
 }
