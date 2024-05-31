@@ -1,3 +1,4 @@
+# DISCLAIMER: This is just fucking digusting. Don't look at this file. Forget it exists.
 {
   config,
   lib,
@@ -15,189 +16,241 @@
 
     # List is taken from: https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/appimage/default.nix
     # and: https://github.com/Mic92/dotfiles/blob/main/nixos/modules/nix-ld.nix
-    libraries = with pkgs; [
-      gtk3
-      bashInteractive
-      gnome.zenity
-      xorg.xrandr
-      which
-      perl
-      xdg-utils
-      iana-etc
-      krb5
-      gsettings-desktop-schemas
-      hicolor-icon-theme # dont show a gtk warning about hicolor not being installed
+    libraries =
+      let
+        removeNull = l: pkgs.lib.lists.remove null l;
+      in
+      with pkgs;
+      # And a lot more stuff
+      qemu_full.buildInputs
+      ++ ffmpeg-full.buildInputs
+      ++ imagemagickBig.buildInputs
+      ++ gst_all_1.gstreamer.buildInputs
+      # ++ appimage-run.buildInputs # TODO: Empty list
+      # ++ steam-run.buildInputs # TODO: Empty list
+      # For some reason there is a null in a buildInputs list ¯\_(ツ)_/¯
+      ++ (removeNull gst_all_1.gst-plugins-base.buildInputs)
+      ++ (removeNull gst_all_1.gst-plugins-good.buildInputs)
+      ++ (removeNull gst_all_1.gst-plugins-bad.buildInputs)
+      ++ (removeNull gst_all_1.gst-plugins-ugly.buildInputs)
+      ++ [
+        # default
+        zlib
+        zstd
+        stdenv.cc.cc
+        curl
+        openssl
+        attr
+        libssh
+        bzip2
+        libxml2
+        acl
+        libsodium
+        util-linux
+        xz
+        systemd
 
-      desktop-file-utils
-      xorg.libXcomposite
-      xorg.libXtst
-      xorg.libXrandr
-      xorg.libXext
-      xorg.libX11
-      xorg.libXfixes
-      libGL
+        fuse # for appimages
+        gtk3
+        bashInteractive
+        gnome.zenity
+        which
+        perl
+        xdg-utils
+        iana-etc
+        krb5
+        gsettings-desktop-schemas
+        hicolor-icon-theme # dont show a gtk warning about hicolor not being installed
 
-      gst_all_1.gstreamer
-      gst_all_1.gst-plugins-ugly
-      gst_all_1.gst-plugins-base
-      libdrm
-      xorg.xkeyboardconfig
-      xorg.libpciaccess
+        libbsd # Android qemu based emulator
 
-      glib
-      gtk2
-      bzip2
-      zlib
-      gdk-pixbuf
+        desktop-file-utils
 
-      xorg.libXinerama
-      xorg.libXdamage
-      xorg.libXcursor
-      xorg.libXrender
-      xorg.libXScrnSaver
-      xorg.libXxf86vm
-      xorg.libXi
-      xorg.libSM
-      xorg.libICE
-      freetype
-      curlWithGnuTls
-      nspr
-      nss
-      fontconfig
-      cairo
-      pango
-      expat
-      dbus
-      cups
-      libcap
-      SDL2
-      libusb1
-      udev
-      dbus-glib
-      atk
-      at-spi2-atk
-      libudev0-shim
+        libGL
+        libdrm
 
-      xorg.libXt
-      xorg.libXmu
-      xorg.libxcb
-      xorg.xcbutil
-      xorg.xcbutilwm
-      xorg.xcbutilimage
-      xorg.xcbutilkeysyms
-      xorg.xcbutilrenderutil
-      libGLU
-      libuuid
-      libogg
-      libvorbis
-      SDL
-      SDL2_image
-      glew110
-      openssl
-      libidn
-      tbb
-      wayland
-      mesa
-      libxkbcommon
-      vulkan-loader
+        glib
+        gtk2
+        gdk-pixbuf
 
-      flac
-      freeglut
-      libjpeg
-      libpng12
-      libpulseaudio
-      libsamplerate
-      libmikmod
-      libthai
-      libtheora
-      libtiff
-      pixman
-      speex
-      SDL_image
-      SDL_ttf
-      SDL_mixer
-      SDL2_ttf
-      SDL2_mixer
-      libappindicator-gtk2
-      libcaca
-      libcanberra
-      libgcrypt
-      libvpx
-      librsvg
-      xorg.libXft
-      libvdpau
-      alsa-lib
+        freetype
+        curlWithGnuTls
+        nspr
+        nss
+        fontconfig
+        cairo
+        pango
+        expat
+        dbus
+        cups
+        libcap
+        SDL2
+        libusb1
+        udev
+        dbus-glib
+        atk
+        at-spi2-atk
+        libudev0-shim
 
-      harfbuzz
-      e2fsprogs
-      libgpg-error
-      keyutils.lib
-      libjack2
-      fribidi
-      p11-kit
+        libGLU
+        libuuid
+        libogg
+        libvorbis
+        SDL
+        SDL2_image
+        glew110
+        libidn
+        tbb
+        wayland
+        mesa
+        libxkbcommon
+        vulkan-loader
 
-      gmp
+        flac
+        freeglut
+        libjpeg
+        libpng12
+        libpulseaudio
+        libsamplerate
+        libmikmod
+        libthai
+        libtheora
+        libtiff
+        pixman
+        speex
+        SDL_image
+        SDL_ttf
+        SDL_mixer
+        SDL2_ttf
+        SDL2_mixer
+        libappindicator-gtk2
+        libcaca
+        libcanberra
+        libgcrypt
+        libvpx
+        librsvg
+        xorg.libXft
+        libvdpau
+        alsa-lib
 
-      # libraries not on the upstream include list, but nevertheless expected
-      # by at least one appimage
-      libtool.lib # for Synfigstudio
-      xorg.libxshmfence # for apple-music-electron
-      at-spi2-core
-      pciutils # for FreeCAD
-      pipewire # immersed-vr wayland support
+        harfbuzz
+        e2fsprogs
+        libgpg-error
+        keyutils.lib
+        libjack2
+        fribidi
+        p11-kit
 
-      alsa-lib
-      at-spi2-atk
-      at-spi2-core
-      atk
-      cairo
-      cups
-      curl
-      dbus
-      expat
-      fontconfig
-      freetype
-      fuse # for appimages
-      fuse3
-      gdk-pixbuf
-      glib
-      gtk3
-      icu
-      libGL
-      libappindicator-gtk3
-      libdrm
-      libglvnd
-      libnotify
-      libpulseaudio
-      libunwind
-      libusb1
-      libuuid
-      libxkbcommon
-      libxml2
-      mesa
-      nspr
-      nss
-      openssl
-      pango
-      pipewire
-      stdenv.cc.cc
-      systemd
-      vulkan-loader
-      xorg.libX11
-      xorg.libXScrnSaver
-      xorg.libXcomposite
-      xorg.libXcursor
-      xorg.libXdamage
-      xorg.libXext
-      xorg.libXfixes
-      xorg.libXi
-      xorg.libXrandr
-      xorg.libXrender
-      xorg.libXtst
-      xorg.libxcb
-      xorg.libxkbfile
-      xorg.libxshmfence
-      zlib
-    ];
+        gmp
+
+        # libraries not on the upstream include list, but nevertheless expected
+        # by at least one appimage
+        libtool.lib # for Synfigstudio
+        at-spi2-core
+        pciutils # for FreeCAD
+        pipewire # immersed-vr wayland support
+
+        fuse3
+        icu
+        libappindicator-gtk3
+        libglvnd
+        libnotify
+        libunwind
+        pipewire
+
+        xorg.xrandr
+        xorg.libXcomposite
+        xorg.libXtst
+        xorg.libXrandr
+        xorg.libXext
+        xorg.libX11
+        xorg.libXfixes
+        xorg.libXinerama
+        xorg.libXdamage
+        xorg.libXcursor
+        xorg.libXrender
+        xorg.libXScrnSaver
+        xorg.libXxf86vm
+        xorg.libXi
+        xorg.libSM
+        xorg.libICE
+        xorg.xkeyboardconfig
+        xorg.libpciaccess
+        xorg.libxshmfence # for apple-music-electron
+        xorg.libxkbfile
+        xorg.libxshmfence
+        xorg.libXt
+        xorg.libXmu
+        xorg.libxcb
+        xorg.xcbutil
+        xorg.xcbutilwm
+        xorg.xcbutilimage
+        xorg.xcbutilkeysyms
+        xorg.xcbutilrenderutil
+        xorg.libpthreadstubs
+        xorg.libXaw
+        xorg.libXdmcp
+        xorg.libXv
+
+        gst_all_1.gstreamer
+        gst_all_1.gst-plugins-base
+        gst_all_1.gst-plugins-good
+        gst_all_1.gst-plugins-bad
+        gst_all_1.gst-plugins-ugly
+        gst_all_1.gst-libav
+
+        alsa-plugins
+        bash
+        cabextract
+        coreutils
+        freealut
+        giflib
+        gnutls
+        lcms2
+        libevdev
+        libgudev
+        libkrb5
+        libmpeg2
+        libopus
+        libpng
+        libselinux
+        libsndfile
+        libsoup
+        libv4l
+        libva
+        libwebp
+        mpg123
+        ncurses
+        ocl-icd
+        openal
+        openldap
+        samba4
+        sane-backends
+        sqlite
+        unixODBC
+        v4l-utils
+
+        # Not formally in runtime but needed by some games
+        at-spi2-core # CrossCode
+        json-glib # paradox launcher (Stellaris)
+        libxkbcommon # paradox launcher
+        libvorbis # Dead Cells
+        libxcrypt # Alien Isolation, XCOM 2, Company of Heroes 2
+        mono
+        xorg.libXScrnSaver # Dead Cells
+        icu # dotnet runtime, e.g. Stardew Valley
+        libbsd
+        libidn2
+        libpsl
+        nghttp2.lib
+        rtmpdump
+        libelf
+        gnome2.GConf
+        ffmpeg
+        libdbusmenu-gtk2
+        libindicator-gtk2
+        gnome2.pango
+        alsaLib
+      ];
   };
 }
