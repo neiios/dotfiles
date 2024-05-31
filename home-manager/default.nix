@@ -8,7 +8,7 @@
   imports = [
     ./git
     ./fonts.nix
-    # ./gnome.nix
+    # ./gnome.nix # sourced in nixos conf
     ./shell.nix
     ./terminal.nix
     ./tmux.nix
@@ -18,7 +18,20 @@
   home.packages = with pkgs; [
     nodePackages.nodejs
     nodePackages.pnpm
-    python3
+
+    (python3.withPackages (
+      ps: with ps; [
+        pandas
+        numpy
+        matplotlib
+        seaborn
+        scapy
+      ]
+    ))
+
+    jdk21
+    gradle
+    maven
 
     ripgrep
     fd
