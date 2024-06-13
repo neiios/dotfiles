@@ -1,14 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  home-manager,
-  ...
-}@args:
+{ pkgs, ... }@args:
 {
   imports = [
-    home-manager.nixosModules.home-manager
-
     ./gnome.nix
     ./keyd.nix
     ./nix-compat.nix

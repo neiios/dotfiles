@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   virtualisation.spiceUSBRedirection.enable = true;
   environment.systemPackages = with pkgs; [ virt-manager ];

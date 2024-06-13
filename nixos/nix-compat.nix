@@ -1,10 +1,5 @@
 # DISCLAIMER: This is just fucking digusting. Don't look at this file. Forget it exists.
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   # Makes programs and scripts with hardcoded paths (/bin/bash) automagically work
   services.envfs.enable = true;

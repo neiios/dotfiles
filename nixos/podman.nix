@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  home-manager,
-  ...
-}:
+{ pkgs, ... }:
 {
   virtualisation.containers.enable = true;
   virtualisation.oci-containers.backend = "podman";

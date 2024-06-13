@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ ... }:
 {
   boot.initrd.luks.devices."root".device = "/dev/disk/by-label/CRYPTROOT";
 

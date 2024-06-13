@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   fonts.fontconfig.enable = true;
   # Flatpaks won't be able to use these
