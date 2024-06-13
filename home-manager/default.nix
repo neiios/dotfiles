@@ -1,12 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   imports = [
     ./git
+    ./flatpak.nix
     ./fonts.nix
     # ./gnome.nix # sourced in nixos conf
     ./shell.nix

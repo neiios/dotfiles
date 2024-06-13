@@ -4,14 +4,14 @@ all:
 	echo "What do you even want to do?"
 
 sysm:
-	sudo -i system-manager switch --flake $(PWD)
+	sudo system-manager switch --flake $(PWD)
 	rm -f $(PWD)/result
 
 hm:
 	home-manager switch --flake $(PWD)
 
 bootstrap-sysm:
-	sudo -i nix run github:numtide/system-manager -- switch --flake $(PWD)
+	sudo nix run github:numtide/system-manager -- switch --flake $(PWD)
 	rm -f $(PWD)/result
 
 bootstrap-hm:

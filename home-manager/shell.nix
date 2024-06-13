@@ -18,8 +18,6 @@
       '';
 
       shellAliases = {
-        sudo = "sudo -i"; # Makes sudo source bashrc and friends
-
         neofetch = "${lib.getBin pkgs.fastfetch}/bin/fastfetch";
 
         nrs = "sudo nixos-rebuild switch";

@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   # Enables gnome desktop
   services.xserver.enable = true;
@@ -32,10 +27,12 @@
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
     gnome-extension-manager
-    gnome.gnome-themes-extra
-    pkgs.keyutils # keyctl
+    junction
 
+    pkgs.keyutils # keyctl
+    gnome.gnome-themes-extra
     gnomeExtensions.appindicator # Tray icons
+    desktop-file-utils # update-desktop-database
   ];
 
   # Remove useless packages
@@ -44,7 +41,15 @@
     gnome.gnome-music
     gnome.geary
     gnome-tour
+    gnome.gnome-weather
+    gnome.gnome-maps
+    gnome.gnome-contacts
   ];
+
+  environment.variables = {
+    # Fixes the cursor theme in foot
+    XCURSOR_THEME = "Adwaita";
+  };
 
   # User settings
   home-manager.users.igor = import ../home-manager/gnome.nix;
@@ -59,11 +64,9 @@
     kernelParams = [
       "quiet"
       "splash"
-      "boot.shell_on_fail"
       "loglevel=3"
-      "rd.systemd.show_status=false"
+      "systemd.show_status=auto"
       "rd.udev.log_level=3"
-      "udev.log_priority=3"
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
@@ -80,7 +83,27 @@
     noto-fonts-monochrome-emoji
 
     inter
+    ubuntu_font_family
     liberation_ttf
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+  ];
+
+  nixpkgs.overlays = [
+    # GNOME 46: triple-buffering-v4-46
+    (final: prev: {
+      gnome = prev.gnome.overrideScope (
+        gnomeFinal: gnomePrev: {
+          mutter = gnomePrev.mutter.overrideAttrs (old: {
+            src = pkgs.fetchFromGitLab {
+              domain = "gitlab.gnome.org";
+              owner = "vanvugt";
+              repo = "mutter";
+              rev = "triple-buffering-v4-46";
+              hash = "sha256-fkPjB/5DPBX06t7yj0Rb3UEuu5b9mu3aS+jhH18+lpI=";
+            };
+          });
+        }
+      );
+    })
   ];
 }
