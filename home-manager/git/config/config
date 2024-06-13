@@ -6,7 +6,7 @@
 [user]
 	email = "igor@sgf.lt"
 	name = "Igor"
-	signingkey = ~/.ssh/id_ed25519
+	signingkey = ~/.ssh/git.pub
 
 [gpg]
 	format = ssh
