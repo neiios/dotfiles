@@ -20,7 +20,6 @@
 
     "org/gnome/desktop/interface" = {
       clock-format = "24h";
-      monospace-font-name = "JetBrainsMonoNL Nerd Font 10";
     };
 
     "org/gnome/desktop/peripherals/mouse" = {

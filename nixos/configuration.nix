@@ -55,6 +55,9 @@
   nix.registry.home-manager.flake = args.home-manager;
   nix.settings.use-xdg-base-directories = true;
 
+  # Allows to run nixos-rebuild without specifying the path to dotfiles
+  systemd.tmpfiles.rules = [ "L+ /etc/nixos - - - - /home/igor/.dotfiles" ];
+
   # Enable flakes
   nix.settings.experimental-features = [
     "nix-command"
