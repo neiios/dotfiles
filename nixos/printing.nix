@@ -21,6 +21,6 @@
     brlaser
     brgenml1lpr
     brgenml1cupswrapper
-    cnijfilter2
+    # cnijfilter2
   ];
 }

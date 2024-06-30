@@ -47,4 +47,6 @@
       logs-dir=${config.xdg.dataHome}/npm/logs
     '';
   };
+
+  systemd.user.tmpfiles.rules = [ "d ${config.xdg.dataHome}/android 755 igor users - -" ];
 }

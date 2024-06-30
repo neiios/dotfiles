@@ -48,7 +48,7 @@
         fuse # for appimages
         gtk3
         bashInteractive
-        gnome.zenity
+        zenity
         which
         perl
         xdg-utils

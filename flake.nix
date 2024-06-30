@@ -2,6 +2,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,6 +15,11 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/v0.4.1";
+
+    nixos-06cb-009a-fingerprint-sensor = {
+      url = "github:ahbnr/nixos-06cb-009a-fingerprint-sensor";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
   };
 
   outputs = inputs: {
@@ -21,7 +28,17 @@
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
-          ./nixos/configuration.nix
+          ./hosts/rainier
+          inputs.home-manager.nixosModules.home-manager
+          { home-manager.extraSpecialArgs = inputs; }
+        ];
+      };
+
+      summit = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+        modules = [
+          ./hosts/summit
           inputs.home-manager.nixosModules.home-manager
           { home-manager.extraSpecialArgs = inputs; }
         ];

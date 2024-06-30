@@ -25,12 +25,12 @@
 
   # Add more desktop packages
   environment.systemPackages = with pkgs; [
-    gnome.gnome-tweaks
+    gnome-tweaks
     gnome-extension-manager
     junction
 
-    pkgs.keyutils # keyctl
-    gnome.gnome-themes-extra
+    keyutils # keyctl
+    gnome-themes-extra
     gnomeExtensions.appindicator # Tray icons
     desktop-file-utils # update-desktop-database
   ];
@@ -38,13 +38,16 @@
   # Remove useless packages
   services.xserver.excludePackages = [ pkgs.xterm ];
   environment.gnome.excludePackages = with pkgs; [
-    gnome.gnome-music
-    gnome.geary
     gnome-tour
+    geary
+    gnome.gnome-music
     gnome.gnome-weather
     gnome.gnome-maps
     gnome.gnome-contacts
   ];
+
+  # Enable flatpaks
+  services.flatpak.enable = true;
 
   environment.variables = {
     # Fixes the cursor theme in foot

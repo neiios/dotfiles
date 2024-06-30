@@ -1,18 +1,5 @@
 { ... }:
 {
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-label/CRYPTROOT";
-
-  fileSystems."/" = {
-    device = "/dev/mapper/root";
-    fsType = "ext4";
-  };
-
-  fileSystems."/efi" = {
-    device = "/dev/disk/by-label/EFI";
-    fsType = "vfat";
-    options = [ "umask=077" ];
-  };
-
   services.zram-generator = {
     enable = true;
     settings = {
