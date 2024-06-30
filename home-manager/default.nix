@@ -14,6 +14,7 @@
   home.packages = with pkgs; [
     nodePackages.nodejs
     nodePackages.pnpm
+    bun
 
     (python3.withPackages (
       ps: with ps; [
@@ -28,6 +29,8 @@
     jdk21
     gradle
     maven
+
+    scrcpy
 
     ripgrep
     fd

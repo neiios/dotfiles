@@ -28,5 +28,6 @@
     # for now docker-compose will be used instead of podman-compose by default
     docker-compose
     podman-compose
+    buildah
   ];
 }

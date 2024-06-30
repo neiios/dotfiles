@@ -1,6 +1,7 @@
 { pkgs, ... }@args:
 {
   imports = [
+    # ./displaylink.nix
     ./gnome.nix
     ./keyd.nix
     ./nix-compat.nix
@@ -12,7 +13,7 @@
   ];
 
   networking.hostName = "rainier";
-  time.timeZone = "Europe/Lisbon";
+  time.timeZone = "Europe/Vilnius";
 
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
@@ -37,6 +38,10 @@
   services.flatpak.enable = true;
 
   programs.adb.enable = true;
+  networking.firewall.allowedTCPPorts = [
+    8080
+    8081
+  ];
 
   environment.systemPackages = with pkgs; [
     git

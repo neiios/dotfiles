@@ -8,6 +8,7 @@
 
   systemd.user.tmpfiles.rules = [
     "L+ ${config.xdg.configHome}/git - - - - ${config.home.homeDirectory}/.dotfiles/home-manager/git/config"
+    "d ${config.xdg.dataHome}/android 755 igor users - -"
   ];
 
   programs.fish.shellAliases = {
