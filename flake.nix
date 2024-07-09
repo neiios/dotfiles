@@ -20,6 +20,11 @@
       url = "github:ahbnr/nixos-06cb-009a-fingerprint-sensor";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
+
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: {
@@ -44,5 +49,13 @@
         ];
       };
     };
+
+    darwinConfigurations = {
+      "macbook" = inputs.nix-darwin.lib.darwinSystem {
+        modules = [ ./hosts/macbook ];
+      };
+    };
+
+    darwinPackages = inputs.self.darwinConfigurations."macbook".pkgs;
   };
 }
