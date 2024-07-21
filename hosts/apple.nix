@@ -1,5 +1,12 @@
-{ pkgs, inputs, ... }:
 {
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  imports = [ inputs.home-manager.darwinModules.home-manager ];
+
   environment.systemPackages = with pkgs; [
     fastfetch
 
@@ -13,17 +20,22 @@
 
   environment.variables.EDITOR = "nvim";
 
-  programs.alacritty.enable = true;
-
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = inputs;
-  home-manager.users.igor = hmArgs: {
+  home-manager.users.igorr = hmArgs: {
+    home.username = "igorr";
+    home.homeDirectory = lib.mkForce "/Users/igorr";
+
     imports = [
       inputs.self.homeManagerModules.git
       inputs.self.homeManagerModules.shell
       inputs.self.homeManagerModules.tmux
     ];
+
+    programs.fish.enable = true;
+
+    programs.alacritty.enable = true;
 
     programs.fish.interactiveShellInit = ''
       # Add IDEs from toolbox to the PATH
@@ -35,6 +47,8 @@
       # Rancher Desktop
       fish_add_path --prepend --move ~/.rd/bin
     '';
+
+    home.stateVersion = "24.05";
   };
 
   # Mandatory boilerplate

@@ -29,7 +29,7 @@
     shellAliases = {
       neofetch = "${lib.getBin pkgs.fastfetch}/bin/fastfetch";
 
-      ls = "ls --color=auto --classify --group-directories-first --almost-all --human-readable -lv";
+      ls = "ls --color=auto -lAh";
 
       dps = "docker ps -a --format='table {{.ID}}	{{.Names}}	{{.Image}}	{{.Status}}	{{.RunningFor}}'";
       dcu = "docker compose up -d";
