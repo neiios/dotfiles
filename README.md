@@ -1,3 +1,0 @@
-# dotfiles
-
-billions must nix

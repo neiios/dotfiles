@@ -8,6 +8,9 @@
 	name = "Igor"
 	signingkey = ~/.ssh/git.pub
 
+[push]
+	autoSetupRemote = true
+
 [gpg]
 	format = ssh
 [commit]

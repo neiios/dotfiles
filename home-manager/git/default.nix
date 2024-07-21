@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  mkSymlink = config.lib.file.mkOutOfStoreSymlink;
+in
 {
   home.packages = with pkgs; [
     (pkgs.gitAndTools.git.override { sendEmailSupport = true; })
@@ -6,9 +9,9 @@
     glab
   ];
 
-  systemd.user.tmpfiles.rules = [
-    "L+ ${config.xdg.configHome}/git - - - - ${config.home.homeDirectory}/.dotfiles/home-manager/git/config"
-  ];
+  home.file = {
+    "${config.xdg.configHome}/git".source = mkSymlink "${config.home.homeDirectory}/.dotfiles/home-manager/git/config";
+  };
 
   programs.fish.shellAliases = {
     gs = "git status --short --branch";

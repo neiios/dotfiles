@@ -1,17 +1,33 @@
-{ pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   imports = [
+    ./common.nix
     ./git
     ./flatpak.nix
     ./fonts.nix
-    # ./gnome.nix # sourced in nixos conf
+    ./gnome.nix
     ./shell.nix
     ./terminal.nix
     ./tmux.nix
     ./xdg.nix
   ];
 
+  programs.bash.enable = true;
+
   home.packages = with pkgs; [
+    fastfetch
+    neovim
+
+    nil
+    nixfmt-rfc-style
+    nh # more convenient nix/home-manager cli
+    nixos-rebuild
+
     nodePackages.nodejs
     nodePackages.pnpm
     bun
@@ -49,16 +65,21 @@
     tesseract
     ffmpeg-full
 
-    nixfmt-rfc-style
-    nil
-
     # used by apps
     trash-cli
     wl-clipboard
     gettext
   ];
 
-  programs.vscode.enable = true;
+  programs.fish.interactiveShellInit = ''
+    fish_add_path --append '${config.xdg.dataHome}/JetBrains/Toolbox/scripts'
+  '';
+
+  services.syncthing.enable = true;
+  home.sessionVariables = {
+    STNODEFAULTFOLDER = 1; # Don't create default ~/Sync folder
+    EDITOR = "nvim";
+  };
 
   programs.tealdeer = {
     enable = true;
@@ -85,10 +106,18 @@
     ];
   };
 
-  services.syncthing.enable = true;
+  services.ssh-agent.enable = true;
 
-  # This should really be the default
-  systemd.user.startServices = "sd-switch";
-  home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
+  # Mandatory boilerplate
+  programs.home-manager.enable = true;
+  home.username = "igor";
+  home.homeDirectory = "/home/igor";
   home.stateVersion = "24.05";
+  systemd.user.startServices = "sd-switch";
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
+  nix.registry.home-manager.flake = inputs.home-manager;
+  home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
+  systemd.user.tmpfiles.rules = [
+    "L+ ${config.home.homeDirectory}/.config/home-manager - - - - ${config.home.homeDirectory}/.dotfiles"
+  ];
 }

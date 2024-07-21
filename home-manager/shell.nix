@@ -1,56 +1,56 @@
+{ lib, pkgs, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  programs.bash.enable = true;
+  programs.fish = {
+    enable = true;
 
-  programs = {
-    fish = {
-      enable = true;
+    plugins = [
+      {
+        name = "pure";
+        src = pkgs.fetchFromGitHub {
+          owner = "pure-fish";
+          repo = "pure";
+          rev = "28447d2e7a4edf3c954003eda929cde31d3621d2";
+          sha256 = "8zxqPU9N5XGbKc0b3bZYkQ3yH64qcbakMsHIpHZSne4=";
+        };
+      }
+    ];
 
-      interactiveShellInit = ''
-        set -g fish_greeting
+    interactiveShellInit = ''
+      set -g fish_greeting
 
-        fish_add_path --append '${config.xdg.dataHome}/JetBrains/Toolbox/scripts'
-      '';
+      set pure_enable_nixdevshell true
+      set pure_symbol_prompt '$'
 
-      shellAliases = {
-        neofetch = "${lib.getBin pkgs.fastfetch}/bin/fastfetch";
-
-        nrs = "sudo nixos-rebuild switch";
-        hms = "home-manager switch";
-        ssm = "sudo system-manager switch --flake ~/.dotfiles";
-        nfc = "nix flake check";
-
-        ls = "ls --color=auto --classify --group-directories-first --almost-all --human-readable -lv";
-
-        dps = "docker ps -a --format='table {{.ID}}	{{.Names}}	{{.Image}}	{{.Status}}	{{.RunningFor}}'";
-        dcu = "docker compose up -d";
-        dcl = "docker compose logs -f";
-        dcd = "docker compose down";
-      };
-    };
-
-    tmux.extraConfig = ''
-      set -g default-shell ${pkgs.fish}/bin/fish
+      set pure_color_prompt_on_success normal
+      set pure_color_mute normal
+      set pure_color_primary brcyan
     '';
 
-    zoxide.enable = true;
+    shellAliases = {
+      neofetch = "${lib.getBin pkgs.fastfetch}/bin/fastfetch";
 
-    fzf.enable = true;
+      ls = "ls --color=auto --classify --group-directories-first --almost-all --human-readable -lv";
 
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
+      dps = "docker ps -a --format='table {{.ID}}	{{.Names}}	{{.Image}}	{{.Status}}	{{.RunningFor}}'";
+      dcu = "docker compose up -d";
+      dcl = "docker compose logs -f";
+      dcd = "docker compose down";
     };
   };
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
+  programs.tmux.extraConfig = ''
+    set -g default-shell ${pkgs.fish}/bin/fish
+  '';
+
+  programs.fzf.enable = true;
+
+  programs.zoxide = {
+    enable = true;
+    options = [ "--cmd cd" ];
   };
 
-  services.ssh-agent.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 }

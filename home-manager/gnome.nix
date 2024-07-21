@@ -75,16 +75,14 @@
       switch-to-workspace-left = [ "<Super>a" ];
       switch-to-workspace-right = [ "<Super>d" ];
 
-      toggle-maximized = [ "<Super>w" ];
       toggle-fullscreen = [ "<Shift><Super>w" ];
-
     };
   };
 
   services.flatpak.overrides = {
     global = {
       Environment = {
-        # Fix un-themed cursor in some Wayland apps
+        # Fix unthemed cursor in some Wayland apps
         XCURSOR_THEME = "Adwaita";
       };
     };

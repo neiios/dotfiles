@@ -1,5 +1,4 @@
-{ ... }@args:
-{
+args: {
   imports = [ args.nix-flatpak.homeManagerModules.nix-flatpak ];
 
   services.flatpak = {
