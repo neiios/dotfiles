@@ -6,15 +6,14 @@
 }:
 {
   imports = [
-    ./common.nix
-    ./git
-    ./flatpak.nix
-    ./fonts.nix
-    ./gnome.nix
-    ./shell.nix
-    ./terminal.nix
-    ./tmux.nix
-    ./xdg.nix
+    inputs.self.homeManagerModules.git
+    inputs.self.homeManagerModules.flatpak
+    inputs.self.homeManagerModules.fonts
+    inputs.self.homeManagerModules.foot
+    inputs.self.homeManagerModules.gnome
+    inputs.self.homeManagerModules.shell
+    inputs.self.homeManagerModules.tmux
+    inputs.self.homeManagerModules.xdg
   ];
 
   programs.bash.enable = true;

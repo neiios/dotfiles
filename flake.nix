@@ -32,7 +32,7 @@
       };
 
       darwinConfigurations."apple" = mkDarwinConfig {
-        modules = [ ./hosts/apple ];
+        modules = [ ./hosts/apple.nix ];
         specialArgs = {
           inherit inputs;
         };
