@@ -5,12 +5,12 @@
 
     plugins = [
       {
-        name = "pure";
+        name = "hydro";
         src = pkgs.fetchFromGitHub {
-          owner = "pure-fish";
-          repo = "pure";
-          rev = "28447d2e7a4edf3c954003eda929cde31d3621d2";
-          sha256 = "8zxqPU9N5XGbKc0b3bZYkQ3yH64qcbakMsHIpHZSne4=";
+          owner = "jorgebucaran";
+          repo = "hydro";
+          rev = "bc31a5ebc687afbfb13f599c9d1cc105040437e1";
+          sha256 = "0MMiM0NRbjZPJLAMDXb+Frgm+du80XpAviPqkwoHjDA=";
         };
       }
     ];
@@ -18,13 +18,12 @@
     interactiveShellInit = ''
       set -g fish_greeting
 
-      set pure_enable_nixdevshell true
-      set pure_enable_single_line_prompt true
-      set pure_symbol_prompt '$'
+      set -g hydro_symbol_prompt '$'
+      set -g hydro_symbol_git_dirty ''''''
+      set -g hydro_cmd_duration_threshold 690000000
 
-      set pure_color_prompt_on_success normal
-      set pure_color_mute normal
-      set pure_color_primary brcyan
+      set -g hydro_color_pwd blue
+      set -g hydro_color_git cyan
     '';
 
     shellAliases = {
