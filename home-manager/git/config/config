@@ -29,3 +29,6 @@
 [credential "https://gist.github.com"]
 	helper =
 	helper = !gh auth git-credential
+
+[includeIf "gitdir:~/wix/"]
+  path = ~/wix/.gitconfig

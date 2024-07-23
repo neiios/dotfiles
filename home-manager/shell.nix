@@ -19,6 +19,7 @@
       set -g fish_greeting
 
       set pure_enable_nixdevshell true
+      set pure_enable_single_line_prompt true
       set pure_symbol_prompt '$'
 
       set pure_color_prompt_on_success normal
