@@ -50,6 +50,11 @@
 
   fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
 
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.remapCapsLockToEscape = true;
+
+  security.pam.enableSudoTouchIdAuth = true;
+
   homebrew = {
     enable = true;
     casks = [ "alacritty" ];
