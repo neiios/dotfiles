@@ -71,5 +71,6 @@
   programs.tmux.extraConfig = ''
     # True color support
     set-option -sa terminal-features ',foot:RGB'
+    set -g default-shell ${pkgs.fish}/bin/fish
   '';
 }

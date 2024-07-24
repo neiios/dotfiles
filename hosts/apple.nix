@@ -22,31 +22,88 @@
 
   environment.variables.EDITOR = "nvim";
 
-  home-manager.users.igorr = hmArgs: {
-    imports = [
-      inputs.self.homeManagerModules.git
-      inputs.self.homeManagerModules.shell
-      inputs.self.homeManagerModules.tmux
-    ];
+  programs.fish.enable = true;
 
-    programs.fish = {
-      enable = true;
-      interactiveShellInit = ''
-        # Add IDEs from toolbox to the PATH
-        fish_add_path --append --move ~/Library/Application Support/JetBrains/Toolbox/scripts
+  home-manager.users.igorr =
+    { config, ... }:
+    let
+      mkSymlink = config.lib.file.mkOutOfStoreSymlink;
+    in
+    {
+      imports = [
+        inputs.self.homeManagerModules.git
+        inputs.self.homeManagerModules.shell
+        inputs.self.homeManagerModules.tmux
+      ];
 
-        # Wixstaller
-        fish_add_path --prepend --move ~/.local/bin
+      home.file = {
+        "${config.home.homeDirectory}/.ideavimrc".source = mkSymlink "${config.home.homeDirectory}/.dotfiles/configs/.ideavimrc";
+      };
 
-        # Rancher Desktop
-        fish_add_path --prepend --move ~/.rd/bin
+      programs.fish = {
+        enable = true;
+        interactiveShellInit = ''
+          # Add IDEs from toolbox to the PATH
+          fish_add_path --append --move ~/Library/Application Support/JetBrains/Toolbox/scripts
+
+          # Wixstaller
+          fish_add_path --prepend --move ~/.local/bin
+
+          # Rancher Desktop
+          fish_add_path --prepend --move ~/.rd/bin
+        '';
+      };
+
+      programs.alacritty = {
+        enable = true;
+        settings = {
+          shell = {
+            program = "${pkgs.tmux}/bin/tmux";
+            args = [
+              "new-session"
+              "-s"
+              "default"
+              "-A"
+            ];
+          };
+
+          window = {
+            padding = {
+              x = 10;
+              y = 10;
+            };
+            dimensions = {
+              columns = 160;
+              lines = 40;
+            };
+            dynamic_padding = true;
+            opacity = 0.92;
+            blur = true;
+            decorations_theme_variant = "Dark";
+            option_as_alt = "Both";
+          };
+
+          font = {
+            size = 13;
+            normal = {
+              family = "JetBrainsMono Nerd Font";
+              style = "Regular";
+            };
+          };
+        };
+      };
+
+      programs.tmux.extraConfig = ''
+        # True color support
+        set-option -sa terminal-features ',alacritty:RGB'
+
+        set -g default-shell '/etc/profiles/per-user/igorr/bin/fish'
       '';
-    };
 
-    home.username = "igorr";
-    home.homeDirectory = lib.mkForce "/Users/igorr";
-    home.stateVersion = "24.05";
-  };
+      home.username = "igorr";
+      home.homeDirectory = lib.mkForce "/Users/igorr";
+      home.stateVersion = "24.05";
+    };
 
   fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
 

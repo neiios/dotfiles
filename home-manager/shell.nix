@@ -38,10 +38,6 @@
     };
   };
 
-  programs.tmux.extraConfig = ''
-    set -g default-shell ${pkgs.fish}/bin/fish
-  '';
-
   programs.fzf.enable = true;
 
   programs.zoxide = {
