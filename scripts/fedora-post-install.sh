@@ -58,10 +58,16 @@ function install_updates {
 }
 
 function remove_pre_installed {
-    sudo dnf remove -y firefox* gnome-terminal gnome-maps gnome-weather gnome-tour yelp mediawriter rhythmbox
+    sudo dnf remove -y firefox* gnome-terminal gnome-maps gnome-contacts gnome-weather gnome-tour yelp mediawriter rhythmbox
 }
 
 function install_apps {
+    sudo dnf install -y htop \
+        gnome-tweaks \
+        gnome-themes-extra \
+        gnome-shell-extension-appindicator \
+        steam-devices
+
     flatpak install flathub -y \
         com.github.tchx84.Flatseal \
         com.mattjakeman.ExtensionManager \
@@ -89,3 +95,4 @@ install_apps
 source "$SCRIPT_DIR/hide-desktop-entries.sh"
 
 echo -e "\n\nNow reboot to apply the configuration and updates."
+echo "Also run (if using encryption): sudo cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue --persistent refresh <luks-uuid>"
