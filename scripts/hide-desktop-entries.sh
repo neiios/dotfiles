@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
-PATTERN='nvim|qv4l2|qvidcap|htop|avahi|bssh|bvnc|lf|electron|footclient|foot-server|helix|fish|scrcpy|cmake'
+ENTRIES=(
+  "nvim.desktop"
+  "htop.desktop"
+  "io.gitlab.librewolf-community.desktop"
+  "qt6-designer.desktop"
+  "qt6-linguist.desktop"
+)
 
 TARGET_DIR="$HOME/.local/share/applications"
-mkdir -p "$TARGET_DIR"
 
-ENTRIES=$(find -L /usr/share/applications ~/.local/state/nix/profile/share/applications -type f -name "*.desktop" 2>/dev/null | grep -E "$PATTERN")
+mkdir -pv "$TARGET_DIR"
 
-for ENTRY in $ENTRIES
-do
-  BASENAME=$(basename "$ENTRY")
-  cat << EOF > "$TARGET_DIR/$BASENAME"
+for ENTRY in "${ENTRIES[@]}"; do
+  cat << EOF > "${TARGET_DIR}/${ENTRY}"
 [Desktop Entry]
 Hidden=true
 EOF
