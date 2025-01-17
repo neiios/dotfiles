@@ -32,3 +32,8 @@
 
 [includeIf "gitdir:~/wix/"]
   path = ~/wix/.gitconfig
+[rebase]
+	autoStash = true
+
+[diff]
+    external = difft

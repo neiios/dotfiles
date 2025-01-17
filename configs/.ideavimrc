@@ -1,38 +1,59 @@
 " .ideavimrc is a configuration file for IdeaVim plugin. It uses
-"   the same commands as the original .vimrc configuration.
+" the same commands as the original .vimrc configuration.
 " You can find a list of commands here: https://jb.gg/h38q75
 " Find more examples here: https://jb.gg/share-ideavimrc
+" Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 
-
-"" -- Suggested options --
-" Show a few lines of context around the cursor. Note that this makes the
-" text scroll if you mouse-click near the start or end of the window.
-set scrolloff=5
-
-" Do incremental searching.
-set incsearch
-
-" Don't use Ex mode, use Q for formatting.
-map Q <Action>(ReformatCode)
-
-" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
-
-" Highlight copied text
-Plug 'machakann/vim-highlightedyank'
-" Commentary plugin
-Plug 'tpope/vim-commentary'
-
-
-"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-"" Map \r to the Reformat Code action
-"map \r <Action>(ReformatCode)
-
-"" Map <leader>d to start debug
-"map <leader>d <Action>(Debug)
-
-"" Map \b to toggle the breakpoint on the current line
-"map \b <Action>(ToggleLineBreakpoint)
-set ideajoin
+let mapleader = " "
 
 set relativenumber
 set number
+set scrolloff=5 sidescrolloff=10
+
+set ignorecase
+set smartcase
+set incsearch
+set wrapscan
+
+" Don't lose selection when indenting
+vnoremap < <gv
+vnoremap > >gv
+vnoremap = =gv
+
+set ideajoin
+set commentary
+set surround
+set NERDTree
+
+" which-key is a separate plugin
+" set which-key
+set notimeout
+let g:WhichKey_ShowVimActions = "true"
+
+set highlightedyank
+let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
+
+set vim-multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+
+map Q <Action>(ReformatCode)
+
+" best way to save
+nmap <leader>w <Action>(SaveAll)
+
+" Move lines up and down
+vmap <S-J> <Action>(MoveLineDown)
+vmap <S-K> <Action>(MoveLineUp)
+
+" Move between issues/errors
+nmap ]e <Action>(GotoNextError)
+nmap [e <Action>(GotoPreviousError)
+
+nnoremap gu <Action>(ShowUsages)
+nnoremap <leader>oi :action OptimizeImports<CR>
+nnoremap <leader>r <Action>(Refactorings.QuickListAction)

@@ -12,17 +12,27 @@
 
     neovim
 
+    jq
+    lf
+    bun
+
     nil
     nixfmt-rfc-style
-    nh # more convenient nix/home-manager cli
     nixos-rebuild
+    inputs.nh.packages.x86_64-darwin.nh
 
-    bazel-buildtools
+    difftastic
+
+    protolint
+    yazi
   ];
 
   environment.variables.EDITOR = "nvim";
 
   programs.fish.enable = true;
+
+  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.enablePamReattach = true;
 
   home-manager.users.igorr =
     { config, ... }:
@@ -44,58 +54,22 @@
         enable = true;
         interactiveShellInit = ''
           # Add IDEs from toolbox to the PATH
-          fish_add_path --append --move ~/Library/Application Support/JetBrains/Toolbox/scripts
+          fish_add_path --append --move ~/Library/Application\ Support/JetBrains/Toolbox/scripts
 
           # Wixstaller
+          fish_add_path --prepend --move $(brew --prefix python@3.10)/libexec/bin
           fish_add_path --prepend --move ~/.local/bin
 
           # Rancher Desktop
           fish_add_path --prepend --move ~/.rd/bin
+
+          function gsw; git switch $argv || git switch -c $argv; end
         '';
-      };
-
-      programs.alacritty = {
-        enable = true;
-        settings = {
-          shell = {
-            program = "${pkgs.tmux}/bin/tmux";
-            args = [
-              "new-session"
-              "-s"
-              "default"
-              "-A"
-            ];
-          };
-
-          window = {
-            padding = {
-              x = 10;
-              y = 10;
-            };
-            dimensions = {
-              columns = 160;
-              lines = 40;
-            };
-            dynamic_padding = true;
-            opacity = 0.92;
-            blur = true;
-            decorations_theme_variant = "Dark";
-            option_as_alt = "Both";
-          };
-
-          font = {
-            size = 13;
-            normal = {
-              family = "JetBrainsMono Nerd Font";
-              style = "Regular";
-            };
-          };
-        };
       };
 
       programs.tmux.extraConfig = ''
         # True color support
-        set-option -sa terminal-features ',alacritty:RGB'
+        set-option -sa terminal-features ',ghostty:RGB'
 
         set -g default-shell '/etc/profiles/per-user/igorr/bin/fish'
       '';
@@ -110,11 +84,9 @@
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
 
-  security.pam.enableSudoTouchIdAuth = true;
-
   homebrew = {
     enable = true;
-    casks = [ "alacritty" ];
+    casks = [ ];
   };
 
   # Mandatory boilerplate

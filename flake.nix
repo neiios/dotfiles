@@ -10,8 +10,12 @@
     };
 
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:dlubawy/nix-darwin/fix_pam_module";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nh = {
+      url = "github:viperML/nh";
     };
   };
 
