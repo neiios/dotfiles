@@ -1,0 +1,14 @@
+command = /var/home/igor/.nix-profile/bin/zsh
+
+font-size = 10
+
+window-width = 144
+window-height = 40
+window-padding-x = 8
+window-padding-y = 8
+
+theme = NvimDark
+window-theme = ghostty
+adw-toolbar-style = flat
+
+confirm-close-surface = false

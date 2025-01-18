@@ -1,0 +1,14 @@
+[
+  // {
+  //   "context": "Workspace",
+  //   "bindings": {
+  //     "ctrl-`": "workspace::NewCenterTerminal"
+  //   }
+  // },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift shift": "file_finder::Toggle"
+    }
+  }
+]
