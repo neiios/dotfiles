@@ -5,12 +5,11 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
-export PATH="$HOME/.local/vscode/bin:$PATH"
-export EDITOR=nvim
+export EDITOR=vim
 
 # Load Nix integration
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
 export NIXPKGS_ALLOW_UNFREE=1
 export LOCALE_ARCHIVE="/usr/lib/locale/locale-archive" # Fixes locale errors in Nix apps
