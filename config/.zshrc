@@ -5,7 +5,6 @@ SAVEHIST="10000"
 bindkey -e
 
 NIX_USER_PROFILE="$HOME/.nix-profile"
-# NIX_USER_PROFILE="$XDG_STATE_HOME/nix/profile"
 
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
@@ -27,11 +26,6 @@ fpath+="/usr/local/share/zsh/site-functions"
 # Completions for old nix commands
 source "$NIX_USER_PROFILE/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh"
 fpath+="$NIX_USER_PROFILE/share/zsh/plugins/nix"
-
-# Completions for hetzner cli
-mkdir -p ~/.cache/hcloud/completion/zsh
-hcloud completion zsh > ~/.cache/hcloud/completion/zsh/_hcloud
-fpath+="$HOME/.cache/hcloud/completion/zsh"
 
 # Zsh just shut up
 unsetopt beep

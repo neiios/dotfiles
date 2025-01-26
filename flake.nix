@@ -14,70 +14,14 @@
       pkgs.buildEnv {
         name = "dotfiles";
         paths = with pkgs; [
+          # shell
           zsh
           zsh-syntax-highlighting
           zsh-autosuggestions
           zsh-completions
           nix-zsh-completions
 
-          nil
-          nixd
-          nixfmt-rfc-style
-          alejandra
-          nixos-rebuild
-          nix-direnv
-          direnv
-          nh
-
-          inter
-          jetbrains-mono
-          nerd-fonts.jetbrains-mono
-
-          docker-compose
-          podman
-          distrobox
-
-          butane
-          act
-          hcloud
-          caddy
-          age
-
-          nodePackages.nodejs
-          nodePackages.pnpm
-          bun
-
-          (python3.withPackages (
-            ps: with ps; [
-              pandas
-              numpy
-              matplotlib
-              seaborn
-              scapy
-            ]
-          ))
-
-          pkgs.htop
-
-          (pkgs.neovim.override {
-            vimAlias = true;
-            viAlias = true;
-            withPython3 = false;
-            withRuby = false;
-          })
-          gnumake
-          gcc
-
-          ghostty
-
-          sshfs
-
-          git
-          gh
-          glab
-
-          tree
-          tmux
+          # cli tools
           fzf
           eza
           zoxide
@@ -89,8 +33,55 @@
           yq
           trash-cli
           wl-clipboard
+          htop
+          sshfs
+          age
+          caddy
+          gnumake
+          git
+          gh
+          glab
           ffmpeg-full
           yt-dlp
+          distrobox
+          docker-compose
+          podlet
+          (neovim.override {
+            vimAlias = true;
+            viAlias = true;
+            withPython3 = false;
+            withRuby = false;
+          })
+
+          # js
+          nodePackages.nodejs
+          nodePackages.pnpm
+          bun
+
+          # python
+          (python3.withPackages (
+            ps: with ps; [
+              pandas
+              numpy
+              matplotlib
+              seaborn
+              scapy
+            ]
+          ))
+
+          # nix tools
+          nil
+          nixd
+          nixfmt-rfc-style
+          nixos-rebuild
+          nix-direnv
+          direnv
+          nh
+
+          # fonts
+          inter
+          jetbrains-mono
+          nerd-fonts.jetbrains-mono
         ];
       };
   };

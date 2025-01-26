@@ -1,0 +1,24 @@
+{
+  "window.titleBarStyle": "custom",
+  "editor.fontFamily": "JetBrains Mono",
+  "telemetry.telemetryLevel": "off",
+  "update.mode": "none",
+  "editor.minimap.enabled": false,
+  "workbench.startupEditor": "none",
+  "workbench.activityBar.location": "top",
+  "window.customTitleBarVisibility": "auto",
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nixd",
+  "nix.serverSettings": {
+    "nixd": {
+      "formatting": {
+        "command": [
+          "nixfmt"
+        ],
+      },
+    },
+  },
+  "files.insertFinalNewline": true,
+  "workbench.iconTheme": "vscode-icons",
+  "vsicons.presets.foldersAllDefaultIcon": true,
+}
