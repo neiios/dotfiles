@@ -1,0 +1,11 @@
+{
+  "nix.serverSettings": {
+    "nixd": {
+      "options": {
+        "nixpkgs": {
+          "expr": "import (builtins.getFlake (builtins.getEnv \"PWD\")).inputs.nixpkgs { }"
+        },
+      },
+    }
+  }
+}
