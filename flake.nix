@@ -23,11 +23,9 @@
 
           # cli tools
           fzf
-          eza
           zoxide
           ripgrep
           fd
-          wget
           curl
           jq
           yq
@@ -70,13 +68,10 @@
           ))
 
           # nix tools
-          nil
           nixd
-          nixfmt-rfc-style
+          nixfmt
           nixos-rebuild
-          nix-direnv
           direnv
-          nh
 
           # fonts
           inter
