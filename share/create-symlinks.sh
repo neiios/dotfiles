@@ -6,7 +6,9 @@ mkdir -pv ~/.config/user-tmpfiles.d
 cat <<EOF > ~/.config/user-tmpfiles.d/90-dotfiles.conf
 L+ $HOME/.zshrc - - - - $HOME/.dotfiles/config/.zshrc
 L+ $HOME/.zshenv - - - - $HOME/.dotfiles/config/.zshenv
+L+ $HOME/.zprofile - - - - $HOME/.dotfiles/config/.zprofile
 L+ $HOME/.ideavimrc - - - - $HOME/.dotfiles/config/.ideavimrc
+L+ $HOME/.tmux.conf - - - - $HOME/.dotfiles/config/.tmux.conf
 L+ $HOME/.config/Code/User/settings.json - - - - $HOME/.dotfiles/config/vscode/settings.json
 
 L+ $HOME/.config/ghostty - - - - $HOME/.dotfiles/config/ghostty

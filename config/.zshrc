@@ -66,25 +66,9 @@ source <(zoxide init --cmd cd zsh) # Must be after compinit
 source <(direnv hook zsh)
 
 alias ssh0='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
-alias ls='eza --long --almost-all'
+alias ls='ls -lAh --color=auto'
 alias sudo='sudo ' # Makes aliases work with sudo
 alias vi="$NIX_USER_PROFILE/bin/nvim"
 alias vim="$NIX_USER_PROFILE/bin/nvim"
 alias nvim="$NIX_USER_PROFILE/bin/nvim" # Alias to absolute path to make it work with sudo
 
-alias gs="git status --short --branch"
-alias gc="git commit --verbose"
-alias gca="git add --all && git commit --verbose"
-alias gcam="git commit --verbose --amend"
-alias gb="git branch"
-alias gswc="git switch -c"
-alias ga="git add"
-alias gap="git add --patch"
-alias gaa="git add --all"
-alias gp="git push"
-alias gpf="git push --force-with-lease --force-if-includes"
-alias gd="git diff"
-alias gdc="git diff --cached"
-alias gdcw="git diff --cached --word-diff"
-alias glog="git log --all --decorate --graph --abbrev-commit --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'"
-function gsw() { git switch "$@" || git switch -c "$@" }; compdef _git-switch gsw
