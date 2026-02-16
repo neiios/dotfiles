@@ -3,6 +3,7 @@ HISTSIZE="10000"
 SAVEHIST="10000"
 
 bindkey -e
+WORDCHARS=${WORDCHARS/\//}
 
 NIX_USER_PROFILE="$HOME/.nix-profile"
 
