@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+# Claude Code Sandbox Script
+# Run this from any project directory to launch Claude Code in a sandboxed environment
+
+PROJECT_DIR="$(pwd)"
+CLAUDE_PATH="$(command -v claude)"
+CLAUDE_REAL_PATH="$(readlink -f "$CLAUDE_PATH")"
+CLAUDE_BIN_DIR="$(dirname "$CLAUDE_PATH")"
+CLAUDE_INSTALL_DIR="$(dirname "$(dirname "$CLAUDE_REAL_PATH")")"
+
+mkdir -p "$HOME/.claude"
+mkdir -p "$HOME/.cache/claude"
+mkdir -p "$HOME/.local/state/claude"
+
+BWRAP_ARGS=(
+    --ro-bind /usr /usr
+    --ro-bind /lib /lib
+    --ro-bind /lib64 /lib64
+    --ro-bind /bin /bin
+    --ro-bind /etc /etc/
+
+    --ro-bind "$CLAUDE_BIN_DIR" "$CLAUDE_BIN_DIR"
+    --ro-bind "$CLAUDE_INSTALL_DIR" "$CLAUDE_INSTALL_DIR"
+
+    --bind "$HOME/.claude" "$HOME/.claude"
+    --bind "$HOME/.cache/claude" "$HOME/.cache/claude"
+    --bind "$HOME/.local/state/claude" "$HOME/.local/state/claude"
+
+    --bind "$PROJECT_DIR" "$PROJECT_DIR"
+
+    --tmpfs /tmp
+    --proc /proc
+    --dev /dev
+    --share-net
+    --unshare-pid
+    --die-with-parent
+    --chdir "$PROJECT_DIR"
+)
+
+OPTIONAL_RW_BINDS=(
+    "$HOME/.claude.json"
+
+    "$HOME/.cache/bazel"
+    "$HOME/.bazelcache"
+)
+
+OPTIONAL_RO_BINDS=(
+    "/nix/store"
+    "$HOME/.nix-profile"
+
+    "$HOME/.gitconfig"
+    "$HOME/.config/gh" # Make sure to login with `gh auth login --insecure-storage`, otherwise `gh` will use the system keyring and it is not available in the sandbox
+)
+
+for path in "${OPTIONAL_RW_BINDS[@]}"; do
+    [[ -e "$path" ]] && BWRAP_ARGS+=(--bind "$path" "$path")
+done
+
+for path in "${OPTIONAL_RO_BINDS[@]}"; do
+    [[ -e "$path" ]] && BWRAP_ARGS+=(--ro-bind "$path" "$path")
+done
+
+exec bwrap "${BWRAP_ARGS[@]}" "$CLAUDE_PATH" "--dangerously-skip-permissions" "$@"
+# exec bwrap "${BWRAP_ARGS[@]}" bash # For debugging. Replace the above line with this to get a shell inside the sandbox
+
+# Trace file access: strace -e trace=open,openat,stat,statx,access -o /tmp/strace.log claude
