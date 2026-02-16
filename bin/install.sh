@@ -5,14 +5,8 @@
 # 2. Adds overrides for flatpaks to integrate with nix (useful for (again) fonts)
 
 function install_nix() {
-	sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
+	curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install
 	source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-	cat <<EOF | sudo tee /etc/nix/nix.conf > /dev/null
-# DO NOT EDIT! THIS FILE IS MANAGED BY DOTFILES SCRIPT
-extra-experimental-features = nix-command flakes
-build-users-group = nixbld
-EOF
-	sudo systemctl restart nix-daemon
 }
 
 function configure_opengl() {

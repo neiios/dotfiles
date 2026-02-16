@@ -1,2 +1,9 @@
-/result
-/old
+/*
+
+!/bin
+!/config
+!/flake.nix
+!/flake.lock
+!/README.md
+!/TWEAKS.md
+!/.gitignore

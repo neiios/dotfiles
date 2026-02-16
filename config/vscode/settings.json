@@ -14,11 +14,11 @@
       "formatting": {
         "command": [
           "nixfmt"
-        ],
-      },
-    },
+        ]
+      }
+    }
   },
   "files.insertFinalNewline": true,
   "workbench.iconTheme": "vscode-icons",
-  "vsicons.presets.foldersAllDefaultIcon": true,
+  "vsicons.presets.foldersAllDefaultIcon": true
 }

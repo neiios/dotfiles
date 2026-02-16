@@ -18,11 +18,6 @@
 [tag]
 	gpgsign = true
 
-[url "https://invent.kde.org/"]
-	insteadOf = "kde:"
-[url "ssh://git@invent.kde.org/"]
-	pushInsteadOf = "kde:"
-
 [credential "https://github.com"]
 	helper =
 	helper = !gh auth git-credential

@@ -23,11 +23,7 @@ fpath+="/usr/share/zsh/site-functions"
 fpath+="/usr/share/zsh/vendor-completions"
 fpath+="/usr/local/share/zsh/site-functions"
 
-# Completions for old nix commands
-source "$NIX_USER_PROFILE/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh"
-fpath+="$NIX_USER_PROFILE/share/zsh/plugins/nix"
-
-# Zsh just shut up
+# shut up zsh
 unsetopt beep
 
 source "$NIX_USER_PROFILE/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
@@ -68,7 +64,3 @@ source <(direnv hook zsh)
 alias ssh0='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias ls='ls -lAh --color=auto'
 alias sudo='sudo ' # Makes aliases work with sudo
-alias vi="$NIX_USER_PROFILE/bin/nvim"
-alias vim="$NIX_USER_PROFILE/bin/nvim"
-alias nvim="$NIX_USER_PROFILE/bin/nvim" # Alias to absolute path to make it work with sudo
-

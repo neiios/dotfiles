@@ -14,15 +14,13 @@
       pkgs.buildEnv {
         name = "dotfiles";
         paths = with pkgs; [
-          # shell
           zsh
           zsh-syntax-highlighting
           zsh-autosuggestions
           zsh-completions
-          nix-zsh-completions
 
-          # cli tools
           fzf
+          tmux
           zoxide
           ripgrep
           fd
@@ -42,8 +40,8 @@
           ffmpeg-full
           yt-dlp
           distrobox
-          docker-compose
           podlet
+
           (neovim.override {
             vimAlias = true;
             viAlias = true;
@@ -51,29 +49,14 @@
             withRuby = false;
           })
 
-          # js
           nodePackages.nodejs
-          nodePackages.pnpm
           bun
 
-          # python
-          (python3.withPackages (
-            ps: with ps; [
-              pandas
-              numpy
-              matplotlib
-              seaborn
-              scapy
-            ]
-          ))
-
-          # nix tools
           nixd
           nixfmt
           nixos-rebuild
           direnv
 
-          # fonts
           inter
           jetbrains-mono
           nerd-fonts.jetbrains-mono
