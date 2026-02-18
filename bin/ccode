@@ -18,14 +18,12 @@ BWRAP_ARGS=(
     --ro-bind /lib /lib
     --ro-bind /lib64 /lib64
     --ro-bind /bin /bin
-    --ro-bind /etc /etc/
+    --ro-bind /etc /etc
+    --ro-bind /sys /sys
+    --ro-bind /var /var
 
     --ro-bind "$CLAUDE_BIN_DIR" "$CLAUDE_BIN_DIR"
     --ro-bind "$CLAUDE_INSTALL_DIR" "$CLAUDE_INSTALL_DIR"
-
-    --bind "$HOME/.claude" "$HOME/.claude"
-    --bind "$HOME/.cache/claude" "$HOME/.cache/claude"
-    --bind "$HOME/.local/state/claude" "$HOME/.local/state/claude"
 
     --bind "$PROJECT_DIR" "$PROJECT_DIR"
 
@@ -39,11 +37,23 @@ BWRAP_ARGS=(
 )
 
 OPTIONAL_RW_BINDS=(
+    "$HOME/.claude"
+    "$HOME/.cache/claude"
+    "$HOME/.local/state/claude"
     "$HOME/.claude.json"
 
     "$HOME/.cache/bazel"
     "$HOME/.bazelcache"
+    "$HOME/.git-cache"
+    "$HOME/.cache/bazelisk"
+    "$HOME/.bazelenv"
+    "$HOME/.bazelrc"
+    "$HOME/.bazelbuildenv.json"
+    "$HOME/.config/wix"
+    "$HOME/.config/bazelwrapper"
+    "$HOME/.config/engflow-rbe"
 )
+
 
 OPTIONAL_RO_BINDS=(
     "/nix/store"
@@ -51,6 +61,8 @@ OPTIONAL_RO_BINDS=(
 
     "$HOME/.gitconfig"
     "$HOME/.config/gh" # Make sure to login with `gh auth login --insecure-storage`, otherwise `gh` will use the system keyring and it is not available in the sandbox
+    "$HOME/.local/bin"
+    "$HOME/.ssh"
 )
 
 for path in "${OPTIONAL_RW_BINDS[@]}"; do
