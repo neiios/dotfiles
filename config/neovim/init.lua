@@ -50,6 +50,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 
 -- Plugin setup
 require("blink.cmp").setup({
+  fuzzy = { implementation = "lua" },
   keymap = {
     ["<C-n>"] = { "show_and_insert", "select_next" },
     ["<C-p>"] = { "show_and_insert", "select_prev" },
