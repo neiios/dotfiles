@@ -2,6 +2,10 @@
 
 # Claude Code Sandbox Script
 # Run this from any project directory to launch Claude Code in a sandboxed environment
+# Inspired by:
+# https://blog.senko.net/sandboxing-ai-agents-in-linux
+# https://kaveh.page/blog/claude-code-sandbox
+# https://dev.to/andersonjoseph/how-i-run-llm-agents-in-a-secure-nix-sandbox-1899
 
 PROJECT_DIR="$(pwd)"
 CLAUDE_PATH="$(command -v claude)"
