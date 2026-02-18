@@ -1,2 +1,6 @@
 [Context]
-filesystems=/nix/store:ro;~/.nix-profile:ro;~/.local/state/nix:ro;
+filesystems=~/.local/state/nix:ro;~/.nix-profile:ro;/nix/store:ro
+
+[Environment]
+XCURSOR_SIZE=24
+XCURSOR_THEME=Adwaita

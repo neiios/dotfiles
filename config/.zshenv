@@ -17,3 +17,5 @@ export LOCALE_ARCHIVE="/usr/lib/locale/locale-archive" # Fixes locale errors in 
 # TODO: a better way would be to do something like this (but this would require to install glibcLocales packges in a profile):
 # export LOCALE_ARCHIVE="$(nix profile list --json | jq -r '.elements[] | select(.attrPath? and (.attrPath | type == "string") and (.attrPath | endswith("glibcLocales"))) | .storePaths[0]')/lib/locale/locale-archive"
 export XCURSOR_PATH="$HOME/.local/share/icons:$HOME/.nix-profile/share/icons:/usr/share/icons" # Fixes cursors in Nix apps
+export XCURSOR_SIZE=24
+export XCURSOR_THEME=Adwaita
