@@ -60,8 +60,9 @@ OPTIONAL_RW_BINDS=(
 
 
 OPTIONAL_RO_BINDS=(
-    "/nix/store"
+    "/nix"
     "$HOME/.nix-profile"
+    "$HOME/.local/state/nix/profiles"
 
     "$HOME/.gitconfig"
     "$HOME/.config/gh" # Make sure to login with `gh auth login --insecure-storage`, otherwise `gh` will use the system keyring and it is not available in the sandbox
