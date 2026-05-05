@@ -2,6 +2,7 @@
 
 !/bin
 !/config
+!/packages
 !/flake.nix
 !/flake.lock
 !/README.md

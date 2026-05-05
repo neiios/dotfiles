@@ -4,63 +4,68 @@
   };
 
   outputs = inputs: {
-    packages."x86_64-linux".dotfiles =
+    packages."x86_64-linux" =
       let
         pkgs = import inputs.nixpkgs {
           system = "x86_64-linux";
           config.allowUnfree = true;
         };
+        pi-coding-agent = pkgs.callPackage ./packages/pi-coding-agent/package.nix { };
       in
-      pkgs.buildEnv {
-        name = "dotfiles";
-        paths = with pkgs; [
-          zsh
-          zsh-syntax-highlighting
-          zsh-autosuggestions
-          zsh-completions
+      {
+        inherit pi-coding-agent;
+        dotfiles = pkgs.buildEnv {
+          name = "dotfiles";
+          paths = with pkgs; [
+            zsh
+            zsh-syntax-highlighting
+            zsh-autosuggestions
+            zsh-completions
 
-          fzf
-          tmux
-          zoxide
-          ripgrep
-          fd
-          curl
-          jq
-          yq
-          trash-cli
-          wl-clipboard
-          htop
-          sshfs
-          age
-          caddy
-          gnumake
-          git
-          gh
-          glab
-          ffmpeg-full
-          yt-dlp
-          distrobox
-          podlet
+            fzf
+            tmux
+            zoxide
+            ripgrep
+            fd
+            curl
+            jq
+            yq
+            trash-cli
+            wl-clipboard
+            htop
+            sshfs
+            age
+            caddy
+            gnumake
+            git
+            gh
+            glab
+            ffmpeg-full
+            yt-dlp
+            distrobox
+            podlet
 
-          (neovim.override {
-            vimAlias = true;
-            viAlias = true;
-            withPython3 = false;
-            withRuby = false;
-          })
+            (neovim.override {
+              vimAlias = true;
+              viAlias = true;
+              withPython3 = false;
+              withRuby = false;
+            })
 
-          nodePackages.nodejs
-          bun
+            nodejs
+            bun
+            pi-coding-agent
 
-          nixd
-          nixfmt
-          nixos-rebuild
-          direnv
+            nixd
+            nixfmt
+            nixos-rebuild
+            direnv
 
-          inter
-          jetbrains-mono
-          nerd-fonts.jetbrains-mono
-        ];
+            inter
+            jetbrains-mono
+            nerd-fonts.jetbrains-mono
+          ];
+        };
       };
   };
 }
