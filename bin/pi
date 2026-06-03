@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REAL_PI="${PI_REAL_BIN:-$HOME/.nix-profile/bin/pi}"
+DOTFILES_PI_CONFIG_DIR="${PI_DOTFILES_CONFIG_DIR:-$HOME/.dotfiles/config/pi}"
+DOTFILES_PI_EXTENSIONS_DIR="${PI_DOTFILES_EXTENSIONS_DIR:-$DOTFILES_PI_CONFIG_DIR/extensions}"
+DOTFILES_PI_SKILLS_DIR="${PI_DOTFILES_SKILLS_DIR:-$DOTFILES_PI_CONFIG_DIR/skills}"
+DOTFILES_PI_MCP_CONFIG="${PI_DOTFILES_MCP_CONFIG:-$DOTFILES_PI_CONFIG_DIR/mcp.json}"
+
+PI_EXTENSION_ARGS=()
+if [[ -d "$DOTFILES_PI_EXTENSIONS_DIR" ]]; then
+  shopt -s nullglob
+  for extension in \
+    "$DOTFILES_PI_EXTENSIONS_DIR"/*.ts \
+    "$DOTFILES_PI_EXTENSIONS_DIR"/*.js \
+    "$DOTFILES_PI_EXTENSIONS_DIR"/*/index.ts \
+    "$DOTFILES_PI_EXTENSIONS_DIR"/*/index.js; do
+    [[ -f "$extension" ]] || continue
+    PI_EXTENSION_ARGS+=( -e "$extension" )
+  done
+  shopt -u nullglob
+fi
+
+PI_SKILL_ARGS=()
+if [[ -d "$DOTFILES_PI_SKILLS_DIR" ]]; then
+  shopt -s nullglob
+  for skill in "$DOTFILES_PI_SKILLS_DIR"/*; do
+    [[ -e "$skill" ]] || continue
+    PI_SKILL_ARGS+=( --skill "$skill" )
+  done
+  shopt -u nullglob
+fi
+
+export PI_SKIP_VERSION_CHECK="${PI_SKIP_VERSION_CHECK:-1}"
+
+case "${1:-}" in
+  install|remove|uninstall|update|list|config)
+    exec "$REAL_PI" "$@"
+    ;;
+esac
+
+exec "$REAL_PI" \
+  --no-context-files \
+  --no-skills \
+  --no-prompt-templates \
+  --no-themes \
+  --no-extensions \
+  --mcp-config "$DOTFILES_PI_MCP_CONFIG" \
+  "${PI_EXTENSION_ARGS[@]}" \
+  "${PI_SKILL_ARGS[@]}" \
+  "$@"

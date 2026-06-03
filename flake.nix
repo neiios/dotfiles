@@ -3,17 +3,20 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
-  outputs = inputs: {
-    packages."x86_64-linux" =
-      let
-        pkgs = import inputs.nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-        pi-coding-agent = pkgs.callPackage ./packages/pi-coding-agent/package.nix { };
-      in
-      {
+  outputs =
+    inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      pi-coding-agent = pkgs.callPackage ./pkgs/pi-coding-agent.nix { };
+    in
+    {
+      packages.${system} = {
         inherit pi-coding-agent;
+
         dotfiles = pkgs.buildEnv {
           name = "dotfiles";
           paths = with pkgs; [
@@ -52,9 +55,7 @@
               withRuby = false;
             })
 
-            nodejs
-            bun
-            pi-coding-agent
+            # bun
 
             nixd
             nixfmt
@@ -64,8 +65,10 @@
             inter
             jetbrains-mono
             nerd-fonts.jetbrains-mono
+
+            pi-coding-agent
           ];
         };
       };
-  };
+    };
 }

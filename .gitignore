@@ -2,9 +2,13 @@
 
 !/bin
 !/config
-!/packages
+!/pkgs
+!/pi
+!/pi/**
 !/flake.nix
 !/flake.lock
 !/README.md
 !/TWEAKS.md
 !/.gitignore
+
+node_modules
