@@ -62,6 +62,10 @@
             nixos-rebuild
             direnv
 
+            lazygit
+            lf
+
+            iosevka-bin
             inter
             jetbrains-mono
             nerd-fonts.jetbrains-mono
