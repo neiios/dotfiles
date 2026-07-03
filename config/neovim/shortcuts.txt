@@ -1,0 +1,95 @@
+Shortcuts
+====================================
+
+LSP (default, any attached server)
+  grn          rename symbol
+  gra          code action
+  grr          references
+  gri          implementation
+  grt          type definition
+  grx          run codelens
+  gO           document symbols outline (also TOC in help/markdown)
+  K            hover docs
+  <C-s>        signature help (insert mode)
+  <C-]>        go to definition
+  gq{motion}   format via LSP (e.g. gqq for a line, gqip for a paragraph)
+
+Diagnostics (default)
+  ]d / [d      next / previous diagnostic
+  ]D / [D      last / first diagnostic
+  <C-w>d       show diagnostic in a float
+
+Treesitter selection (default, visual mode)
+  an / in      select around / inside node at cursor
+  ]n / [n      grow / shrink selection incrementally
+  ]N / [N      expand selection to next / previous sibling
+
+Completion (built-in autocomplete)
+  <C-n> / <C-p>  next / previous item
+  <C-y>          accept
+  <C-e>          dismiss menu
+
+Telescope
+  <leader>ff   find files
+  <leader>fg   live grep
+  <leader>fb   buffers
+  <leader>fh   help tags
+  <leader>fr   resume last picker (query and position intact)
+  <leader>fd   diagnostics
+  <leader>fo   recent files
+  <leader>fw   grep word under cursor
+
+Oil
+  -            open parent directory (in oil: - goes up, g? shows all keys)
+  <C-s>/<C-v>  open entry in horizontal / vertical split (in oil)
+
+Bracket motions (default)
+  ]q / [q      next / previous quickfix entry ([Q / ]Q first / last)
+  ]l / [l      next / previous location list entry
+  ]b / [b      next / previous buffer
+  ]a / [a      next / previous arglist file
+  ]<Space>     add blank line below ([<Space> above)
+
+Terminal
+  <Esc><Esc>   exit terminal mode
+  [[ / ]]      jump between shell prompts (needs OSC 133, zsh has it)
+
+Folds (treesitter-powered)
+  za / zc / zo   toggle / close / open fold under cursor
+  zM / zR        close / open all folds
+
+Misc (default)
+  gcc / gc{motion}  toggle comment
+  gx           open URL/file under cursor
+  <C-l>        clear search highlight + refresh
+
+Editing power moves
+  cgn          change next match of last search, then . repeats it (poor
+               man's multi-cursor: * on a word, cgn, type, . . .)
+  gv           reselect last visual selection
+  gi           insert at the spot you last left insert mode
+  <C-a>/<C-x>  increment / decrement number under cursor
+  g<C-a>       (visual) increment as a sequence: 1,1,1 -> 1,2,3
+  I / A        (visual block) insert/append on every line of the block
+  "0p          paste the last yank, ignoring deletes that clobbered ""
+  "+y / "+p    yank to / paste from system clipboard
+  &            repeat last :s on current line (g& = whole file with flags)
+  Q / @@       replay last recorded macro / last used register
+  q: / q/      command-line / search history window (edit and re-run)
+  @:           repeat last ex command
+  g- / g+      undo tree time travel (also :earlier 5m, :later 1f)
+
+Navigation
+  <C-o>/<C-i>  jumplist back / forward (across files)
+  g; / g,      changelist back / forward (jump to previous edits)
+  `.           jump to last change ( `` = before last jump)
+  zz/zt/zb     center / top / bottom cursor line
+  * / #        search word under cursor forward / backward (works in visual)
+  %            jump between matching pairs
+
+Neovim-specific
+  ZR           restart Nvim, keeping the UI attached (:restart)
+  :Inspect     show highlight groups under cursor (why is this colored?)
+  :InspectTree live treesitter syntax tree of the buffer
+  :checkhealth diagnose config, providers, plugins
+  :lua vim.pack.update()   update plugins, review, then :write to apply

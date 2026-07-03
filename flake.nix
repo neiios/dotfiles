@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs =
@@ -10,8 +11,17 @@
       pkgs = import inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
       };
       pi-coding-agent = pkgs.callPackage ./pkgs/pi-coding-agent.nix { };
+      neovimLatest = pkgs.symlinkJoin {
+        name = "neovim-latest";
+        paths = [ pkgs.neovim ];
+        postBuild = ''
+          ln -s nvim $out/bin/vim
+          ln -s nvim $out/bin/vi
+        '';
+      };
     in
     {
       packages.${system} = {
@@ -48,12 +58,12 @@
             distrobox
             podlet
 
-            (neovim.override {
-              vimAlias = true;
-              viAlias = true;
-              withPython3 = false;
-              withRuby = false;
-            })
+            neovimLatest
+            luajitPackages.tree-sitter-cli
+            lua-language-server
+            stylua
+
+            gopls
 
             # bun
 

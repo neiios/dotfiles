@@ -1,117 +1,242 @@
--- Space as leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- Enable line numbers
 vim.o.number = true
 vim.o.relativenumber = true
 
--- Enable mouse mode, can be useful for resizing splits for example!
-vim.o.mouse = 'a'
+vim.o.undofile = true
 
--- Don't show the mode, since it's already in the status line
-vim.o.showmode = false
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+vim.o.inccommand = "split"
+
+vim.o.splitright = true
+vim.o.splitbelow = true
+vim.opt.diffopt:append("vertical")
+
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldlevelstart = 99
+
+vim.api.nvim_create_autocmd({ "TextYankPost", "TextPutPost" }, {
+  group = vim.api.nvim_create_augroup("yank_highlight", {}),
+  callback = function()
+    vim.hl.hl_op()
+  end,
+})
+
+vim.diagnostic.config({ virtual_text = true })
+
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+-- Must be registered before the first vim.pack.add() to also fire on fresh installs
+vim.api.nvim_create_autocmd("PackChanged", {
+  group = vim.api.nvim_create_augroup("pack_hooks", {}),
+  callback = function(ev)
+    if ev.data.spec.name == "nvim-treesitter" and ev.data.kind == "update" then
+      vim.schedule(function()
+        require("nvim-treesitter").update()
+      end)
+    end
+  end,
+})
 
 vim.pack.add({
-  {src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main"},
-  {src = "https://github.com/nvim-lua/plenary.nvim"},
-  {src = "https://github.com/nvim-telescope/telescope.nvim", version = "master"},
-  {src = 'https://github.com/neovim/nvim-lspconfig'},
-  {src = 'https://github.com/miikanissi/modus-themes.nvim'},
-  {src = "https://github.com/Saghen/blink.cmp"},
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+  { src = "https://github.com/nvim-lua/plenary.nvim" },
+  { src = "https://github.com/nvim-telescope/telescope.nvim", version = "master" },
+  { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/miikanissi/modus-themes.nvim" },
+  { src = "https://github.com/stevearc/oil.nvim" },
+  { src = "https://github.com/refractalize/oil-git-status.nvim" },
+  { src = "https://github.com/lewis6991/gitsigns.nvim" },
+  { src = "https://github.com/tpope/vim-fugitive" },
+  { src = "https://github.com/sindrets/diffview.nvim" },
+  { src = "https://github.com/NeogitOrg/neogit" },
+  { src = "https://github.com/rickhowe/wrapwidth" },
 })
 
 require("modus-themes").setup({
-	transparent = true,
-	line_nr_column_background = false,
-	sign_column_background = false,
+  transparent = true,
+  line_nr_column_background = false,
+  sign_column_background = false,
+})
+vim.cmd.colorscheme("modus")
+
+vim.o.autocomplete = true
+vim.o.complete = "o,."
+vim.o.completeopt = "menuone,noselect,fuzzy"
+
+require("nvim-treesitter").install({
+  "bash",
+  "dockerfile",
+  "lua",
+  "markdown",
+  "markdown_inline",
+  "go",
+  "java",
+  "scala",
+  "starlark",
+  "javascript",
+  "typescript",
+  "tsx",
+  "python",
+  "nix",
+  "json",
+  "toml",
+  "yaml",
 })
 
-
-vim.cmd([[colorscheme modus]])
-
--- Create an event to build `blink.cmp` with `cargo build --release`.
--- This event should be defined *before* the `vim.pack.add` call
--- so it runs automatically after the plugin is installed.
-vim.api.nvim_create_autocmd("PackChanged", {
-  pattern = "blink.cmp",
-  group = vim.api.nvim_create_augroup("blink_update", { clear = true }),
-  callback = function(e)
-    if e.data.kind == "update" then
-      -- Recommended way to access plugin files inside `PackChanged` event
-      -- vim.cmd [[packadd blink.cmp]]
-      vim.cmd.packadd({ args = { e.data.spec.name }, bang = false })
-      -- Build the plugin from source
-      -- vim.cmd [[BlinkCmp build]]
-      require("blink.cmp.fuzzy.build").build()
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(ev)
+    local lang = vim.treesitter.language.get_lang(ev.match)
+    if lang and vim.treesitter.language.add(lang) then
+      vim.treesitter.start(ev.buf, lang)
     end
   end,
 })
 
--- Plugin setup
-require("blink.cmp").setup({
-  fuzzy = { implementation = "lua" },
-  keymap = {
-    ["<C-n>"] = { "show_and_insert", "select_next" },
-    ["<C-p>"] = { "show_and_insert", "select_prev" },
-    ["<C-j>"] = { "select_and_accept" },
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
+vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Telescope resume" })
+vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Telescope diagnostics" })
+vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Telescope recent files" })
+vim.keymap.set(
+  "n",
+  "<leader>fw",
+  builtin.grep_string,
+  { desc = "Telescope grep word under cursor" }
+)
+
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+vim.keymap.set("n", "<leader>gq", function()
+  if vim.b.wrapwidth then
+    vim.cmd.Wrapwidth(0)
+    vim.wo.linebreak = false
+  else
+    vim.wo.wrap = true
+    vim.wo.linebreak = true
+    vim.cmd.Wrapwidth(80)
+  end
+end, { desc = "Toggle visual wrap at 80 chars" })
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("force_vsplit", {}),
+  pattern = { "help", "fugitive", "git" },
+  command = "wincmd L",
+})
+
+vim.lsp.config("gopls", {
+  settings = {
+    gopls = {
+      hints = {
+        parameterNames = true,
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+      },
+    },
   },
 })
 
-treesitter_enabled_languages = {'bash', 'dockerfile', 'lua', 'go'}
+vim.lsp.enable({ "lua_ls", "gopls", "stylua" })
+-- vim.lsp.inlay_hint.enable()
 
-require('nvim-treesitter').install(treesitter_enabled_languages)
-
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.cmd("hi! Normal guibg=NONE ctermbg=NONE")
-    vim.cmd("hi! NonText guibg=NONE ctermbg=NONE")
+-- No-op unless stylua is attached, which requires a stylua.toml/.editorconfig root marker
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = vim.api.nvim_create_augroup("stylua_format", {}),
+  pattern = "*.lua",
+  callback = function(ev)
+    vim.lsp.buf.format({ bufnr = ev.buf, name = "stylua", timeout_ms = 2000 })
   end,
 })
 
-vim.api.nvim_create_autocmd('filetype', {
-  pattern = treesitter_enabled_languages,
-  callback = function() vim.treesitter.start() end,
+require("oil").setup({
+  win_options = {
+    signcolumn = "yes:2",
+  },
+  view_options = {
+    show_hidden = true,
+  },
 })
+require("oil-git-status").setup()
 
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+require("neogit").setup({})
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Show Neogit UI" })
 
-vim.lsp.config('lua_ls', {
-  on_init = function(client)
-    if client.workspace_folders then
-      local path = client.workspace_folders[1].name
-      if
-        path ~= vim.fn.stdpath('config')
-        and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
-      then
-        return
-      end
+require("gitsigns").setup({
+  on_attach = function(bufnr)
+    local gitsigns = require("gitsigns")
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
     end
 
-    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-      runtime = {
-        version = 'LuaJIT',
-        path = {
-          'lua/?.lua',
-          'lua/?/init.lua',
-        },
-      },
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME
-        }
-      }
-    })
+    map("n", "]c", function()
+      if vim.wo.diff then
+        vim.cmd.normal({ "]c", bang = true })
+      else
+        gitsigns.nav_hunk("next")
+      end
+    end, { desc = "Next hunk" })
+
+    map("n", "[c", function()
+      if vim.wo.diff then
+        vim.cmd.normal({ "[c", bang = true })
+      else
+        gitsigns.nav_hunk("prev")
+      end
+    end, { desc = "Previous hunk" })
+
+    map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "Stage hunk" })
+    map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "Reset hunk" })
+
+    map("v", "<leader>hs", function()
+      gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+    end, { desc = "Stage hunk" })
+
+    map("v", "<leader>hr", function()
+      gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+    end, { desc = "Reset hunk" })
+
+    map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "Stage buffer" })
+    map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "Reset buffer" })
+    map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "Preview hunk" })
+    map("n", "<leader>hi", gitsigns.preview_hunk_inline, { desc = "Preview hunk inline" })
+
+    map("n", "<leader>hb", function()
+      gitsigns.blame_line({ full = true })
+    end, { desc = "Blame line" })
+
+    map("n", "<leader>hd", gitsigns.diffthis, { desc = "Diff this" })
+
+    map("n", "<leader>hD", function()
+      gitsigns.diffthis("~")
+    end, { desc = "Diff this against last commit" })
+
+    map("n", "<leader>hq", gitsigns.setqflist, { desc = "Hunks to quickfix" })
+    map("n", "<leader>hQ", function()
+      gitsigns.setqflist("all")
+    end, { desc = "All hunks to quickfix" })
+
+    map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "Toggle line blame" })
+    map("n", "<leader>tw", gitsigns.toggle_word_diff, { desc = "Toggle word diff" })
+
+    map({ "o", "x" }, "ih", gitsigns.select_hunk, { desc = "Select hunk" })
   end,
-  settings = {
-    Lua = {}
-  }
 })
-
-vim.lsp.enable({'lua_ls', 'gopls'})
-
+vim.keymap.set("n", "-", function()
+  require("oil").open()
+end, { desc = "Open parent directory" })
