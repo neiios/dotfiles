@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+current=$(tmux display-message -p '#S')
+
+selected=$(
+  tmux list-sessions -F '#{session_name}' \
+    | grep -v "^${current}$" \
+    | fzf \
+        --tmux=center,50%,40% \
+        --no-sort \
+        --cycle \
+        --header="Switch session (ctrl-d: kill)" \
+        --preview='tmux list-windows -t {}' \
+        --preview-window=right:50% \
+        --bind="ctrl-d:execute-silent(tmux kill-session -t {})+reload(tmux list-sessions -F '#{session_name}' | grep -v \"^${current}$\")"
+)
+
+if [ -n "$selected" ]; then
+  tmux switch-client -t "$selected"
+fi
