@@ -1,88 +1,45 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs =
     inputs:
     let
       system = "x86_64-linux";
-      pkgs = import inputs.nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
-      };
-      pi-coding-agent = pkgs.callPackage ./pkgs/pi-coding-agent.nix { };
-      neovimLatest = pkgs.symlinkJoin {
-        name = "neovim-latest";
-        paths = [ pkgs.neovim ];
-        postBuild = ''
-          ln -s nvim $out/bin/vim
-          ln -s nvim $out/bin/vi
-        '';
-      };
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
     in
     {
-      packages.${system} = {
-        inherit pi-coding-agent;
+      packages.${system} = rec {
+        neovim-git = pkgs.callPackage ./nix/neovim-git.nix { };
 
-        dotfiles = pkgs.buildEnv {
-          name = "dotfiles";
-          paths = with pkgs; [
-            zsh
-            zsh-syntax-highlighting
-            zsh-autosuggestions
-            zsh-completions
-
-            fzf
-            tmux
-            zoxide
+        default = pkgs.buildEnv {
+          name = "profile-env";
+          paths = with pkgs;[
             ripgrep
             fd
-            curl
             jq
-            yq
-            trash-cli
-            wl-clipboard
-            htop
-            sshfs
-            age
-            caddy
-            gnumake
-            git
+            fzf
             gh
-            glab
-            ffmpeg-full
-            yt-dlp
-            distrobox
-            podlet
 
-            neovimLatest
-            luajitPackages.tree-sitter-cli
+            gopls
             lua-language-server
             stylua
 
-            gopls
-
-            # bun
-
-            nixd
-            nixfmt
-            nixos-rebuild
-            direnv
-
-            lazygit
-            lf
-
-            iosevka-bin
-            inter
-            jetbrains-mono
-            nerd-fonts.jetbrains-mono
-
             pi-coding-agent
+            neovim-git
+
+            zsh-autosuggestions
+            zsh-syntax-highlighting
+            glibcLocales
+          ];
+          extraOutputsToInstall = [
+            "man"
+            "doc"
           ];
         };
       };
+
+      formatter.${system} = pkgs.callPackage ./nix/fmt.nix { };
     };
 }

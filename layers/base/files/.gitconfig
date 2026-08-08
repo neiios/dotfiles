@@ -1,0 +1,40 @@
+[user]
+	email = "igor@29r.lt"
+	name = "Igor"
+	signingkey = ~/.ssh/git.pub
+
+[init]
+	defaultBranch = "master"
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+	autoSquash = true
+[merge]
+	conflictstyle = zdiff3
+[diff]
+	algorithm = histogram
+	colorMoved = default
+[fetch]
+	prune = true
+[rerere]
+	enabled = true
+[branch]
+	sort = -committerdate
+
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+	verbose = true
+[tag]
+	gpgsign = true
+
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential

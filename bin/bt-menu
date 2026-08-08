@@ -1,0 +1,118 @@
+#!/bin/sh
+
+menu() {
+    tofi --prompt-text "$1"
+}
+
+notify() {
+    command -v notify-send >/dev/null 2>&1 && notify-send "bluetooth" "$1"
+}
+
+mac_of() {
+    printf '%s\n' "$1" | while read -r _ mac name; do
+        if [ "$name" = "$2" ]; then
+            printf '%s\n' "$mac"
+            break
+        fi
+    done
+}
+
+scan_menu() {
+    bluetoothctl power on >/dev/null
+    bluetoothctl scan on >/dev/null 2>&1 &
+    scanner=$!
+    trap 'kill "$scanner" 2>/dev/null' EXIT
+    paired=$(bluetoothctl devices Paired)
+    while :; do
+        all=$(bluetoothctl devices)
+        new=""
+        while read -r _ mac name; do
+            [ -n "$mac" ] || continue
+            printf '%s\n' "$paired" | grep -qF "$mac" && continue
+            new="${new}${name}
+"
+        done <<EOF
+$all
+EOF
+        choice=$(printf '%s' "↻ refresh
+$new" | menu "pair: ") || exit 0
+        [ -n "$choice" ] || exit 0
+        [ "$choice" = "↻ refresh" ] && continue
+        kill "$scanner" 2>/dev/null
+        mac=$(mac_of "$all" "$choice")
+        if bluetoothctl pair "$mac" && bluetoothctl trust "$mac" && bluetoothctl connect "$mac"; then
+            notify "paired $choice"
+        else
+            notify "failed to pair $choice"
+        fi
+        exit 0
+    done
+}
+
+device_menu() {
+    name=$1 mac=$2 connected=$3
+    if [ "$connected" = yes ]; then
+        actions="disconnect
+forget"
+    else
+        actions="connect
+forget"
+    fi
+    action=$(printf '%s' "$actions" | menu "$name: ") || exit 0
+    case "$action" in
+    connect)
+        bluetoothctl power on >/dev/null
+        if bluetoothctl connect "$mac"; then
+            notify "connected $name"
+        else
+            notify "failed to connect $name"
+        fi
+        ;;
+    disconnect)
+        bluetoothctl disconnect "$mac" && notify "disconnected $name"
+        ;;
+    forget)
+        bluetoothctl remove "$mac" && notify "forgot $name"
+        ;;
+    esac
+}
+
+paired=$(bluetoothctl devices Paired)
+connected=$(bluetoothctl devices Connected)
+
+entries=""
+while read -r _ mac name; do
+    [ -n "$mac" ] || continue
+    if printf '%s\n' "$connected" | grep -qF "$mac"; then
+        entries="${entries}* ${name}
+"
+    else
+        entries="${entries}${name}
+"
+    fi
+done <<EOF
+$paired
+EOF
+
+entries="${entries}scan
+"
+if bluetoothctl show | grep -q "Powered: yes"; then
+    entries="${entries}power off"
+else
+    entries="${entries}power on"
+fi
+
+choice=$(printf '%s' "$entries" | menu "bt: ") || exit 0
+case "$choice" in
+"") exit 0 ;;
+scan) scan_menu ;;
+"power on") bluetoothctl power on && notify "powered on" ;;
+"power off") bluetoothctl power off && notify "powered off" ;;
+"* "*)
+    name=${choice#\* }
+    device_menu "$name" "$(mac_of "$paired" "$name")" yes
+    ;;
+*)
+    device_menu "$choice" "$(mac_of "$paired" "$choice")" no
+    ;;
+esac
