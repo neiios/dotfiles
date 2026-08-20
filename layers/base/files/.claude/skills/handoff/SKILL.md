@@ -1,26 +1,16 @@
 ---
 name: handoff
-description: Create a concise handoff file so a fresh agent can continue the current work. Use when moving work to another session or agent.
-argument-hint: "Focus for the next session"
+description: Compact the current conversation into a handoff document for another agent to pick up.
+argument-hint: "What will the next session be used for?"
+disable-model-invocation: true
 ---
 
-Create a concise, action-oriented handoff for a fresh agent. Save it outside the workspace in the OS temporary directory as `handoff-<project>-<YYYYMMDD-HHMMSS>.md`.
+Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save it outside the workspace in the OS temporary directory as `handoff-<project>-<YYYYMMDD-HHMMSS>.md`.
 
-Include:
-- goal
-- current state: completed and remaining work, todos
-- next steps, in priority order
-- relevant files, paths, URLs, and commands
-- decisions and constraints
-- open questions and failed approaches, only when relevant
+Include a "suggested skills" section in the document, naming which skills the next agent should call the Skill tool for.
 
-Reference existing specs, plans, issues, commits, relevant file paths, links to docs, and other artifacts instead of repeating them. 
-For uncommitted work, identify the relevant files and instruct the next agent to inspect the current `git status` and diff.
+Do not duplicate content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
 
-Include only context needed to continue the work. Never include secret values, credentials, tokens.
+Redact any sensitive information, such as API keys, passwords, or personally identifiable information.
 
-If arguments were provided, use them as the next session's focus.
-
-After saving the file, respond with:
-1. its absolute path
-2. a ready-to-paste prompt such as: `Read <path> and continue with <focus>.`
+If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
